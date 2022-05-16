@@ -1,0 +1,57 @@
+{
+    "Guns": [{
+        "33": {
+            "gunStats": {
+                "description": "",
+                "name": "The Vision",
+                "icon": "/common/destiny2_content/icons/3d08c0b69472f9450ab003b1d8748bec.jpg",
+                "hasIcon": true
+            }
+        }
+    }, {
+        "43": {
+            "gunStats": {
+                "description": "",
+                "name": "Palmyra-B",
+                "icon": "/common/destiny2_content/icons/60bc3fff04850b558963711dc3505ce5.jpg",
+                "hasIcon": true
+            }
+        }
+    }, {
+        "45": {
+            "gunStats": {
+                "description": "",
+                "name": "Ragnhild-D",
+                "icon": "/common/destiny2_content/icons/90f63be3eb246360c07a11d73d2254a0.jpg",
+                "hasIcon": true
+            }
+        }
+    }, {
+        "51": {
+            "gunStats": {
+                "description": "",
+                "name": "Fugue-55",
+                "icon": "/common/destiny2_content/icons/7458f40bf4f2264f8de19cc0f807fc51.jpg",
+                "hasIcon": true
+            }
+        }
+    }, {
+        "52": {
+            "gunStats": {
+                "description": "",
+                "name": "Krait",
+                "icon": "/common/destiny2_content/icons/e1b64a533cbbb561fd12cfc170763f76.jpg",
+                "hasIcon": true
+            }
+        }
+    }, {
+        "56": {
+            "gunStats": {
+                "description": "",
+                "name": "Eternity's Edge",
+                "icon": "/common/destiny2_content/icons/42b579f9efa7ab24844dcdd3a65880d5.jpg",
+                "hasIcon": true
+            }
+        }
+    }]
+}
