@@ -3,8 +3,8 @@ const request = require("request");
 
 const fs = require('fs');
 const credentials = require('../Config/config.json')
-const {ApiKey} = credentials
-const {access_token} = credentials
+const { ApiKey } = credentials
+const { access_token } = credentials
 /*
 When you make a VendorRequest,you get their inventory but item's have hashes instead of their actual names
 and because of that we have to make a request that will tell us what the name the hash corresponds to.
@@ -23,13 +23,13 @@ let gunKeys = []
 /*for (let i = 7; i <= 12; i++) {
     itemHashList.push(gunSales[salesKeys[i]]['itemHash'])
 }*/
- for (let i = 0; i <= 22; i++) {
-    if (Object.hasOwn(gunSales[salesKeys[i]], 'costs') &&  gunSales[salesKeys[i]]['costs'].length == 2){
+for (let i = 0; i <= 22; i++) {
+    if (Object.hasOwn(gunSales[salesKeys[i]], 'costs') && gunSales[salesKeys[i]]['costs'].length == 2) {
         gunKeys.push(salesKeys[i])
-    itemHashList.push(gunSales[salesKeys[i]]['itemHash']);
-    console.log(salesKeys[i]);
+        itemHashList.push(gunSales[salesKeys[i]]['itemHash']);
+        console.log(salesKeys[i]);
     }
-    else if(i == 22){
+    else if (i == 22) {
         //console.log(itemHashList)
         console.log(gunKeys)
     }
@@ -42,7 +42,7 @@ let gunKeys = []
 //console.log(fetchItemHash())
 //let itemHash =  "2272470786"
 
- const timer = ms => new Promise(res => setTimeout(res, ms))
+const timer = ms => new Promise(res => setTimeout(res, ms))
 async function requestWithTimeout() {
     for (let i = 0; i <= 5; i++) {
         request.get({
@@ -61,14 +61,14 @@ async function requestWithTimeout() {
             }
             //response.itemHash = bodyAsJson.Response.displayProperties
             let Responsestring = JSON.stringify(response)
-            let gunObject = JSON.stringify({'Guns': [{[gunKeys[i]]: response}] })
+            let gunObject = JSON.stringify({ 'Guns': [{ [gunKeys[i]]: response }] })
 
             console.log(response);
             fs.readFile('Cache/ItemNameRequest.json', 'utf8', function (err, data) {
                 if (data) {
                     console.log("true")
                     obj = JSON.parse(data)
-                    obj['Guns'].push({[gunKeys[i]]: response})
+                    obj['Guns'].push({ [gunKeys[i]]: response })
                     const json = JSON.stringify(obj)
                     //console.log(json)
                     fs.writeFile("Cache/ItemNameRequest.json", json, {

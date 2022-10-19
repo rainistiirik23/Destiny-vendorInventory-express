@@ -1,8 +1,7 @@
 const fs = require('fs');
 const request = require("request");
 const credentials = require('../Config/config.json')
-const {ApiKey} = credentials
-const {access_token} = credentials
+const { ApiKey, access_token } = credentials
 /*let gunKeyList = { 'Guns': [] };
 
 let itemHashList = [];

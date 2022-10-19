@@ -1,8 +1,5 @@
 const credentials = require('../Config/config.json')
-const {ApiKey} = credentials
-const {client_id} = credentials
-const {client_secret} = credentials
-const {code} = credentials
+const { ApiKey, client_id, client_secret, code } = credentials
 const request = require("request");
 const fs = require('fs');
 const X = btoa(client_id + ":" + client_secret);
@@ -21,8 +18,8 @@ request.post({
     }
 }, function (err, res, body) {
     console.log(body + " \nstatus code: " + res.statusCode + "\ncookie: " + res.headers['set-cookie']);
-/*const response = JSON.stringify(res);
-fs.writeFile("./Cache/TokenRequest.json", response, function(err, result) {
-    if(err) console.log('error', err);
-});*/
+    /*const response = JSON.stringify(res);
+    fs.writeFile("./Cache/TokenRequest.json", response, function(err, result) {
+        if(err) console.log('error', err);
+    });*/
 });

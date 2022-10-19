@@ -1,1 +1,4 @@
 Config/config.json
+dist/
+sqliteFile
+Cache

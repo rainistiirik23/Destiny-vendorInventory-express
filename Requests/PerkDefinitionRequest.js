@@ -1,12 +1,12 @@
 const fs = require("fs")
 const request = require("request");
 const credentials = require('../Config/config.json')
-const {ApiKey} = credentials
-const {access_token} = credentials
+const { ApiKey } = credentials
+const { access_token } = credentials
 
-const data = fs.readFileSync('Cache/PerkRequest.json', 'utf8', function (err, data) {})
-const perkData = JSON.parse(data)["Response"]["itemComponents"]["perks"]["data"]
-const perkKeys = Object.keys(perkData)
+const data = fs.readFileSync('Cache/PerkRequest.json', 'utf8', function (err, data) { })
+const perkData = JSON.parse(data)["Response"]["itemComponents"]["perks"]["data"];
+const perkKeys = Object.keys(perkData);
 const vendorData = fs.readFileSync('Cache/VendorRequest.json', 'utf8', function (err, data) {
     if (err) {
         console.log(err)
@@ -15,8 +15,8 @@ const vendorData = fs.readFileSync('Cache/VendorRequest.json', 'utf8', function 
 let itemHashList = [];
 const gunSales = JSON.parse(vendorData)['Response']['sales']['data'];
 const salesKeys = Object.keys(gunSales);
-let gunKeys = []
-let gunPerkHashes = []
+let gunKeys = [];
+let gunPerkHashes = [];
 /*for (let i = 0; i <= 22; i++) {
     if () {
         gunKeys.push(salesKeys[i])
@@ -46,11 +46,11 @@ for (let i = 0; i <= 22; i++) {
 //console.log(perkData)
 const timer = ms => new Promise(res => setTimeout(res, ms))
 async function getPerkDefintion() {
-    for (let i1 = 0; i1 <  gunKeys.length ; i1++) {
+    for (let i1 = 0; i1 < gunKeys.length; i1++) {
         if (perkData[gunKeys[i1]]) {
             //console.log(perkData[gunKeys[i]]["perks"].length)
         }
-        for (let i = 0; i <  perkData[gunKeys[i1]]["perks"].length; i++) {
+        for (let i = 0; i < perkData[gunKeys[i1]]["perks"].length; i++) {
 
             // console.log(body)
             if (perkData[gunKeys[i1]]["perks"][i]["iconPath"] && perkData[gunKeys[i1]]["perks"][i]["visible"]) {
@@ -63,12 +63,12 @@ async function getPerkDefintion() {
                         "Authorization": access_token,
                     },
                 }, function (err, res, body) {
-                    const perkDefinition = JSON.parse(body)["Response"]["displayProperties"]
+                    const perkDefinition = JSON.parse(body)["Response"]["displayProperties"];
 
                     fs.readFile("Test/ItemNameRequestTest.json", "utf8", function (err, data) {
 
-                        const itemRequestAsJson = JSON.parse(data)
-                        const gunIndex = gunKeys.indexOf(gunKeys[i1])
+                        const itemRequestAsJson = JSON.parse(data);
+                        const gunIndex = gunKeys.indexOf(gunKeys[i1]);
                         //console.log(itemRequestAsJson["Guns"][gunIndex][gunKeys[i1]]["gunStats"]["name"])
                         if (!itemRequestAsJson["Guns"][gunIndex][gunKeys[i1]]["gunStats"]["perks"]) {
                             itemRequestAsJson["Guns"][gunIndex][gunKeys[i1]]["gunStats"]["perks"] = [perkDefinition]
