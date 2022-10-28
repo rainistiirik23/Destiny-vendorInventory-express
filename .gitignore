@@ -1,4 +1,5 @@
 Config/config.json
 dist/
 sqliteFile
-Cache
+/Cache
+/node_modules
