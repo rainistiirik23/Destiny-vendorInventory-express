@@ -2,14 +2,12 @@ const fs = require('fs');
 const request = require("request");
 const credentials = require('../Config/config.json')
 const { ApiKey, client_id, client_secret, refresh_token } = credentials
+const X = btoa(client_id + ":" + client_secret);
 
 /* While it's possible to log in again and again to bungie.net with the account to get the access token and make a VendorRequest,
 rather let's use the refresh token to get the access token,without having to log in for each VendorRequest.
 NB!! refresh token has an expiration date of 90 days,after that you will  have to log in again.
 */
-const X = btoa(client_id + ":" + client_secret);
-
-
 
 const tokenRequest = () => {
     return (
