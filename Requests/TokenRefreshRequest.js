@@ -9,29 +9,7 @@ NB!! refresh token has an expiration date of 90 days,after that you will  have t
 */
 const X = btoa(client_id + ":" + client_secret);
 
-/* request.post({
-    url: 'https://www.bungie.net/Platform/App/OAuth/Token/',
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-API-Key': ApiKey,
-        'Authorization': 'Basic ' + X,
-    },
-    form: {
-        "grant_type": "refresh_token",
-        "refresh_token": refresh_token,
 
-    }
-}, (err, res, body) => {
-    const moreErrorInfo = body + " \nstatus code: " + res.statusCode + "\ncookie: " + res.headers['set-cookie'];
-    const bodyAsJSon = JSON.parse(body);
-    if (err) {
-        console.log(err);
-    }
-    else {
-        console.log(bodyAsJSon);
-    }
-});
- */
 
 const tokenRequest = () => {
     return (
@@ -101,4 +79,3 @@ const refreshToken = async () => {
     }
 }
 refreshToken();
-/* const configTokens = readTokenConfig(); */
