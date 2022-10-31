@@ -9,63 +9,96 @@ NB!! refresh token has an expiration date of 90 days,after that you will  have t
 */
 const X = btoa(client_id + ":" + client_secret);
 
-const postRequest = () => new Promise((resolve, reject) => {
-    request.post({
-        url: 'https://www.bungie.net/Platform/App/OAuth/Token/',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-API-Key': ApiKey,
-            'Authorization': 'Basic ' + X,
-        },
-        form: {
-            "grant_type": "refresh_token",
-            "refresh_token": refresh_token,
+/* request.post({
+    url: 'https://www.bungie.net/Platform/App/OAuth/Token/',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-API-Key': ApiKey,
+        'Authorization': 'Basic ' + X,
+    },
+    form: {
+        "grant_type": "refresh_token",
+        "refresh_token": refresh_token,
 
-        }
-
-    }, (err, res, body) => {
-        const bodyAsJSon = JSON.parse(body);
-        if (err) {
-            reject(err);
-        }
-        else {
-            resolve(bodyAsJSon);
-        }
-    });
+    }
+}, (err, res, body) => {
+    const moreErrorInfo = body + " \nstatus code: " + res.statusCode + "\ncookie: " + res.headers['set-cookie'];
+    const bodyAsJSon = JSON.parse(body);
+    if (err) {
+        console.log(err);
+    }
+    else {
+        console.log(bodyAsJSon);
+    }
 });
+ */
+
+const tokenRequest = () => {
+    return (
+        new Promise((resolve, reject) => {
+            request.post({
+                url: 'https://www.bungie.net/Platform/App/OAuth/Token/',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-API-Key': ApiKey,
+                    'Authorization': 'Basic ' + X,
+                },
+
+                form: {
+                    "grant_type": "refresh_token",
+                    "refresh_token": refresh_token,
+                }
+
+            }, (err, res, body) => {
+                const moreErrorInfo = body + " \nstatus code: " + res.statusCode;
+                const bodyAsJSon = JSON.parse(body);
+                if (bodyAsJSon.error) {
+                    reject(moreErrorInfo);
+                }
+                else {
+                    resolve(bodyAsJSon);
+                }
+            });
+        }));
+};
 
 const readTokenConfig = () => {
     return (
-        fs.readFileSync('Config/config.json', 'utf8', (err, res) => {
-
-            if (err) {
-                console.log(err);
-            }
-
+        new Promise((resolve, reject) => {
+            fs.readFile('Config/config.json', 'utf8', (err, res) => {
+                const resultAsJson = JSON.parse(res)
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(resultAsJson)
+                }
+            });
         }));
 };
-const writeTokens = Tokens => new Promise((resolve, reject) => {
-    fs.writeFile('Config/config.json', JSON.stringify(Tokens), (err, result) => {
+
+const writeTokens = (configTokens, requestTokens) => new Promise((resolve, reject) => {
+    configTokens['access_token'] = requestTokens['access_token'];
+    configTokens[' refresh_token'] = requestTokens[' refresh_token'];
+    fs.writeFile('Config/config.json', JSON.stringify(configTokens), (err, result) => {
         if (err) {
             reject(err);
         }
         else {
-            resolve('Tokens are written');
+            resolve(console.log('Tokens are written'));
         }
     })
 });
 
 const refreshToken = async () => {
     try {
-        const tokensFromRequest = await postRequest();
-        const tokenFromConfig = JSON.parse(readTokenConfig());
-        tokenFromConfig['access_token'] = tokensFromRequest['access_token']
-        tokenFromConfig[' refresh_token'] = tokensFromRequest[' refresh_token']
-        await writeTokens(tokenFromConfig);
-
+        const requestTokens = await tokenRequest();
+        const configTokens = await readTokenConfig();
+        await writeTokens(configTokens, requestTokens);
     }
     catch (err) {
         console.log(err);
     }
 }
 refreshToken();
+/* const configTokens = readTokenConfig(); */
