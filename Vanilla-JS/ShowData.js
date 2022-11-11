@@ -1,7 +1,7 @@
 const result = document.getElementById('result');
 //const json = require('Cache/ItemNameRequest.json')
 //console.log( json )
-fetch('Cache/ItemNameManifest.json')
+fetch('../Cache/ItemNameManifest.json')
     .then(response => response.json())
     .then(data => {
         console.log(Object.keys(data['Guns']))
