@@ -15,6 +15,7 @@ const vendorRequest = () => {
                 },
             }, (err, res, body) => {
                 const bodyAsJson = JSON.parse(body);
+
                 if (bodyAsJson.error) {
                     const moreErrorInfo = body + " \nstatus code: " + res.statusCode;
                     reject(moreErrorInfo);

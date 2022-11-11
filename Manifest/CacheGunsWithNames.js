@@ -47,8 +47,8 @@ const getGunNames = () => {
                 /* console.log(JSON.parse(gunObject)['Guns'][gunKeys[i]]); */
                 /*  let gunObject = JSON.stringify({ 'Guns': [{ [gunKeys[i]]: response }] }) */
                 const readManifest = fs.readFileSync('Cache/ItemNameManifest.json', 'utf8', function (err, data) {
-                    if (!err) {
-                        console.log("reading")
+                    if (err) {
+
                     }
                 });
 
@@ -63,7 +63,7 @@ const getGunNames = () => {
                         if (err) console.log('error', err);
                     });
                 }
-                if (!readManifest) {
+                else if (!readManifest) {
                     /*    console.log("not true" + i) */
                     fs.writeFileSync('Cache/ItemNameManifest.json', gunObject, {
                         'flag': 'w'

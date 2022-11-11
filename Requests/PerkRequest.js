@@ -26,7 +26,7 @@ request.get({
     url: 'https://www.bungie.net//Platform/Destiny2/2/Profile/4611686018436313974/Character/2305843009261697780/Vendors/672118013/?definitions=true&components=302',
     headers: {
         "X-API-KEY": ApiKey,
-        "Authorization": access_token,
+        "Authorization": "Bearer " + access_token,
     },
 }, function (err, res, body) {
     //console.log(" \nstatus code: " + res.statusCode + "\ncookie: " + res.headers['set-cookie']);

@@ -39,6 +39,12 @@
                                 "visible": false
                             },
                             {
+                                "perkHash": 2349040841,
+                                "iconPath": "",
+                                "isActive": true,
+                                "visible": false
+                            },
+                            {
                                 "perkHash": 3712552436,
                                 "iconPath": "/common/destiny2_content/icons/ba833d17f4b85ef723eaa7f0e5a253db.png",
                                 "isActive": true,
@@ -52,35 +58,7 @@
                             }
                         ]
                     },
-                    "33": {
-                        "perks": [
-                            {
-                                "perkHash": 3435464613,
-                                "iconPath": "",
-                                "isActive": true,
-                                "visible": false
-                            },
-                            {
-                                "perkHash": 3562839833,
-                                "iconPath": "/common/destiny2_content/icons/ad56b0e83d31592d9984cdf2f392452a.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 850803125,
-                                "iconPath": "/common/destiny2_content/icons/83e206ebea83f76d9969efea7134ddcc.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 2161792065,
-                                "iconPath": "/common/destiny2_content/icons/5b83b3c3fc474c9716e54b4dfe4a862b.png",
-                                "isActive": true,
-                                "visible": true
-                            }
-                        ]
-                    },
-                    "43": {
+                    "41": {
                         "perks": [
                             {
                                 "perkHash": 1717910801,
@@ -89,48 +67,8 @@
                                 "visible": false
                             },
                             {
-                                "perkHash": 3672760533,
-                                "iconPath": "/common/destiny2_content/icons/90c4f7f35c9d24f4add016722a78404e.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 402655312,
-                                "iconPath": "/common/destiny2_content/icons/df460693665b7b4dd42f1706e5fbb9e1.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 710860076,
-                                "iconPath": "",
-                                "isActive": true,
-                                "visible": false
-                            },
-                            {
-                                "perkHash": 3703856239,
-                                "iconPath": "/common/destiny2_content/icons/92111c4f872db8112e71a1bb4c684609.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 1776204874,
-                                "iconPath": "/common/destiny2_content/icons/0f58c76120e6331c0ee2832c6e8c58fe.png",
-                                "isActive": true,
-                                "visible": true
-                            }
-                        ]
-                    },
-                    "45": {
-                        "perks": [
-                            {
-                                "perkHash": 682617678,
-                                "iconPath": "/common/destiny2_content/icons/d1ff65162c4a9d54a9612d9874b9fa88.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 3041644106,
-                                "iconPath": "/common/destiny2_content/icons/feb90291222c7ef1fdb0d7730706d36e.png",
+                                "perkHash": 1907936296,
+                                "iconPath": "/common/destiny2_content/icons/ad56b0e83d31592d9984cdf2f392452a.png",
                                 "isActive": true,
                                 "visible": true
                             },
@@ -147,6 +85,74 @@
                                 "visible": false
                             },
                             {
+                                "perkHash": 586210096,
+                                "iconPath": "/common/destiny2_content/icons/5f346569b07ad452768b16a255ebd168.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 2542543524,
+                                "iconPath": "/common/destiny2_content/icons/eeb139e47fc2a6d6c776a8a0fe50e76b.png",
+                                "isActive": true,
+                                "visible": true
+                            }
+                        ]
+                    },
+                    "49": {
+                        "perks": [
+                            {
+                                "perkHash": 4040885430,
+                                "iconPath": "/common/destiny2_content/icons/90c4f7f35c9d24f4add016722a78404e.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 1167548551,
+                                "iconPath": "/common/destiny2_content/icons/1f08b014f6e0433875b39a5a4176e4cd.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 2763822767,
+                                "iconPath": "/common/destiny2_content/icons/e9aa2f479812bfabc8d48effde384737.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 1776204874,
+                                "iconPath": "/common/destiny2_content/icons/0f58c76120e6331c0ee2832c6e8c58fe.png",
+                                "isActive": true,
+                                "visible": true
+                            }
+                        ]
+                    },
+                    "50": {
+                        "perks": [
+                            {
+                                "perkHash": 4040885430,
+                                "iconPath": "/common/destiny2_content/icons/90c4f7f35c9d24f4add016722a78404e.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 2920138167,
+                                "iconPath": "",
+                                "isActive": true,
+                                "visible": false
+                            },
+                            {
+                                "perkHash": 2408129136,
+                                "iconPath": "/common/destiny2_content/icons/9f3c3ae1bddbed21af1cc6487338028e.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 1314569399,
+                                "iconPath": "/common/destiny2_content/icons/b7106e2123d59e57a1547bc006892ebc.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
                                 "perkHash": 1776204874,
                                 "iconPath": "/common/destiny2_content/icons/0f58c76120e6331c0ee2832c6e8c58fe.png",
                                 "isActive": true,
@@ -157,7 +163,7 @@
                     "51": {
                         "perks": [
                             {
-                                "perkHash": 279556661,
+                                "perkHash": 3435464613,
                                 "iconPath": "",
                                 "isActive": true,
                                 "visible": false
@@ -169,20 +175,20 @@
                                 "visible": true
                             },
                             {
-                                "perkHash": 1537859493,
-                                "iconPath": "/common/destiny2_content/icons/f271b1b0d4ae393cce12eb7c305f8d12.png",
+                                "perkHash": 4030961232,
+                                "iconPath": "/common/destiny2_content/icons/5f4601133a7dad01a4f8afa9b63f92f0.png",
                                 "isActive": true,
                                 "visible": true
                             },
                             {
-                                "perkHash": 3458972548,
-                                "iconPath": "/common/destiny2_content/icons/49df9d90b3f27bd5ec6a9b35f4c10def.png",
+                                "perkHash": 924005633,
+                                "iconPath": "/common/destiny2_content/icons/7ad7019f186f93d6a9c0a3497c06ed8a.png",
                                 "isActive": true,
                                 "visible": true
                             },
                             {
-                                "perkHash": 2198256770,
-                                "iconPath": "/common/destiny2_content/icons/6e67f277fe19b93159c466a41542b7b3.png",
+                                "perkHash": 2542543524,
+                                "iconPath": "/common/destiny2_content/icons/eeb139e47fc2a6d6c776a8a0fe50e76b.png",
                                 "isActive": true,
                                 "visible": true
                             }
@@ -191,32 +197,78 @@
                     "52": {
                         "perks": [
                             {
-                                "perkHash": 1717910801,
+                                "perkHash": 3486450016,
                                 "iconPath": "",
                                 "isActive": true,
                                 "visible": false
                             },
                             {
-                                "perkHash": 2608136408,
-                                "iconPath": "/common/destiny2_content/icons/0ab090e93e19da9e841b0f94c5ab7de6.png",
+                                "perkHash": 4040885430,
+                                "iconPath": "/common/destiny2_content/icons/90c4f7f35c9d24f4add016722a78404e.png",
                                 "isActive": true,
                                 "visible": true
                             },
                             {
-                                "perkHash": 3527390035,
-                                "iconPath": "/common/destiny2_content/icons/d355b1117307c9f187729249361cecc3.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 1056770387,
+                                "perkHash": 4144877249,
                                 "iconPath": "",
                                 "isActive": true,
                                 "visible": false
                             },
                             {
-                                "perkHash": 1314569399,
-                                "iconPath": "/common/destiny2_content/icons/b7106e2123d59e57a1547bc006892ebc.png",
+                                "perkHash": 1613006503,
+                                "iconPath": "/common/destiny2_content/icons/16d063d66a8d90643a409dfa4283c4e2.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 3192673030,
+                                "iconPath": "/common/destiny2_content/icons/391c674efee7852092c36c1b82b097ca.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 3599664899,
+                                "iconPath": "",
+                                "isActive": true,
+                                "visible": false
+                            },
+                            {
+                                "perkHash": 2542543524,
+                                "iconPath": "/common/destiny2_content/icons/eeb139e47fc2a6d6c776a8a0fe50e76b.png",
+                                "isActive": true,
+                                "visible": true
+                            }
+                        ]
+                    },
+                    "56": {
+                        "perks": [
+                            {
+                                "perkHash": 279556661,
+                                "iconPath": "",
+                                "isActive": true,
+                                "visible": false
+                            },
+                            {
+                                "perkHash": 1675041642,
+                                "iconPath": "/common/destiny2_content/icons/90c4f7f35c9d24f4add016722a78404e.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 1873974715,
+                                "iconPath": "",
+                                "isActive": true,
+                                "visible": false
+                            },
+                            {
+                                "perkHash": 1167548551,
+                                "iconPath": "/common/destiny2_content/icons/1f08b014f6e0433875b39a5a4176e4cd.png",
+                                "isActive": true,
+                                "visible": true
+                            },
+                            {
+                                "perkHash": 3654471391,
+                                "iconPath": "/common/destiny2_content/icons/d4e363e155b7d836a3bc6383d72666db.png",
                                 "isActive": true,
                                 "visible": true
                             },
@@ -228,47 +280,7 @@
                             }
                         ]
                     },
-                    "56": {
-                        "perks": [
-                            {
-                                "perkHash": 3486450016,
-                                "iconPath": "",
-                                "isActive": true,
-                                "visible": false
-                            },
-                            {
-                                "perkHash": 3833153424,
-                                "iconPath": "/common/destiny2_content/icons/59597c84cf53f7739337a19b80f2d8fe.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 983157083,
-                                "iconPath": "/common/destiny2_content/icons/27372dd0065672d9308804a2a0a442bd.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 4073730730,
-                                "iconPath": "",
-                                "isActive": false,
-                                "visible": false
-                            },
-                            {
-                                "perkHash": 3835132082,
-                                "iconPath": "/common/destiny2_content/icons/8a42d3e3d7b4c1c38755f5e0ac186f0b.png",
-                                "isActive": true,
-                                "visible": true
-                            },
-                            {
-                                "perkHash": 3558172203,
-                                "iconPath": "/common/destiny2_content/icons/0dbd2b11fd1343c11b4559c7a72ae8da.png",
-                                "isActive": true,
-                                "visible": true
-                            }
-                        ]
-                    },
-                    "116": {
+                    "115": {
                         "perks": [
                             {
                                 "perkHash": 2778772943,
@@ -278,6 +290,12 @@
                             },
                             {
                                 "perkHash": 1345104071,
+                                "iconPath": "",
+                                "isActive": true,
+                                "visible": false
+                            },
+                            {
+                                "perkHash": 3100626989,
                                 "iconPath": "",
                                 "isActive": true,
                                 "visible": false
