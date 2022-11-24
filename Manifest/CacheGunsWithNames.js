@@ -37,12 +37,18 @@ const getGunNames = () => {
     for (let i = 0; i < dataAsJson.length; i++) {
         const dataJson = JSON.parse(dataAsJson[i]['json']);
         const gunStats = dataJson.displayProperties;
-        let response = {
-            gunStats
-        }
+        /*  console.log(dataJson.flavorText) */
+        const gunFlavorText = dataJson.flavorText
 
+        let response = {
+            gunStats,
+
+        }
         for (let i = 0; i < itemHashList.length; i++) {
+            /*  console.log(response) */
             if (JSON.parse(dataJson['hash'] == itemHashList[i])) {
+                Object.assign(response.gunStats, { flavorText: gunFlavorText })
+                console.log(response)
                 let gunObject = JSON.stringify({ 'Guns': { [gunKeys[i]]: response } })
                 /* console.log(JSON.parse(gunObject)['Guns'][gunKeys[i]]); */
                 /*  let gunObject = JSON.stringify({ 'Guns': [{ [gunKeys[i]]: response }] }) */

@@ -72,6 +72,8 @@ class guns extends React.Component {
                 }
                 await this.setState({ styles: style, loaded: true })
                 console.log(style)
+
+
             }
             catch (err) {
                 console.log(err)
@@ -95,6 +97,7 @@ class guns extends React.Component {
             return <h1>Loading</h1>
         }
         if (this.state.loaded) {
+            /*   console.log(this.state.data) */
 
             const gunStyle = {
                 display: 'flex'
@@ -103,6 +106,7 @@ class guns extends React.Component {
             const gunKeys = this.state.keys;
             const gunInfo = gunKeys.map(i => {
                 const icons = gundata.Guns[i].gunStats.icon
+                const flavorText = gundata.Guns[i].gunStats.flavorText
                 const gunPerks = gundata.Guns[i].gunStats.perks.map((i2, index) => {
                     return (
                         < div >
@@ -133,11 +137,14 @@ class guns extends React.Component {
                 /* console.log(gunPerks[0]) */
                 const element = <div key={i} style={gunStyle} >
                     <img key={`${i}${icons}`} src={`http://www.bungie.net${icons}`}></img>
-                    <p key={`${i}-${gundata.Guns[i].gunStats.name}`} >{gundata.Guns[i].gunStats.name}</p>
+                    <div>
+                        <p key={`${i}-${gundata.Guns[i].gunStats.name}`} >{gundata.Guns[i].gunStats.name}</p>
+                        <p>{flavorText}</p>
+                    </div>
                 </div >;
 
                 return (
-                    <div >
+                    <div className='gunContainer' >
                         {element}
                         <div style={gunStyle}>{gunPerks}</div>
                     </div>

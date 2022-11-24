@@ -13,10 +13,16 @@ nav {
     flex-direction: column;
 }
 
+.gunContainer {
+    margin: 100px 0px 100px 0px;
+}
+
 .hiddenName {
     display: none;
+    background-color: cadetblue;
 }
 
 .visibleName {
-    display: flex
+    display: flex;
+    background-color: cadetblue;
 }
