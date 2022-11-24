@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 /* app.use(express.urlencoded()) */
+app.use(express.urlencoded());
 app.use(express.static(path.join(__dirname, '..', 'Public')))
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'Public/index.html'))
