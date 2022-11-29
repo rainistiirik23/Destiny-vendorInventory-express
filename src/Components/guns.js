@@ -7,7 +7,8 @@ class guns extends React.Component {
             data: {},
             loaded: false,
             keys: [],
-            styles: {}
+            styles: {},
+            perkClasses: {}
         }
     }
     bansheeRequest() {
@@ -28,7 +29,7 @@ class guns extends React.Component {
                 const fetched = await fetch('banshee', { method: 'GET' });
                 const fetchedJson = await jsonify(fetched)
                 const keys = Object.keys(fetchedJson['Guns'])
-                await this.setState({ data: fetchedJson, /* loaded: true, */ keys: keys, })
+                await this.setState({ data: fetchedJson, keys: keys, })
 
             }
             catch (err) {
@@ -55,7 +56,7 @@ class guns extends React.Component {
                 const fetched = await fetch('banshee', { method: 'GET' });
                 const fetchedJson = await jsonify(fetched);
                 const keys = Object.keys(fetchedJson['Guns']);
-
+                const perkClasses = this.state.perkClasses
                 const style = {}
                 for (let i = 0; i < keys.length; i++) {
                     const gunKey = keys[i]
@@ -66,13 +67,19 @@ class guns extends React.Component {
                         value: {},
                         writable: true,
                     })
+                    Object.defineProperty(perkClasses, gunKey, {
+                        value: {},
+                        writable: true,
+                    })
                     for (let i2 = 0; i2 < perkLength; i2++) {
                         Object.assign(style[gunKey], { [i2]: { className: 'hiddenName' } })
+                        Object.assign(perkClasses[gunKey], { [i2]: { className: 'perk' } })
                     }
                 }
-                await this.setState({ styles: style, loaded: true })
-                console.log(style)
-
+                await this.setState({ styles: style, loaded: true, perkClasses: perkClasses })
+                /*   console.log(style)
+                  console.log(perkClasses) */
+                /*                 console.log(this.state.data) */
 
             }
             catch (err) {
@@ -100,7 +107,8 @@ class guns extends React.Component {
             /*   console.log(this.state.data) */
 
             const gunStyle = {
-                display: 'flex'
+                display: 'flex',
+
             }
             const gundata = this.state.data;
             const gunKeys = this.state.keys;
@@ -109,35 +117,76 @@ class guns extends React.Component {
                 const flavorText = gundata.Guns[i].gunStats.flavorText
                 const gunPerks = gundata.Guns[i].gunStats.perks.map((i2, index) => {
                     return (
-                        < div >
 
+                        < div className={this.state.perkClasses[i][index]['className']} >
+                            < img className='perkIcon' key={`${i}-${i2.icon}`} src={`http://www.bungie.net${i2.icon}`}
+                                onMouseOver={() => {
+                                    console.log()
+                                    const className = this.state.styles
+                                    let perkClassName = this.state.perkClasses
+                                    /*   if (className[i][index]['className'] == 'visibleName' && perkClassName[i][index]['className'] == 'perk-coverPerks') {
+                                          className[i][index] = { className: 'hiddenName' }
+                                          perkClassName[i][index] = { className: 'perk' }
+                                          this.setState({ styles: className, perkClasses: perkClassName })
+  
+                                          console.log(this.state.perkClasses)
+  
+                                          return
+                                      } */
+                                    perkClassName[i][index] = { className: 'perk-coverPerks' }
+                                    className[i][index] = { className: 'visibleName' }
+                                    this.setState({ styles: className, perkClasses: perkClassName })
+                                    /* styles[i] = {display: 'flex' } */
 
-                            <div className={this.state.styles[i][index]['className']} >{i2.name}</div>
-
-                            < img key={`${i}-${i2.icon}`} src={`http://www.bungie.net${i2.icon}`}
-                                onClick={() => {
+                                    console.log(this.state.perkClasses)
+                                }}
+                                onMouseLeave={() => {
                                     console.log(index)
                                     const className = this.state.styles
-                                    if (className[i][index]['className'] == 'visibleName') {
+                                    let perkClassName = this.state.perkClasses
+                                    if (className[i][index]['className'] == 'visibleName' && perkClassName[i][index]['className'] == 'perk-coverPerks') {
                                         className[i][index] = { className: 'hiddenName' }
-                                        this.setState(className)
-                                        console.log(className[i][index])
+                                        perkClassName[i][index] = { className: 'perk' }
+                                        this.setState({ styles: className, perkClasses: perkClassName })
+
+                                        console.log(this.state.perkClasses)
+
                                         return
                                     }
-                                    className[i][index] = { className: 'visibleName' }
-                                    this.setState(className)
-                                    /* styles[i] = {display: 'flex' } */
-                                    console.log(className[i][index]);
+
                                 }}
                             >
                             </img >
+                            <div className={this.state.styles[i][index]['className']} >
+                                <p>{i2.name}</p>
+                                <p>{i2.description}</p>
+                            </div>
                         </div >
+
+
+
+
+                        /*  <div className='perkNameContainer'>
+                             <div className={this.state.styles[i][index]['className']} >
+                                 <p>{i2.name}</p>
+                                 <p>{i2.description}</p>
+                             </div>
+                         </div> */
                     )
                 })
+                /* const gunPerkNames = gundata.Guns[i].gunStats.perks.map((i2, index) => {
+                    return (
+                        <div className={this.state.styles[i][index]['className']} >
+                            <p>{i2.name}</p>
+                            <p>{i2.description}</p>
+                        </div>
+                    )
+                }) */
+
                 /* console.log(gunPerks[0]) */
                 const element = <div key={i} style={gunStyle} >
                     <img key={`${i}${icons}`} src={`http://www.bungie.net${icons}`}></img>
-                    <div>
+                    <div >
                         <p key={`${i}-${gundata.Guns[i].gunStats.name}`} >{gundata.Guns[i].gunStats.name}</p>
                         <p>{flavorText}</p>
                     </div>
@@ -146,7 +195,8 @@ class guns extends React.Component {
                 return (
                     <div className='gunContainer' >
                         {element}
-                        <div style={gunStyle}>{gunPerks}</div>
+                        <div className='perkContainer'>{gunPerks}</div>
+                        {/*    {<div className='perkNames'>{gunPerkNames}</div>} */}
                     </div>
 
                 );
