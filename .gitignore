@@ -3,3 +3,4 @@ dist/
 sqliteFile
 /Cache
 /node_modules
+Requests/DownloadImage.js
