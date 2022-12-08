@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import Mynavbar from '../Components/navbar';
 const wishlistpage = () => {
     return (
@@ -10,3 +10,4 @@ const wishlistpage = () => {
     )
 }
 export default wishlistpage
+ */
