@@ -1,0 +1,35 @@
+html {
+    background-color: blue;
+
+}
+
+#result {
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+    /* grid-template-columns: 300px 300px 300px;*/
+    grid-template-rows: max-content max-content max-content;
+    column-gap: 120px;
+    row-gap: 5%;
+
+}
+
+.gunIcon {
+    width: 500px;
+    border-radius: 90%;
+}
+
+.gunDiv {
+    display: flex;
+}
+
+span {
+    font-size: 60px;
+}
+
+p {
+    font-size: 60px;
+}
+
+.perkIcon {
+    width: 120px;
+}
