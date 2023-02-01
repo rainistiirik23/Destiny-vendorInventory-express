@@ -1,5 +1,4 @@
 import React from 'react';
-import image from '/example.png';
 class guns extends React.Component {
     constructor(props) {
         super(props)
@@ -128,9 +127,9 @@ class guns extends React.Component {
                                           className[i][index] = { className: 'hiddenName' }
                                           perkClassName[i][index] = { className: 'perk' }
                                           this.setState({ styles: className, perkClasses: perkClassName })
-  
+
                                           console.log(this.state.perkClasses)
-  
+
                                           return
                                       } */
                                     perkClassName[i][index] = { className: 'perk-coverPerks' }
