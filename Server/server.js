@@ -15,7 +15,6 @@ app.use('/gunPicView', gunPicView);
 app.use('/', Vendorpage);
 app.use('/banshee', banshee);
 app.use('/wishlist', wishList);
-console.log(__dirname)
 const options = {
     cert: fs.readFileSync("Server/ssl/cert.pem"),
     key: fs.readFileSync("Server/ssl/key.pem")

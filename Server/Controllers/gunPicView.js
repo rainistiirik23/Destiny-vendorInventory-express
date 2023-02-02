@@ -5,7 +5,7 @@ const app = express()
 
 const gunPic = async (req, res) => {
     /*  res.sendFile(path.join(__dirname, '../../Pictures/screenshot.png')) */
-    res.sendFile(path.join(__dirname, '../../', 'Public/Views/gunV/index.html'));
+    res.sendFile(path.join(__dirname, '../../', 'Public/Views/Gunview/index.html'));
 
 
 };

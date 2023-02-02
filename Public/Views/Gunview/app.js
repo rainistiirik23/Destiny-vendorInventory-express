@@ -1,7 +1,7 @@
 
 
 
-fetch('http://localhost:8000/banshee')
+fetch('https://localhost:8000/banshee')
     .then(response => response.json())
     .then(data => {
         console.log('datafetch')
@@ -20,7 +20,7 @@ fetch('http://localhost:8000/banshee')
             result.appendChild(gunsPerksDiv);
 
             const gunIcon = document.createElement('img')
-            gunIcon.src = `http://www.bungie.net${gunIcons}`;
+            gunIcon.src = `https://www.bungie.net${gunIcons}`;
             gunIcon.className = "gunIcon";
             gunDiv.appendChild(gunIcon);
             const gunNameElement = document.createElement('span');
@@ -42,8 +42,8 @@ fetch('http://localhost:8000/banshee')
                 const perkIconElement = document.createElement('img');
                 perkIconElement.className = 'perkIcon';
                 const perkIcon = data["Guns"][gunKeys[i]]["gunStats"]["perks"][i2]["icon"];
-                console.log(perkIcon);
-                perkIconElement.src = `http://www.bungie.net${perkIcon}`;
+                /* console.log(perkIcon); */
+                perkIconElement.src = `https://www.bungie.net${perkIcon}`;
                 perkDiv.appendChild(perkIconElement);
                 perkDiv.appendChild(perkNameElement);
                 perkDiv.appendChild(perkDescriptionElement);
