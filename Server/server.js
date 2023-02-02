@@ -15,9 +15,10 @@ app.use('/gunPicView', gunPicView);
 app.use('/', Vendorpage);
 app.use('/banshee', banshee);
 app.use('/wishlist', wishList);
+console.log(__dirname)
 const options = {
-    cert: fs.readFileSync("././ssl/cert.pem"),
-    key: fs.readFileSync("././ssl/key.pem")
+    cert: fs.readFileSync("Server/ssl/cert.pem"),
+    key: fs.readFileSync("Server/ssl/key.pem")
 };
 const server = https.createServer(options, app)
 server.listen(port = 8000, () => {
