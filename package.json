@@ -8,7 +8,7 @@
         "build": "npx webpack",
         "start": "npx webpack serve",
         "watch": "npx webpack --watch",
-        "serve": "nodemon server/server.js"
+        "serve": "nodemon Server/server.js"
     },
     "author": "",
     "license": "ISC",
