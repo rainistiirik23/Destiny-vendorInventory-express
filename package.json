@@ -4,7 +4,6 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "auth": "nodemon app.js",
         "build": "npx webpack",
         "start": "npx webpack serve",
         "watch": "npx webpack --watch",
