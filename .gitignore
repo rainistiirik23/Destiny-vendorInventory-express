@@ -4,3 +4,5 @@ sqliteFile
 /Cache
 /node_modules
 Requests/DownloadImage.js
+Server/Assets/Icons/Guns/*.png
+Server/Assets/Icons/Perks/*.png
