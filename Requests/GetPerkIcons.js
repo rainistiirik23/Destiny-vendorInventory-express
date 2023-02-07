@@ -33,7 +33,7 @@ const downloadFile = async () => {
                 fileStream.on("finish", resolve);
             });
 
-            await timer(3000);
+            await timer(1500);
 
         }
     }

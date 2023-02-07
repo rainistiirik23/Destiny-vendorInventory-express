@@ -10,6 +10,7 @@ class guns extends React.Component {
             perkClasses: {}
         }
     }
+
     bansheeRequest() {
         const jsonify = res => {
             return (
@@ -103,7 +104,7 @@ class guns extends React.Component {
             return <h1>Loading</h1>
         }
         if (this.state.loaded) {
-            /*   console.log(this.state.data) */
+            console.log(this.state.data)
 
             const gunStyle = {
                 display: 'flex',
@@ -112,13 +113,13 @@ class guns extends React.Component {
             const gundata = this.state.data;
             const gunKeys = this.state.keys;
             const gunInfo = gunKeys.map(i => {
-                const icons = gundata.Guns[i].gunStats.icon
+                const gunIconName = gundata.Guns[i].gunStats.name
                 const flavorText = gundata.Guns[i].gunStats.flavorText
                 const gunPerks = gundata.Guns[i].gunStats.perks.map((i2, index) => {
                     return (
 
                         < div className={this.state.perkClasses[i][index]['className']} >
-                            < img className='perkIcon' key={`${i}-${i2.icon}`} src={`http://www.bungie.net${i2.icon}`}
+                            < img className='perkIcon' key={`${i}-${i2.icon}`} src={`https://localhost:8000/perkIcon/${i2.name}.png`}
                                 onMouseOver={() => {
                                     console.log()
                                     const className = this.state.styles
@@ -184,7 +185,7 @@ class guns extends React.Component {
 
                 /* console.log(gunPerks[0]) */
                 const element = <div key={i} style={gunStyle} >
-                    <img key={`${i}${icons}`} src={`http://www.bungie.net${icons}`}></img>
+                    <img key={`${i}${gunIconName}`} src={`https://localhost:8000/gunIcon/${gunIconName}.png`}></img>
                     <div >
                         <p key={`${i}-${gundata.Guns[i].gunStats.name}`} >{gundata.Guns[i].gunStats.name}</p>
                         <p>{flavorText}</p>
@@ -193,6 +194,7 @@ class guns extends React.Component {
 
                 return (
                     <div className='gunContainer' >
+                        {/* <img src='https://localhost:8000/gunIcon/Ammit%20AR2.png'></img> */}
                         {element}
                         <div className='perkContainer'>{gunPerks}</div>
                         {/*    {<div className='perkNames'>{gunPerkNames}</div>} */}
