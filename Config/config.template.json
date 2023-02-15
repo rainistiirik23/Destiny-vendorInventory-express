@@ -5,5 +5,11 @@
     "access_token": "",
     "refresh_token": "",
     "code": "",
-    "manifestUrl": ""
+    "manifestUrl": "",
+    "Database": {
+        "host": "",
+        "user": "",
+        "password": "",
+        "database": ""
+    }
 }
