@@ -1,15 +1,22 @@
 {
+  "SteamAccount": {
+    "Username": "",
+    "Password": 123
+  },
+  "Api": {
+    "AuthCodeUrl": "",
     "ApiKey": "",
     "client_id": "",
     "client_secret": "",
     "access_token": "",
     "refresh_token": "",
     "code": "",
-    "manifestUrl": "",
-    "Database": {
-        "host": "",
-        "user": "",
-        "password": "",
-        "database": ""
-    }
+    "manifestUrl": ""
+  },
+  "Database": {
+    "host": "",
+    "user": "",
+    "password": "",
+    "database": ""
+  }
 }
