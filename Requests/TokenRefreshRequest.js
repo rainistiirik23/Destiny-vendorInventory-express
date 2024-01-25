@@ -55,7 +55,7 @@ const readTokenConfig = () => {
 const writeTokens = (configTokens, requestTokens) =>
   new Promise((resolve, reject) => {
     configTokens.Api.access_token = requestTokens["access_token"];
-    configTokens.Api.refresh_token = requestTokens[" refresh_token"];
+    configTokens.Api.refresh_token = requestTokens["refresh_token"];
     fs.writeFile(
       "Config/config.json",
       JSON.stringify(configTokens),
