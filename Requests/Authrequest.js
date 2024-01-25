@@ -82,7 +82,7 @@ const getConfig = () => {
 };
 const replaceAuthCode = (config, authCode) =>
   new Promise((resolve, reject) => {
-    config["code"] = authCode;
+    config.Api.code = authCode;
     fs.writeFile(
       "Config/config.json",
       JSON.stringify(config),
