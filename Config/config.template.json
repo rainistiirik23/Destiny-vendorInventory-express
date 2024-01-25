@@ -4,7 +4,6 @@
     "Password": 123
   },
   "Api": {
-    "AuthCodeUrl": "",
     "ApiKey": "",
     "client_id": "",
     "client_secret": "",
