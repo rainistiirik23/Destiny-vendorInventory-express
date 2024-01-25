@@ -6,13 +6,14 @@ const {
 const fetch = require("node-fetch");
 const { default: puppeteer, HTTPResponse, HTTPRequest } = require("puppeteer");
 const fs = require("fs");
+const authCodeUrl = `https://www.bungie.net/en/oauth/authorize?client_id=${client_id}&response_type=code&state=6i0mkLx79Hp91nzWVeHrzHG4`;
 const authCodeRequest = async () => {
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(AuthCodeUrl);
+    await page.goto(authCodeUrl);
     await page.click(
-      'a[href="/en/User/SignIn/SteamId?bru=%252Fen%252Foauth%252Fauthorize%253Fclient_id%253D%252524%25257Bclient_id%25257D%2526response_type%253Dcode%2526state%253D6i0mkLx79Hp91nzWVeHrzHG4&flowStart=1"]'
+      'a[href="/en/User/SignIn/SteamId?bru=%252Fen%252Foauth%252Fauthorize%253Fclient_id%253D46155%2526response_type%253Dcode%2526state%253D6i0mkLx79Hp91nzWVeHrzHG4&flowStart=1"]'
     );
     const loginUrl = await page.url();
     const userNameElement = await page.waitForSelector(
@@ -28,9 +29,15 @@ const authCodeRequest = async () => {
     );
     await page.waitForNavigation();
     await page.click('input[id="imageLogin"][type="submit"]');
+    /*    await page.waitForNavigation(); */
+
     const getAuthCode = () => {
       return new Promise((resolve, reject) => {
         page.on("response", (response) => {
+          if (!response.headers()["location"]) {
+            return;
+          }
+
           const status = response.status();
           console.log(response.headers());
           const redirectUrlExists = response
@@ -60,7 +67,7 @@ const authCodeRequest = async () => {
     process.exit(1);
   }
 };
-
+authCodeRequest();
 const getConfig = () => {
   return new Promise((resolve, reject) => {
     fs.readFile("Config/config.json", "utf8", (err, res) => {
