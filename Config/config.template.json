@@ -1,7 +1,7 @@
 {
   "SteamAccount": {
-    "Username": "",
-    "Password": 123
+    "username": "",
+    "password": 123
   },
   "Api": {
     "ApiKey": "",
