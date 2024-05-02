@@ -1,7 +1,10 @@
-const fs = require('fs');
+const fs = require("fs");
 const request = require("request");
-const credentials = require('../Config/config.json')
-const { ApiKey, access_token } = credentials
+const credentials = require("../Config/config.json");
+const {
+  Api: { ApiKey, access_token },
+  SteamAccount: { memberShipType, memberShipId, characterId },
+} = credentials;
 /*let gunKeyList = { 'Guns': [] };
 
 let itemHashList = [];
@@ -20,21 +23,28 @@ for (let i = 7; i <= 12; i++) {
 console.log(gunKeyList, itemHashList);
 */
 
-
-
-request.get({
-    url: 'https://www.bungie.net//Platform/Destiny2/2/Profile/4611686018436313974/Character/2305843009261697780/Vendors/672118013/?definitions=true&components=302',
+request.get(
+  {
+    url: `https://www.bungie.net//Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/Character/${characterId}/Vendors/672118013/?definitions=true&components=302,310`,
     headers: {
-        "X-API-KEY": ApiKey,
-        "Authorization": "Bearer " + access_token,
+      "X-API-KEY": ApiKey,
+      Authorization: "Bearer " + access_token,
     },
-}, function (err, res, body) {
-    //console.log(" \nstatus code: " + res.statusCode + "\ncookie: " + res.headers['set-cookie']);
-    const response = JSON.parse(body)
+  },
+  function (err, res, body) {
+    console.log(" \nstatus code: " + res.statusCode + "\ncookie: " + res.headers["set-cookie"]);
+
+    const response = JSON.parse(body);
     //console.log(response)
-    fs.writeFile("Cache/PerkRequest.json", body, {
-        'flag': 'w'
-    }, function (err, result) {
-        if (err) console.log('error', err);
-    });
-});
+    fs.writeFile(
+      "Cache/PerkRequest.json",
+      body,
+      {
+        flag: "w",
+      },
+      function (err, result) {
+        if (err) console.log("error", err);
+      }
+    );
+  }
+);
