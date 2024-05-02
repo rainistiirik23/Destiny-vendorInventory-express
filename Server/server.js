@@ -1,36 +1,46 @@
-
-const express = require('express');
+const express = require("express");
 const app = express();
-const path = require('path');
-const https = require('https');
-const fs = require('fs');
-
-const banshee = require('./Routes/banshee');
-const Vendorpage = require('./Routes/Vendorpage');
-const wishList = require('./Routes/wishList');
-const gunPic = require('./Routes/gunPic');
-const gunPicView = require('./Routes/gunPicView');
-const gunIcon = require('./Routes/gunIcons');
-const perkIcon = require('./Routes/perkIcons');
-
-app.use(express.urlencoded({ extended: false }));
-app.use('/gunPic', gunPic);
-app.use('/gunPicView', gunPicView);
-app.use('/', Vendorpage);
-app.use('/banshee', banshee);
-app.use('/wishlist', wishList);
-app.use('/gunIcon', gunIcon);
-app.use('/perkIcon', perkIcon);
-
+const path = require("path");
+const https = require("https");
+const fs = require("fs");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const banshee = require("./Routes/banshee");
+const Vendorpage = require("./Routes/Vendorpage");
+const wishList = require("./Routes/wishList");
+const gunPic = require("./Routes/gunPic");
+const gunPicView = require("./Routes/gunPicView");
+const gunIcon = require("./Routes/gunIcons");
+const perkIcon = require("./Routes/perkIcons");
+const allVendorSales = require("./Routes/allVendorSales");
+const getUserId = require("./Routes/getUserId");
+const saveWishLIstedItem = require("./Routes/saveWishListedItem");
+const corsOptions = {
+  origin: "http://127.0.0.1:5173",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+const jsonParser = bodyParser.json();
+app.use(jsonParser);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/gunPic", gunPic);
+app.use("/gunPicView", gunPicView);
+app.use("/", Vendorpage);
+app.use("/banshee", banshee);
+app.use("/wishlist", wishList);
+app.use("/gunIcon", gunIcon);
+app.use("/perkIcon", perkIcon);
+app.use("/api/allVendorSales", allVendorSales);
+app.use("/api/getUserId", cors(corsOptions), getUserId);
+app.use("/api/saveWishListedItem", cors(corsOptions), saveWishLIstedItem);
 const options = {
-    cert: fs.readFileSync("Server/ssl/cert.pem"),
-    key: fs.readFileSync("Server/ssl/key.pem")
+  cert: fs.readFileSync("Server/ssl/fullchain.pem"),
+  key: fs.readFileSync("Server/ssl/cert-key.pem"),
 };
 
-const server = https.createServer(options, app)
-server.listen(port = 8000, () => {
-    console.log(`Server now listening at https://localhost:${port}`);
-})
+const server = https.createServer(options, app);
+server.listen((port = 8000), () => {
+  console.log(`Server now listening at https://localhost:${port}`);
+});
 /* app.listen(port = 8000, () => {
     console.log(`Server now listening at http://localhost:${port}`);
 }); */
