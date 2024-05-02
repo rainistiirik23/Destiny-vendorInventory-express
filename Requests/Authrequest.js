@@ -1,7 +1,7 @@
 const request = require("request");
 const {
   Api: { client_id, AuthCodeUrl },
-  SteamAccount: { password, username },
+  SteamAccount: { username, password },
 } = require("../Config/config.json");
 const fetch = require("node-fetch");
 const { default: puppeteer, HTTPResponse, HTTPRequest } = require("puppeteer");
@@ -12,23 +12,20 @@ const authCodeRequest = async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(authCodeUrl);
+
     await page.click(
       'a[href="/en/User/SignIn/SteamId?bru=%252Fen%252Foauth%252Fauthorize%253Fclient_id%253D46155%2526response_type%253Dcode%2526state%253D6i0mkLx79Hp91nzWVeHrzHG4&flowStart=1"]'
     );
     const loginUrl = await page.url();
-    const userNameElement = await page.waitForSelector(
-      'input[class="newlogindialog_TextInput_2eKVn"][type="text"]'
-    );
+    const userNameElement = await page.waitForSelector('input[type="text"]');
     const passwordElement = await page.waitForSelector(
-      'input[class="newlogindialog_TextInput_2eKVn"][type="password"]'
+      'input[type="password"]'
     );
     await userNameElement.type(username, { delay: 100 });
     await passwordElement.type(password, { delay: 100 });
-    await page.click(
-      'button[class="newlogindialog_SubmitButton_2QgFE"][type="submit"]'
-    );
+    await page.click('button[type="submit"]');
     await page.waitForNavigation();
-    await page.click('input[id="imageLogin"][type="submit"]');
+    await page.click('input[type="submit"]');
     /*    await page.waitForNavigation(); */
 
     const getAuthCode = () => {
