@@ -33,8 +33,8 @@ app.use("/api/allVendorSales", allVendorSales);
 app.use("/api/getUserId", cors(corsOptions), getUserId);
 app.use("/api/saveWishListedItem", cors(corsOptions), saveWishLIstedItem);
 const options = {
-  cert: fs.readFileSync("Server/ssl/fullchain.pem"),
-  key: fs.readFileSync("Server/ssl/cert-key.pem"),
+  cert: fs.readFileSync("Server/ssl/cert.pem"),
+  key: fs.readFileSync("Server/ssl/key.pem"),
 };
 
 const server = https.createServer(options, app);
