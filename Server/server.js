@@ -12,7 +12,7 @@ const gunPic = require("./Routes/gunPic");
 const gunPicView = require("./Routes/gunPicView");
 const gunIcon = require("./Routes/gunIcons");
 const perkIcon = require("./Routes/perkIcons");
-const allVendorSales = require("./Routes/allVendorSales");
+const currentVendorSales = require("./Routes/getCurrentVendorSales");
 const getUserId = require("./Routes/getUserId");
 const saveWishLIstedItem = require("./Routes/saveWishListedItem");
 const corsOptions = {
@@ -29,7 +29,7 @@ app.use("/banshee", banshee);
 app.use("/wishlist", wishList);
 app.use("/gunIcon", gunIcon);
 app.use("/perkIcon", perkIcon);
-app.use("/api/allVendorSales", allVendorSales);
+app.use("/api/currentVendorSales", currentVendorSales);
 app.use("/api/getUserId", cors(corsOptions), getUserId);
 app.use("/api/saveWishListedItem", cors(corsOptions), saveWishLIstedItem);
 const options = {
