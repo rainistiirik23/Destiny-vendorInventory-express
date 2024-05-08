@@ -24,14 +24,14 @@
                     ],
                     "apiPurchasable": true
                 },
-                "9": {
+                "11": {
                     "saleStatus": 8,
                     "failureIndexes": [
                         5
                     ],
                     "augments": 0,
-                    "vendorItemIndex": 9,
-                    "itemHash": 1588595445,
+                    "vendorItemIndex": 11,
+                    "itemHash": 4091000557,
                     "quantity": 1,
                     "costs": [
                         {
@@ -41,14 +41,14 @@
                         }
                     ]
                 },
-                "10": {
+                "12": {
                     "saleStatus": 8,
                     "failureIndexes": [
                         5
                     ],
                     "augments": 0,
-                    "vendorItemIndex": 10,
-                    "itemHash": 984527513,
+                    "vendorItemIndex": 12,
+                    "itemHash": 371216963,
                     "quantity": 1,
                     "costs": [
                         {
@@ -58,14 +58,14 @@
                         }
                     ]
                 },
-                "16": {
+                "14": {
                     "saleStatus": 8,
                     "failureIndexes": [
                         5
                     ],
                     "augments": 0,
-                    "vendorItemIndex": 16,
-                    "itemHash": 3336648220,
+                    "vendorItemIndex": 14,
+                    "itemHash": 941997506,
                     "quantity": 1,
                     "costs": [
                         {
@@ -75,14 +75,14 @@
                         }
                     ]
                 },
-                "18": {
+                "17": {
                     "saleStatus": 8,
                     "failureIndexes": [
                         5
                     ],
                     "augments": 0,
-                    "vendorItemIndex": 18,
-                    "itemHash": 1334978104,
+                    "vendorItemIndex": 17,
+                    "itemHash": 518387148,
                     "quantity": 1,
                     "costs": [
                         {
@@ -121,13 +121,13 @@
                             "hasConditionalVisibility": false
                         }
                     ],
-                    "overrideNextRefreshDate": "2022-10-31T17:00:00Z"
+                    "overrideNextRefreshDate": "2022-11-11T17:00:00Z"
                 },
-                "25": {
+                "28": {
                     "saleStatus": 0,
                     "failureIndexes": [],
                     "augments": 0,
-                    "vendorItemIndex": 25,
+                    "vendorItemIndex": 28,
                     "itemHash": 2979281381,
                     "quantity": 1,
                     "costs": [
@@ -142,7 +142,7 @@
                             "hasConditionalVisibility": false
                         },
                         {
-                            "itemHash": 592227263,
+                            "itemHash": 293622383,
                             "quantity": 25,
                             "hasConditionalVisibility": false
                         },
@@ -152,70 +152,7 @@
                             "hasConditionalVisibility": false
                         }
                     ],
-                    "overrideNextRefreshDate": "2022-10-31T17:00:00Z"
-                },
-                "37": {
-                    "saleStatus": 0,
-                    "failureIndexes": [],
-                    "augments": 0,
-                    "vendorItemIndex": 37,
-                    "itemHash": 3489657138,
-                    "quantity": 1,
-                    "costs": [
-                        {
-                            "itemHash": 1022552290,
-                            "quantity": 30,
-                            "hasConditionalVisibility": false
-                        },
-                        {
-                            "itemHash": 3159615086,
-                            "quantity": 7000,
-                            "hasConditionalVisibility": false
-                        }
-                    ],
-                    "overrideNextRefreshDate": "2022-11-01T17:00:00Z"
-                },
-                "38": {
-                    "saleStatus": 0,
-                    "failureIndexes": [],
-                    "augments": 0,
-                    "vendorItemIndex": 38,
-                    "itemHash": 1019000888,
-                    "quantity": 1,
-                    "costs": [
-                        {
-                            "itemHash": 1022552290,
-                            "quantity": 30,
-                            "hasConditionalVisibility": false
-                        },
-                        {
-                            "itemHash": 3159615086,
-                            "quantity": 7000,
-                            "hasConditionalVisibility": false
-                        }
-                    ],
-                    "overrideNextRefreshDate": "2022-11-01T17:00:00Z"
-                },
-                "40": {
-                    "saleStatus": 0,
-                    "failureIndexes": [],
-                    "augments": 0,
-                    "vendorItemIndex": 40,
-                    "itemHash": 4114929480,
-                    "quantity": 1,
-                    "costs": [
-                        {
-                            "itemHash": 1022552290,
-                            "quantity": 30,
-                            "hasConditionalVisibility": false
-                        },
-                        {
-                            "itemHash": 3159615086,
-                            "quantity": 7000,
-                            "hasConditionalVisibility": false
-                        }
-                    ],
-                    "overrideNextRefreshDate": "2022-11-01T17:00:00Z"
+                    "overrideNextRefreshDate": "2022-11-11T17:00:00Z"
                 },
                 "41": {
                     "saleStatus": 0,
@@ -236,28 +173,7 @@
                             "hasConditionalVisibility": false
                         }
                     ],
-                    "overrideNextRefreshDate": "2022-11-01T17:00:00Z"
-                },
-                "48": {
-                    "saleStatus": 0,
-                    "failureIndexes": [],
-                    "augments": 0,
-                    "vendorItemIndex": 48,
-                    "itemHash": 3341893443,
-                    "quantity": 1,
-                    "costs": [
-                        {
-                            "itemHash": 1022552290,
-                            "quantity": 30,
-                            "hasConditionalVisibility": false
-                        },
-                        {
-                            "itemHash": 3159615086,
-                            "quantity": 7000,
-                            "hasConditionalVisibility": false
-                        }
-                    ],
-                    "overrideNextRefreshDate": "2022-11-01T17:00:00Z"
+                    "overrideNextRefreshDate": "2022-11-15T17:00:00Z"
                 },
                 "49": {
                     "saleStatus": 0,
@@ -278,7 +194,91 @@
                             "hasConditionalVisibility": false
                         }
                     ],
-                    "overrideNextRefreshDate": "2022-11-01T17:00:00Z"
+                    "overrideNextRefreshDate": "2022-11-15T17:00:00Z"
+                },
+                "50": {
+                    "saleStatus": 0,
+                    "failureIndexes": [],
+                    "augments": 0,
+                    "vendorItemIndex": 50,
+                    "itemHash": 1916287826,
+                    "quantity": 1,
+                    "costs": [
+                        {
+                            "itemHash": 1022552290,
+                            "quantity": 30,
+                            "hasConditionalVisibility": false
+                        },
+                        {
+                            "itemHash": 3159615086,
+                            "quantity": 7000,
+                            "hasConditionalVisibility": false
+                        }
+                    ],
+                    "overrideNextRefreshDate": "2022-11-15T17:00:00Z"
+                },
+                "51": {
+                    "saleStatus": 0,
+                    "failureIndexes": [],
+                    "augments": 0,
+                    "vendorItemIndex": 51,
+                    "itemHash": 617501162,
+                    "quantity": 1,
+                    "costs": [
+                        {
+                            "itemHash": 1022552290,
+                            "quantity": 30,
+                            "hasConditionalVisibility": false
+                        },
+                        {
+                            "itemHash": 3159615086,
+                            "quantity": 7000,
+                            "hasConditionalVisibility": false
+                        }
+                    ],
+                    "overrideNextRefreshDate": "2022-11-15T17:00:00Z"
+                },
+                "52": {
+                    "saleStatus": 0,
+                    "failureIndexes": [],
+                    "augments": 0,
+                    "vendorItemIndex": 52,
+                    "itemHash": 2119346509,
+                    "quantity": 1,
+                    "costs": [
+                        {
+                            "itemHash": 1022552290,
+                            "quantity": 30,
+                            "hasConditionalVisibility": false
+                        },
+                        {
+                            "itemHash": 3159615086,
+                            "quantity": 7000,
+                            "hasConditionalVisibility": false
+                        }
+                    ],
+                    "overrideNextRefreshDate": "2022-11-15T17:00:00Z"
+                },
+                "56": {
+                    "saleStatus": 0,
+                    "failureIndexes": [],
+                    "augments": 0,
+                    "vendorItemIndex": 56,
+                    "itemHash": 1911060537,
+                    "quantity": 1,
+                    "costs": [
+                        {
+                            "itemHash": 1022552290,
+                            "quantity": 30,
+                            "hasConditionalVisibility": false
+                        },
+                        {
+                            "itemHash": 3159615086,
+                            "quantity": 7000,
+                            "hasConditionalVisibility": false
+                        }
+                    ],
+                    "overrideNextRefreshDate": "2022-11-15T17:00:00Z"
                 },
                 "59": {
                     "saleStatus": 0,
@@ -327,7 +327,7 @@
                     "failureIndexes": [
                         11
                     ],
-                    "augments": 0,
+                    "augments": 128,
                     "vendorItemIndex": 66,
                     "itemHash": 2979281381,
                     "quantity": 2,
@@ -348,7 +348,8 @@
                     "saleStatus": 8,
                     "failureIndexes": [
                         13,
-                        14
+                        14,
+                        15
                     ],
                     "augments": 0,
                     "vendorItemIndex": 70,
@@ -356,12 +357,12 @@
                     "quantity": 1,
                     "costs": []
                 },
-                "73": {
+                "77": {
                     "saleStatus": 0,
                     "failureIndexes": [],
                     "augments": 0,
-                    "vendorItemIndex": 73,
-                    "itemHash": 1272199270,
+                    "vendorItemIndex": 77,
+                    "itemHash": 3090126239,
                     "quantity": 1,
                     "costs": [
                         {
@@ -372,12 +373,12 @@
                     ],
                     "apiPurchasable": true
                 },
-                "82": {
+                "80": {
                     "saleStatus": 0,
                     "failureIndexes": [],
                     "augments": 0,
-                    "vendorItemIndex": 82,
-                    "itemHash": 1405646104,
+                    "vendorItemIndex": 80,
+                    "itemHash": 1008565805,
                     "quantity": 1,
                     "costs": [
                         {
@@ -388,12 +389,12 @@
                     ],
                     "apiPurchasable": true
                 },
-                "84": {
+                "85": {
                     "saleStatus": 0,
                     "failureIndexes": [],
                     "augments": 0,
-                    "vendorItemIndex": 84,
-                    "itemHash": 1019699039,
+                    "vendorItemIndex": 85,
+                    "itemHash": 3795659409,
                     "quantity": 1,
                     "costs": [
                         {
@@ -404,12 +405,12 @@
                     ],
                     "apiPurchasable": true
                 },
-                "91": {
+                "94": {
                     "saleStatus": 0,
                     "failureIndexes": [],
                     "augments": 0,
-                    "vendorItemIndex": 91,
-                    "itemHash": 1869653095,
+                    "vendorItemIndex": 94,
+                    "itemHash": 1742928699,
                     "quantity": 1,
                     "costs": [
                         {
