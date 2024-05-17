@@ -13,8 +13,12 @@ const gunPicView = require("./Routes/gunPicView");
 const gunIcon = require("./Routes/gunIcons");
 const perkIcon = require("./Routes/perkIcons");
 const currentVendorSales = require("./Routes/getCurrentVendorSales");
+const allVendorSales = require("./Routes/getAllVendorSales");
 const getUserId = require("./Routes/getUserId");
 const saveWishLIstedItem = require("./Routes/saveWishListedItem");
+const getUsersWishListedSales = require("./Routes/getUsersWishListedSales");
+const editWishlistedItem = require("./Routes/editWishlistedItem");
+const deleteWishlistedItem = require("./Routes/deleteWishlistedItem");
 const corsOptions = {
   origin: "http://127.0.0.1:5173",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -30,8 +34,12 @@ app.use("/wishlist", wishList);
 app.use("/gunIcon", gunIcon);
 app.use("/perkIcon", perkIcon);
 app.use("/api/currentVendorSales", currentVendorSales);
+app.use("/api/allVendorSales", allVendorSales);
 app.use("/api/getUserId", cors(corsOptions), getUserId);
 app.use("/api/saveWishListedItem", cors(corsOptions), saveWishLIstedItem);
+app.use("/api/getUsersWishListedSales", cors(corsOptions), getUsersWishListedSales);
+app.use("/api/editWishListedItem", cors(corsOptions), editWishlistedItem);
+app.use("/api/deleteWishlistedItem", cors(corsOptions), deleteWishlistedItem);
 const options = {
   cert: fs.readFileSync("Server/ssl/cert.pem"),
   key: fs.readFileSync("Server/ssl/key.pem"),
