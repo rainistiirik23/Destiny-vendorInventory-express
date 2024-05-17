@@ -23,13 +23,13 @@ const createMysqlConnection = (host, databaseUser, password, databaseName) => {
 const saveUsersWishListedItem = (mysqlConnection, requestData) => {
   return new Promise((resolve, reject) => {
     const {
-      itemData: { itemName, itemHash, perks, masterWorks },
+      itemData: { itemName, itemHash, itemIcon, perks, masterWorks },
       userData: { id: userId },
     } = requestData;
-    const findUserByIdQuery = `INSERT INTO Wishlisted_items(user_id,item_hash,item_name,perks,masterworks) VALUES(?, ?, ?, ?, ?)`;
+    const findUserByIdQuery = `INSERT INTO Wishlisted_items(user_id,item_hash,item_name,item_icon,perks,masterworks) VALUES(?, ?, ?, ?, ?,?)`;
     mysqlConnection.query(
       findUserByIdQuery,
-      [parseInt(userId), itemHash, itemName, JSON.stringify(perks), JSON.stringify(masterWorks)],
+      [userId, itemHash, itemName, itemIcon, JSON.stringify(perks), JSON.stringify(masterWorks)],
       (error, result) => {
         if (error) {
           reject(error);
