@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const allCurrentVendorSales = require("../Controllers/getAllVendorSales");
+const currentVendorSales = require("../Controllers/getCurrentVendorSales");
 
-router.get("/", allCurrentVendorSales);
+router.get("/", currentVendorSales);
 module.exports = router;

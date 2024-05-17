@@ -21,9 +21,9 @@ const createMysqlConnection = (host, databaseUser, password, databaseName) => {
   });
 };
 
-const getAllVendorSalesFromDatabase = (mysqlConnection) => {
+const getCurrentVendorSalesFromDatabase = (mysqlConnection) => {
   return new Promise((resolve, reject) => {
-    const query = `Select * from allVendorSales`;
+    const query = `Select * from gun_sales`;
     mysqlConnection.query(query, (error, result) => {
       if (error) {
         reject(error);
@@ -33,14 +33,14 @@ const getAllVendorSalesFromDatabase = (mysqlConnection) => {
   });
 };
 
-async function getAllVendorSales(req, res, next) {
+async function getCurrentVendorSales(req, res, next) {
   try {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
-    const allVendorSales = await getAllVendorSalesFromDatabase(mysqlConnection);
-    res.status(200).json({ allVendorSales: allVendorSales });
+    const currentVendorSales = await getCurrentVendorSalesFromDatabase(mysqlConnection);
+    res.status(200).json({ currentVendorSales: currentVendorSales });
   } catch (error) {
     console.log(error);
     res.status(500);
   }
 }
-module.exports = getAllVendorSales;
+module.exports = getCurrentVendorSales;
