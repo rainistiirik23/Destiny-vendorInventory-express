@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const allCurrentVendorSales = require("../Controllers/getAllVendorSales");
+const usersWishListedSales = require("../Controllers/getUsersWishListedSales");
 
-router.get("/", allCurrentVendorSales);
+router.post("/", usersWishListedSales);
 module.exports = router;

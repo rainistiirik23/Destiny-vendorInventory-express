@@ -21,9 +21,9 @@ const createMysqlConnection = (host, databaseUser, password, databaseName) => {
   });
 };
 
-const getAllVendorSalesFromDatabase = (mysqlConnection) => {
+const getUsersWishListedSalesFromDatabase = (mysqlConnection, userId) => {
   return new Promise((resolve, reject) => {
-    const query = `Select * from allVendorSales`;
+    const query = `Select * from Wishlisted_items Where user_id = ${userId}`;
     mysqlConnection.query(query, (error, result) => {
       if (error) {
         reject(error);
@@ -33,14 +33,16 @@ const getAllVendorSalesFromDatabase = (mysqlConnection) => {
   });
 };
 
-async function getAllVendorSales(req, res, next) {
+async function getUsersWishListedSales(request, response, next) {
   try {
+    const userId = await request.body.data.userId;
+    console.log(userId);
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
-    const allVendorSales = await getAllVendorSalesFromDatabase(mysqlConnection);
-    res.status(200).json({ allVendorSales: allVendorSales });
+    const usersWishListedSales = await getUsersWishListedSalesFromDatabase(mysqlConnection, userId);
+    response.status(200).json(usersWishListedSales);
   } catch (error) {
     console.log(error);
-    res.status(500);
+    response.status(500);
   }
 }
-module.exports = getAllVendorSales;
+module.exports = getUsersWishListedSales;

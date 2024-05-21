@@ -21,10 +21,11 @@ const createMysqlConnection = (host, databaseUser, password, databaseName) => {
   });
 };
 
-const getAllVendorSalesFromDatabase = (mysqlConnection) => {
+const deleteWishlistedItemFromDatabase = (mysqlConnection, sale) => {
   return new Promise((resolve, reject) => {
-    const query = `Select * from allVendorSales`;
-    mysqlConnection.query(query, (error, result) => {
+    const { user_id, id } = sale;
+    const editWishlistedItemQuery = `DELETE FROM Wishlisted_items WHERE user_id = ? AND id = ?`;
+    mysqlConnection.query(editWishlistedItemQuery, [user_id, id], (error, result) => {
       if (error) {
         reject(error);
       }
@@ -33,14 +34,15 @@ const getAllVendorSalesFromDatabase = (mysqlConnection) => {
   });
 };
 
-async function getAllVendorSales(req, res, next) {
+async function deleteWishlistedItem(request, response, next) {
   try {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
-    const allVendorSales = await getAllVendorSalesFromDatabase(mysqlConnection);
-    res.status(200).json({ allVendorSales: allVendorSales });
+    console.log(request.body);
+    await deleteWishlistedItemFromDatabase(mysqlConnection, request.body);
+    response.status(200).json("success");
   } catch (error) {
     console.log(error);
-    res.status(500);
+    response.status(500);
   }
 }
-module.exports = getAllVendorSales;
+module.exports = deleteWishlistedItem;

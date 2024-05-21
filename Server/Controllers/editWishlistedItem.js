@@ -21,10 +21,11 @@ const createMysqlConnection = (host, databaseUser, password, databaseName) => {
   });
 };
 
-const getAllVendorSalesFromDatabase = (mysqlConnection) => {
+const updateWishlistedItemOnDatabase = (mysqlConnection, sale) => {
   return new Promise((resolve, reject) => {
-    const query = `Select * from allVendorSales`;
-    mysqlConnection.query(query, (error, result) => {
+    const { perks, masterworks, user_id, id } = sale;
+    const editWishlistedItemQuery = `UPDATE Wishlisted_items SET perks = ?, masterworks = ? WHERE user_id = ? AND id = ?`;
+    mysqlConnection.query(editWishlistedItemQuery, [perks, masterworks, user_id, id], (error, result) => {
       if (error) {
         reject(error);
       }
@@ -33,14 +34,16 @@ const getAllVendorSalesFromDatabase = (mysqlConnection) => {
   });
 };
 
-async function getAllVendorSales(req, res, next) {
+async function editWishlistedItem(request, response, next) {
   try {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
-    const allVendorSales = await getAllVendorSalesFromDatabase(mysqlConnection);
-    res.status(200).json({ allVendorSales: allVendorSales });
+
+    console.log(request.body.data);
+    await updateWishlistedItemOnDatabase(mysqlConnection, request.body.data);
+    response.status(200).json("success");
   } catch (error) {
     console.log(error);
-    res.status(500);
+    response.status(500);
   }
 }
-module.exports = getAllVendorSales;
+module.exports = editWishlistedItem;
