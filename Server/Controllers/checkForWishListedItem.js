@@ -54,6 +54,7 @@ const getCurrentVendorSales = (mysqlConnection) => {
 const getUsersWhisListedItemsFromSales = (userObjectsList, vendorSales, usersWhisListedItems) => {
   return new Promise((resolve, reject) => {
     const matchingSalesObject = {};
+    /*  console.log(usersWhisListedItems); */
     userObjectsList.forEach((user) => {
       matchingSalesObject[user.userId] = [];
       const findWhislistedItemsByUserId = usersWhisListedItems[0].filter((item) => item.user_id === user.userId);
@@ -80,25 +81,43 @@ const getUsersWhisListedItemsFromSales = (userObjectsList, vendorSales, usersWhi
               return wishListPerk.item_name === saleItemPerk.itemName;
             });
             if (!findWishListedPerk) {
+              console.log(itemWithWhishListedItemHash);
               doesItemMatch = false;
             }
           });
         });
+        if (!doesItemMatch) {
+          continue;
+        }
         /* console.log(wishListedItem); */
-        matchingSalesObject[user.userId].push(itemWithWhishListedItemHash);
+        const wishListedItemMasterworks = JSON.parse(wishListedItem.masterworks);
+        const itemWithWhishListedItemHashMasterworks = JSON.parse(itemWithWhishListedItemHash.masterWork);
+
+        const findMasterworkFromWishlistedItem = wishListedItemMasterworks.filter(
+          (wishListedItemMasterwork) =>
+            itemWithWhishListedItemHashMasterworks.masterWorkName.includes(wishListedItemMasterwork.masterWorkName) ===
+            true
+        );
+        if (!findMasterworkFromWishlistedItem) {
+          doesItemMatch = false;
+        }
+        console.log(wishListedItemMasterworks);
+        if (doesItemMatch) {
+          matchingSalesObject[user.userId].push(itemWithWhishListedItemHash);
+        }
       }
     });
     resolve(matchingSalesObject);
   });
 };
 async function checkForWishListedItem(request, response, next) {
-  console.log(request.body.data.usersList);
+  /*  console.log(request.body.data.usersList); */
   const usersList = request.body.data.usersList;
   const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
   const usersWhisListedItems = await getUsersWhisListedItems(mysqlConnection, usersList);
   const vendorInventory = await getCurrentVendorSales(mysqlConnection);
   const usersWishListedSales = await getUsersWhisListedItemsFromSales(usersList, vendorInventory, usersWhisListedItems);
-  console.log(usersWishListedSales);
+  /* console.log(usersWishListedSales); */
   mysqlConnection.end();
   response.json(usersWishListedSales);
 }
