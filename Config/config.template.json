@@ -1,7 +1,10 @@
 {
   "SteamAccount": {
     "username": "",
-    "password": 123
+    "password": "",
+    "memberShipId": "",
+    "memberShipType": "",
+    "characterId": ""
   },
   "Api": {
     "ApiKey": "",
@@ -12,6 +15,7 @@
     "code": "",
     "manifestUrl": ""
   },
+  "Discord": { "clientId": "", "clientSecret": "" },
   "Database": {
     "host": "",
     "user": "",
