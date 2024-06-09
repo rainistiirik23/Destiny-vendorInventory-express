@@ -37,6 +37,7 @@ async function getCurrentVendorSales(req, res, next) {
   try {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     const currentVendorSales = await getCurrentVendorSalesFromDatabase(mysqlConnection);
+    await mysqlConnection.end();
     res.status(200).json({ currentVendorSales: currentVendorSales });
   } catch (error) {
     console.log(error);

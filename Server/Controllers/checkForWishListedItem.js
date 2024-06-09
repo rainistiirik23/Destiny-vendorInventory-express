@@ -118,7 +118,7 @@ async function checkForWishListedItem(request, response, next) {
   const vendorInventory = await getCurrentVendorSales(mysqlConnection);
   const usersWishListedSales = await getUsersWhisListedItemsFromSales(usersList, vendorInventory, usersWhisListedItems);
   /* console.log(usersWishListedSales); */
-  mysqlConnection.end();
+  await mysqlConnection.end();
   response.json(usersWishListedSales);
 }
 module.exports = checkForWishListedItem;

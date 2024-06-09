@@ -40,6 +40,7 @@ async function editWishlistedItem(request, response, next) {
 
     console.log(request.body.data);
     await updateWishlistedItemOnDatabase(mysqlConnection, request.body.data);
+    await mysqlConnection.end();
     response.status(200).json("success");
   } catch (error) {
     console.log(error);

@@ -39,6 +39,7 @@ async function deleteWishlistedItem(request, response, next) {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     console.log(request.body);
     await deleteWishlistedItemFromDatabase(mysqlConnection, request.body);
+    await mysqlConnection.end();
     response.status(200).json("success");
   } catch (error) {
     console.log(error);

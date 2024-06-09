@@ -39,6 +39,7 @@ async function getUsersWishListedSales(request, response, next) {
     console.log(userId);
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     const usersWishListedSales = await getUsersWishListedSalesFromDatabase(mysqlConnection, userId);
+    await mysqlConnection.end();
     response.status(200).json(usersWishListedSales);
   } catch (error) {
     console.log(error);
