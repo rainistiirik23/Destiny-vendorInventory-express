@@ -81,39 +81,34 @@ const PerkTableCheck = mysqlConnection => {
         }))
 }
 const insertPerkData = async (mysqlConnection, manifest) => {
-    return (
-        new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
+    for (let i = 0; i < manifest.length; i++) {
+      const manifestAsJson = JSON.parse(manifest[i]["json"]);
 
-            for (let i = 0; i < manifest.length; i++) {
+      const {
+        displayProperties: {
+          description: perkDescription,
+          name: perkName,
+          icon: perkIcon,
+        },
+        hash: perkHash,
+      } = manifestAsJson;
 
-                const manifestAsJson = JSON.parse(manifest[i]['json']);
-                if ((!manifestAsJson['displayProperties']['name'] || !manifestAsJson['displayProperties']['description']) || !manifestAsJson['displayProperties']['hasIcon']) {
-
-                    continue
-                }
-                const {
-                    displayProperties: { description: perkDescription, name: perkName, icon: perkIcon },
-                    hash: perkHash,
-                } = manifestAsJson;
-
-                const insertManifest = `INSERT INTO Perk_manifest ( perkName ,perkDescription ,perkHash,perkIcon) VALUES(?, ?, ?, ?);`;
-                mysqlConnection.query(insertManifest,
-                    [
-                        perkName,
-                        perkDescription,
-                        perkHash,
-                        perkIcon
-                    ],
-                    (error, result) => {
-                        if (error) {
-                            reject(error);
-                        }
-                    });
-                if (i === manifest.length - 1) {
-                    resolve();
-                }
-            }
-        }));
+      const insertManifest = `INSERT INTO Perk_manifest ( perkName ,perkDescription ,perkHash,perkIcon) VALUES(?, ?, ?, ?);`;
+      mysqlConnection.query(
+        insertManifest,
+        [perkName, perkDescription, perkHash, perkIcon],
+        (error, result) => {
+          if (error) {
+            reject(error);
+          }
+        }
+      );
+      if (i === manifest.length - 1) {
+        resolve();
+      }
+    }
+  });
 };
 
 const manifestToDatabase = async () => {
