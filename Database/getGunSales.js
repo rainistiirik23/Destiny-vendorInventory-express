@@ -129,58 +129,89 @@ const getGunInfo = (mysqlConnection, items, perkData, allItems) => {
     const itemHashQuery = `SELECT * FROM Item_manifest WHERE itemHash=?;`;
     const perkQuery = `SELECT * FROM Perk_manifest WHERE perkHash=?;`;
     let gunInfo = [];
-    const perkDataAsJson = JSON.parse(perkData).Response.itemComponents.reusablePlugs.data;
+    const perkDataAsJson =
+      JSON.parse(perkData).Response.itemComponents.reusablePlugs.data;
+    const socketDataAsJson =
+      JSON.parse(perkData).Response.itemComponents.sockets.data;
+    console.log(socketDataAsJson);
     for (let i = 0; i < items.length; i++) {
       const gunHash = items[i].itemHash;
       const saleKey = items[i].saleKey;
-      gunInfo.push(
-        allItems.find((item) => {
-          return item.itemHash == items[i].itemHash;
-        })
-      );
-      gunInfo[i].perks = {};
-      gunInfo[i].itemSaleKey = saleKey;
-      gunInfo[i].masterWork = {};
-      const plugArrays = Object.values(perkDataAsJson[saleKey].plugs);
-      plugArrays;
-      /* if (i === 0) {
-        console.log(plugArrays[0]);
-      } */
-      plugArrays.forEach((plugArray, plugArrayIndex) => {
-        plugArray.forEach((plugArrayItem) => {
-          const plugItemInfo = allItems.find((item) => {
-            return item.itemHash == plugArrayItem.plugItemHash;
-          });
-          /*    console.log(plugItemInfo); */
-
-          if (
-            plugItemInfo.itemName.includes("Kill Tracker") ||
-            plugItemInfo.itemName.includes("Crucible Tracker") ||
-            plugItemInfo.itemName.includes("Default Shader")
-          ) {
-            return;
-          }
-          if (plugItemInfo.plug_category_identifier && plugItemInfo.plug_category_identifier.includes("masterworks")) {
-            gunInfo[i].masterWork.masterWorkName = plugItemInfo.itemName;
-            gunInfo[i].masterWork.masterWorkDescription = plugItemInfo.itemDescription;
-            gunInfo[i].masterWork.masterWorkIcon = plugItemInfo.itemIcon;
-            gunInfo[i].masterWork.masterWorkItemHash = plugItemInfo.itemHash;
-          }
-          if (!gunInfo[i].perks[`perkColumn${plugArrayIndex + 1}`]) {
-            gunInfo[i].perks[`perkColumn${plugArrayIndex + 1}`] = [];
-          }
-          const perkObject = {
-            id: plugItemInfo.id,
-            perkName: plugItemInfo.itemName,
-            perkDescription: plugItemInfo.itemDescription,
-            perkIcon: plugItemInfo.itemIcon,
-            perkHash: plugItemInfo.itemHash,
-            perkTypeDisplayName: plugItemInfo.itemTypeDisplayName,
-            perkTypeAndTierDisplayName: plugItemInfo.itemTypeAndTierDisplayName,
-          };
-          gunInfo[i].perks[`perkColumn${plugArrayIndex + 1}`].push(perkObject);
-        });
+      const matchedItem = allItems.find((item) => {
+        if (item.itemTypeAndTierDisplayName?.includes("Material")) {
+          return;
+        }
+        return item.itemHash === items[i].itemHash;
       });
+      if (!matchedItem) {
+        continue;
+      }
+      console.log(matchedItem, saleKey);
+
+      matchedItem.perks = {};
+      matchedItem.itemSaleKey = saleKey;
+      matchedItem.masterWork = {};
+      /*     console.log(Object.values(perkDataAsJson)); */
+      /*  console.log(Object.values(perkDataAsJson[saleKey])); */
+      /* console.log(saleKey); */
+      /* if (!Object.values(perkDataAsJson[saleKey])) {
+        continue;
+        } */
+      if (!socketDataAsJson[saleKey]?.sockets) {
+        console.log(saleKey);
+      }
+      const socketArray = socketDataAsJson[saleKey].sockets;
+      let perkColumnIndex = 1;
+      socketArray.forEach((socketItem) => {
+        if (!socketItem.plugHash) {
+          return;
+        }
+        const socketItemInfo = allItems.find((item) => {
+          return item.itemHash === socketItem.plugHash;
+        });
+        if (!socketItemInfo?.itemName) {
+          console.log(socketItem);
+        }
+        if (
+          socketItemInfo.itemName.includes("Frame") ||
+          socketItemInfo.plug_category_identifier.includes("intrinsics")
+        ) {
+          return;
+        }
+        if (
+          socketItemInfo.itemName.includes("Tier") &&
+          socketItemInfo.plug_category_identifier.includes("masterworks")
+        ) {
+          matchedItem.masterWork.masterWorkName = socketItemInfo.itemName;
+          matchedItem.masterWork.masterWorkDescription =
+            socketItemInfo.itemDescription;
+          matchedItem.masterWork.masterWorkIcon = socketItemInfo.itemIcon;
+          matchedItem.masterWork.masterWorkItemHash = socketItemInfo.itemHash;
+          return;
+        }
+        switch (socketItemInfo.itemName) {
+          case "Default Shader":
+          case "Empty Mod Socket":
+          case "Kill Tracker":
+            return;
+        }
+        if (!matchedItem.perks[`perkColumn${perkColumnIndex}`]) {
+          matchedItem.perks[`perkColumn${perkColumnIndex}`] = [];
+        }
+        const perkObject = {
+          id: socketItemInfo.id,
+          perkName: socketItemInfo.itemName,
+          perkDescription: socketItemInfo.itemDescription,
+          perkIcon: socketItemInfo.itemIcon,
+          perkHash: socketItemInfo.itemHash,
+          perkTypeDisplayName: socketItemInfo.itemTypeDisplayName,
+          perkTypeAndTierDisplayName: socketItemInfo.itemTypeAndTierDisplayName,
+        };
+        matchedItem.perks[`perkColumn${perkColumnIndex}`].push(perkObject);
+        perkColumnIndex++;
+      });
+
+      gunInfo.push(matchedItem);
     }
     resolve(gunInfo);
   });
@@ -274,11 +305,21 @@ const getGunSales = async (name) => {
     /* console.log(vendorData); */
 
     const itemHashList = await getItemHashList(JSON.parse(vendorData));
-    /* console.log(itemHashList); */
-    const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
+    console.log(itemHashList);
+    const mysqlConnection = await createMysqlConnection(
+      host,
+      databaseUser,
+      password,
+      dataBaseName
+    );
     const allItems = await getAllItems(mysqlConnection);
     const vendorID = await getVendorID(mysqlConnection, name);
-    const gunInfo = await getGunInfo(mysqlConnection, itemHashList, perkData, allItems);
+    const gunInfo = await getGunInfo(
+      mysqlConnection,
+      itemHashList,
+      perkData,
+      allItems
+    );
     console.log(gunInfo[4].perks);
     await insertGuns(mysqlConnection, vendorID, gunInfo);
     await mysqlConnection.end((error, result) => {

@@ -1,7 +1,9 @@
 const https = require("https");
-const credentials = require('../Config/config.json')
-const { manifestUrl } = credentials
-const fs = require('fs')
+const {
+  Api: { manifestUrl },
+} = require("../Config/config.json");
+
+const fs = require("fs");
 
 https.get(manifestUrl, (res) => {
     const path = "sqliteFile";

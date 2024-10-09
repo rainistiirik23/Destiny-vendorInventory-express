@@ -25,7 +25,7 @@ console.log(gunKeyList, itemHashList);
 
 request.get(
   {
-    url: `https://www.bungie.net//Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/Character/${characterId}/Vendors/672118013/?definitions=true&components=302,310`,
+    url: `https://www.bungie.net//Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/Character/${characterId}/Vendors/672118013/?definitions=true&components=402,305,310`,
     headers: {
       "X-API-KEY": ApiKey,
       Authorization: "Bearer " + access_token,
