@@ -15,14 +15,7 @@
     "code": "",
     "manifestUrl": ""
   },
-<<<<<<< HEAD
   "Discord": { "clientId": "", "clientSecret": "" },
-=======
-  "Discord": {
-    "clientId": "",
-    "clientSecret": ""
-  },
->>>>>>> api-changes
   "Database": {
     "host": "",
     "user": "",
