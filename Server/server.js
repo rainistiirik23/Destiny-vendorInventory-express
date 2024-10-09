@@ -19,11 +19,7 @@ const saveWishLIstedItem = require("./Routes/saveWishListedItem");
 const getUsersWishListedSales = require("./Routes/getUsersWishListedSales");
 const editWishlistedItem = require("./Routes/editWishlistedItem");
 const deleteWishlistedItem = require("./Routes/deleteWishlistedItem");
-<<<<<<< HEAD
 const checkWishlistedItems = require("./Routes/checkForWishListedItem");
-=======
-const checkForWishListedItem = require("./Routes/checkForWishListedItem");
->>>>>>> api-changes
 const corsOptions = {
   origin: "http://127.0.0.1:5173",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -45,16 +41,8 @@ app.use("/api/saveWishListedItem", cors(corsOptions), saveWishLIstedItem);
 app.use("/api/getUsersWishListedSales", cors(corsOptions), getUsersWishListedSales);
 app.use("/api/editWishListedItem", cors(corsOptions), editWishlistedItem);
 app.use("/api/deleteWishlistedItem", cors(corsOptions), deleteWishlistedItem);
-<<<<<<< HEAD
 app.use("/api/checkForWishListedItem", cors({ origin: "*" }), checkWishlistedItems);
 
-=======
-app.use(
-  "/api/checkForWishListedItem",
-  cors(corsOptions),
-  checkForWishListedItem
-);
->>>>>>> api-changes
 const options = {
   cert: fs.readFileSync("Server/ssl/cert.pem"),
   key: fs.readFileSync("Server/ssl/key.pem"),
