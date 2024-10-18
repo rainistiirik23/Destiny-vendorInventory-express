@@ -3,7 +3,7 @@ const sqlite3 = require("sqlite3");
 const fs = require("fs");
 const {
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
-} = require("../Config/config.json");
+} = require("../../../Config/config.json");
 
 const getItemManifest = async () => {
   let db = new sqlite3.Database(

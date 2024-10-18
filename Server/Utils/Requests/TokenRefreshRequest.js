@@ -2,7 +2,7 @@ const fs = require("fs");
 const request = require("request");
 const {
   Api: { ApiKey, client_id, client_secret, refresh_token },
-} = require("../Config/config.json");
+} = require("../../../Config/config.json");
 const X = btoa(client_id + ":" + client_secret);
 
 /* While it's possible to log in again and again to bungie.net with the account to get the access token and make a VendorRequest,
@@ -56,17 +56,13 @@ const writeTokens = (configTokens, requestTokens) =>
   new Promise((resolve, reject) => {
     configTokens.Api.access_token = requestTokens["access_token"];
     configTokens.Api.refresh_token = requestTokens["refresh_token"];
-    fs.writeFile(
-      "Config/config.json",
-      JSON.stringify(configTokens),
-      (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(console.log("Tokens are written"));
-        }
+    fs.writeFile("Config/config.json", JSON.stringify(configTokens), (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(console.log("Tokens are written"));
       }
-    );
+    });
   });
 
 const refreshToken = async () => {

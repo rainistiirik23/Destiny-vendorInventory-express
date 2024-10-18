@@ -1,4 +1,4 @@
-const config = require("../Config/config.json");
+const config = require("../../../Config/config.json");
 
 const fs = require("fs");
 const fetch = require("node-fetch");
@@ -34,16 +34,12 @@ const readConfig = () => {
 };
 const saveCharacterIdToConifg = (Config) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile(
-      "Config/config.json",
-      JSON.stringify(Config),
-      (error, result) => {
-        if (error) {
-          reject(error);
-        }
-        resolve();
+    fs.writeFile("Config/config.json", JSON.stringify(Config), (error, result) => {
+      if (error) {
+        reject(error);
       }
-    );
+      resolve();
+    });
   });
 };
 async function getCharacterId() {
@@ -51,9 +47,7 @@ async function getCharacterId() {
   const profileInfo = await response.json();
   const config = await readConfig();
   /* const characterID = Object.keys(profileInfo.Response.characters.data)[0]; */
-  config.SteamAccount.characterId = Object.keys(
-    profileInfo.Response.characters.data
-  )[0];
+  config.SteamAccount.characterId = Object.keys(profileInfo.Response.characters.data)[0];
   await saveCharacterIdToConifg(config);
   /* console.log(characterID); */
 }

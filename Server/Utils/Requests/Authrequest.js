@@ -2,7 +2,7 @@ const request = require("request");
 const {
   Api: { client_id, AuthCodeUrl },
   SteamAccount: { username, password },
-} = require("../Config/config.json");
+} = require("../../../Config/config.json");
 const fetch = require("node-fetch");
 const { default: puppeteer, HTTPResponse, HTTPRequest } = require("puppeteer");
 const fs = require("fs");
@@ -18,9 +18,7 @@ const authCodeRequest = async () => {
     );
     const loginUrl = await page.url();
     const userNameElement = await page.waitForSelector('input[type="text"]');
-    const passwordElement = await page.waitForSelector(
-      'input[type="password"]'
-    );
+    const passwordElement = await page.waitForSelector('input[type="password"]');
     await userNameElement.type(username, { delay: 100 });
     await passwordElement.type(password, { delay: 100 });
     await page.click('button[type="submit"]');
@@ -37,16 +35,9 @@ const authCodeRequest = async () => {
 
           const status = response.status();
           console.log(response.headers());
-          const redirectUrlExists = response
-            .headers()
-            ["location"].includes("https://localhost:8000/");
+          const redirectUrlExists = response.headers()["location"].includes("https://localhost:8000/");
           if (status >= 300 && status <= 399 && redirectUrlExists) {
-            console.log(
-              "Redirect from",
-              response.url(),
-              "to",
-              response.headers()["location"]
-            );
+            console.log("Redirect from", response.url(), "to", response.headers()["location"]);
             const redirectUrl = response.headers()["location"];
             resolve(redirectUrl);
           }
@@ -80,17 +71,13 @@ const getConfig = () => {
 const replaceAuthCode = (config, authCode) =>
   new Promise((resolve, reject) => {
     config.Api.code = authCode;
-    fs.writeFile(
-      "Config/config.json",
-      JSON.stringify(config),
-      (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(console.log("Authorization code was replaced in config"));
-        }
+    fs.writeFile("Config/config.json", JSON.stringify(config), (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(console.log("Authorization code was replaced in config"));
       }
-    );
+    });
   });
 const getNewAuthCode = async () => {
   try {

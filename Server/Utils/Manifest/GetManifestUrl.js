@@ -1,4 +1,4 @@
-const credentials = require("../Config/config.json");
+const credentials = require("../../../Config/config.json");
 const { ApiKey, client_id, client_secret, code } = credentials;
 const request = require("request");
 const fs = require("fs");
@@ -63,16 +63,12 @@ const manifestUrlRequest = () => {
 const saveManifestUrl = (manifestUrl) => {
   return new Promise((resolve, reject) => {
     /* credentials.Api.manifestUrl = manifestUrl; */
-    fs.writeFile(
-      "Config/config.json",
-      JSON.stringify(credentials),
-      (error, result) => {
-        if (error) {
-          reject(error);
-        }
-        resolve(result);
+    fs.writeFile("Config/config.json", JSON.stringify(credentials), (error, result) => {
+      if (error) {
+        reject(error);
       }
-    );
+      resolve(result);
+    });
   });
 };
 async function getManifestURl() {

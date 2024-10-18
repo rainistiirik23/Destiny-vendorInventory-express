@@ -1,6 +1,6 @@
 const fs = require("fs");
 const request = require("request");
-const credentials = require("../Config/config.json");
+const credentials = require("../../../Config/config.json");
 const {
   Api: { ApiKey, access_token },
   SteamAccount: { memberShipType, memberShipId, characterId },
@@ -33,18 +33,13 @@ const vendorRequest = () => {
 };
 const cacheVendorRequest = (vendorRequest) =>
   new Promise((resolve, reject) => {
-    fs.writeFile(
-      "./Cache/VendorRequest.json",
-      JSON.stringify(vendorRequest),
-      { flag: "w" },
-      function (err, result) {
-        if (err) {
-          reject(console.log("error", err));
-        } else {
-          resolve(console.log("Vendor request is cached"));
-        }
+    fs.writeFile("./Cache/VendorRequest.json", JSON.stringify(vendorRequest), { flag: "w" }, function (err, result) {
+      if (err) {
+        reject(console.log("error", err));
+      } else {
+        resolve(console.log("Vendor request is cached"));
       }
-    );
+    });
   });
 const vendorRequestCache = async () => {
   try {

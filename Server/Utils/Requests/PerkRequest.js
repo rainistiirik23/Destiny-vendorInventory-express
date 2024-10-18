@@ -1,6 +1,6 @@
 const fs = require("fs");
 const request = require("request");
-const credentials = require("../Config/config.json");
+const credentials = require("../../../Config/config.json");
 const {
   Api: { ApiKey, access_token },
   SteamAccount: { memberShipType, memberShipId, characterId },

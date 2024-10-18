@@ -1,6 +1,6 @@
 const {
   Api: { ApiKey, client_id, client_secret, code },
-} = require("../Config/config.json");
+} = require("../../../Config/config.json");
 const request = require("request");
 const fs = require("fs");
 const X = btoa(client_id + ":" + client_secret);
@@ -51,17 +51,13 @@ const writeTokens = (configTokens, requestTokens) =>
     configTokens.Api.access_token = requestTokens["access_token"];
     configTokens.Api.refresh_token = requestTokens["refresh_token"];
 
-    fs.writeFile(
-      "Config/config.json",
-      JSON.stringify(configTokens),
-      (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(console.log("Tokens are written"));
-        }
+    fs.writeFile("Config/config.json", JSON.stringify(configTokens), (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(console.log("Tokens are written"));
       }
-    );
+    });
   });
 const tokenRequestCache = async () => {
   try {

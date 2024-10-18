@@ -1,13 +1,13 @@
 const fs = require("fs");
 const {
   /*  ApiKey, access_token  */
-} = require("../Config/config.json");
+} = require("../../../Config/config.json");
 const fetch = require("node-fetch");
 const {
   Api: { ApiKey, access_token },
   SteamAccount: { memberShipType, memberShipId, characterId },
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
-} = require("../Config/config.json");
+} = require("../../../Config/config.json");
 const mysql = require("mysql");
 
 const Vendordata = fs.readFileSync("Cache/VendorRequest.json", "utf8", function (err, data) {
@@ -129,10 +129,8 @@ const getGunInfo = (mysqlConnection, items, perkData, allItems) => {
     const itemHashQuery = `SELECT * FROM Item_manifest WHERE itemHash=?;`;
     const perkQuery = `SELECT * FROM Perk_manifest WHERE perkHash=?;`;
     let gunInfo = [];
-    const perkDataAsJson =
-      JSON.parse(perkData).Response.itemComponents.reusablePlugs.data;
-    const socketDataAsJson =
-      JSON.parse(perkData).Response.itemComponents.sockets.data;
+    const perkDataAsJson = JSON.parse(perkData).Response.itemComponents.reusablePlugs.data;
+    const socketDataAsJson = JSON.parse(perkData).Response.itemComponents.sockets.data;
     console.log(socketDataAsJson);
     for (let i = 0; i < items.length; i++) {
       const gunHash = items[i].itemHash;
@@ -183,8 +181,7 @@ const getGunInfo = (mysqlConnection, items, perkData, allItems) => {
           socketItemInfo.plug_category_identifier.includes("masterworks")
         ) {
           matchedItem.masterWork.masterWorkName = socketItemInfo.itemName;
-          matchedItem.masterWork.masterWorkDescription =
-            socketItemInfo.itemDescription;
+          matchedItem.masterWork.masterWorkDescription = socketItemInfo.itemDescription;
           matchedItem.masterWork.masterWorkIcon = socketItemInfo.itemIcon;
           matchedItem.masterWork.masterWorkItemHash = socketItemInfo.itemHash;
           return;
@@ -306,20 +303,10 @@ const getGunSales = async (name) => {
 
     const itemHashList = await getItemHashList(JSON.parse(vendorData));
     console.log(itemHashList);
-    const mysqlConnection = await createMysqlConnection(
-      host,
-      databaseUser,
-      password,
-      dataBaseName
-    );
+    const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     const allItems = await getAllItems(mysqlConnection);
     const vendorID = await getVendorID(mysqlConnection, name);
-    const gunInfo = await getGunInfo(
-      mysqlConnection,
-      itemHashList,
-      perkData,
-      allItems
-    );
+    const gunInfo = await getGunInfo(mysqlConnection, itemHashList, perkData, allItems);
     console.log(gunInfo[4].perks);
     await insertGuns(mysqlConnection, vendorID, gunInfo);
     await mysqlConnection.end((error, result) => {

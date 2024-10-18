@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const credentials = require("../Config/config.json");
+const credentials = require("../../../Config/config.json");
 const fs = require("fs");
 const {
   Api: { ApiKey, client_id, client_secret, code },
@@ -22,15 +22,11 @@ const memberShipIdrequest = () => {
   return response;
 };
 const writeMemberShipIdToConfig = (Config) => {
-  fs.writeFile(
-    "Config/config.json",
-    JSON.stringify(Config),
-    (error, result) => {
-      if (error) {
-        console.log(error);
-      }
+  fs.writeFile("Config/config.json", JSON.stringify(Config), (error, result) => {
+    if (error) {
+      console.log(error);
     }
-  );
+  });
 };
 const readConfig = () => {
   return new Promise((resolve, reject) => {
