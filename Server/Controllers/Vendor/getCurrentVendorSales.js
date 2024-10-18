@@ -1,6 +1,6 @@
 const {
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
-} = require("../../Config/config.json");
+} = require("../../../Config/config.json");
 const mysql = require("mysql");
 const sqlite3 = require("sqlite3");
 const createMysqlConnection = (host, databaseUser, password, databaseName) => {
@@ -21,9 +21,9 @@ const createMysqlConnection = (host, databaseUser, password, databaseName) => {
   });
 };
 
-const getAllVendorSalesFromDatabase = (mysqlConnection) => {
+const getCurrentVendorSalesFromDatabase = (mysqlConnection) => {
   return new Promise((resolve, reject) => {
-    const query = `Select * from allVendorSales`;
+    const query = `Select * from gun_sales`;
     mysqlConnection.query(query, (error, result) => {
       if (error) {
         reject(error);
@@ -33,15 +33,15 @@ const getAllVendorSalesFromDatabase = (mysqlConnection) => {
   });
 };
 
-async function getAllVendorSales(req, res, next) {
+async function getCurrentVendorSales(req, res, next) {
   try {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
-    const allVendorSales = await getAllVendorSalesFromDatabase(mysqlConnection);
+    const currentVendorSales = await getCurrentVendorSalesFromDatabase(mysqlConnection);
     await mysqlConnection.end();
-    res.status(200).json({ allVendorSales: allVendorSales });
+    res.status(200).json({ currentVendorSales: currentVendorSales });
   } catch (error) {
     console.log(error);
     res.status(500);
   }
 }
-module.exports = getAllVendorSales;
+module.exports = getCurrentVendorSales;
