@@ -1,5 +1,4 @@
-const credentials = require("../../../Config/config.json");
-const { ApiKey, client_id, client_secret, code } = credentials;
+const { ApiKey, client_id, client_secret, code } = require("../../../Config/config.json");
 const request = require("request");
 const fs = require("fs");
 const X = btoa(client_id + ":" + client_secret);
