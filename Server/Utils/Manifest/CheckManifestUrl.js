@@ -1,7 +1,7 @@
+const config = require("../../Config/config.json");
 const {
   Api: { ApiKey, client_id, client_secret, code, manifestUrl: configManifestUrl },
-} = require("../../Config/config.json");
-
+} = config;
 const axios = require("axios");
 const fs = require("fs");
 const X = btoa(client_id + ":" + client_secret);
@@ -16,9 +16,9 @@ const axiosRequestInstance = axios.create({
   },
 });
 
-const saveManifestUrl = (manifestUrl) => {
+const saveManifestUrl = (config) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile("Config/config.json", JSON.stringify(credentials), (error, result) => {
+    fs.writeFile("Server/Config/config.json", JSON.stringify(config), (error, result) => {
       if (error) {
         reject(error);
       }
@@ -27,20 +27,22 @@ const saveManifestUrl = (manifestUrl) => {
   });
 };
 
-async function getManifestURl() {
+async function checkManifestURl() {
   try {
-    console.log("active");
     const manifestUrlRequest = await axiosRequestInstance.get();
     const manifestUrl = `https://www.bungie.net${manifestUrlRequest.data.Response.mobileWorldContentPaths.en}`;
-    console.log(manifestUrlRequest);
-
+    let isManifestOutdated = false;
     if (configManifestUrl === manifestUrl) {
-      return;
+      return isManifestOutdated;
     }
-    /*  await saveManifestUrl(manifestUrl); */
+    let configCopy = { ...config };
+    configCopy.Api.manifestUrl = manifestUrl;
+    await saveManifestUrl(configCopy);
+    isManifestOutdated = true;
+    return isManifestOutdated;
   } catch (error) {
     console.error(error);
   }
 }
-getManifestURl();
-/* module.exports = getManifestURl; */
+
+module.exports = checkManifestURl;
