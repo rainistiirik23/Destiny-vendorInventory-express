@@ -1,4 +1,8 @@
-const decompress = require('decompress');
-decompress('sqliteFile', 'dist').then(files => {
-    console.log('done!');
-});
+const decompress = require("decompress");
+
+function extractManifestArchive(params) {
+  decompress("sqliteFile", "dist").then((files) => {
+    console.log("done!");
+  });
+}
+module.exports = extractManifestArchive;
