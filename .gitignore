@@ -1,9 +1,9 @@
-Config/config.json
-dist/
+Server/Config/config.json
+Cache/Manifest
 sqliteFile
-/Cache
+/Server/Cache/**
 /node_modules
 Requests/DownloadImage.js
 Server/Assets/Icons/Guns/*.png
 Server/Assets/Icons/Perks/*.png
-Server/ssl/*
+Server/Ssl/
