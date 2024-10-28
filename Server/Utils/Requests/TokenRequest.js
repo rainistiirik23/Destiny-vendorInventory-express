@@ -50,4 +50,4 @@ const tokenRequestCache = async () => {
     console.log(err);
   }
 };
-tokenRequestCache();
+module.exports = tokenRequestCache;
