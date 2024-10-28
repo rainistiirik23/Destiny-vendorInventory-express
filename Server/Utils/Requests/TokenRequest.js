@@ -12,10 +12,14 @@ const axiosRequestInstance = axios.create({
 });
 // Request for a Token which Oauth requires to make a VendorRequest
 
-const writeTokens = (configTokens, requestTokens) =>
+const writeTokens = (requestTokens) =>
   new Promise((resolve, reject) => {
-    configTokens.Api.access_token = requestTokens["access_token"];
-    configTokens.Api.refresh_token = requestTokens["refresh_token"];
+    const configTokens = Object.create({
+      access_token: access_token,
+      refreshToken: refresh_token,
+    });
+    configTokens.access_token = requestTokens["access_token"];
+    configTokens.refresh_token = requestTokens["refresh_token"];
 
     fs.writeFile("Config/config.json", JSON.stringify(configTokens), (err, result) => {
       if (err) {
@@ -35,8 +39,7 @@ const tokenRequestCache = async () => {
       client_secret: client_secret,
     }).data;
 
-    const configTokens = await readTokenConfig();
-    await writeTokens(configTokens, requestTokens);
+    await writeTokens(requestTokens);
   } catch (err) {
     console.log(err);
   }
