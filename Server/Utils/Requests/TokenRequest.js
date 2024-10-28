@@ -1,5 +1,5 @@
 const {
-  Api: { ApiKey, client_id, client_secret, code },
+  Api: { ApiKey, client_id, client_secret, code, access_token, refresh_token },
 } = require("../../../Config/config.json");
 
 const fs = require("fs");
