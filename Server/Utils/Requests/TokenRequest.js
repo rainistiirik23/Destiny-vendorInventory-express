@@ -10,7 +10,13 @@ const axiosRequestInstance = axios.create({
     "Content-Type": "application/x-www-form-urlencoded",
   },
 });
-// Request for a Token which Oauth requires to make a VendorRequest
+/*
+
+Request for a Token which Oauth requires to make a VendorRequest.
+
+Access token is valid for an hour and refresh token is valid for 90 days.
+
+*/
 
 const writeTokens = (requestTokens) =>
   new Promise((resolve, reject) => {
