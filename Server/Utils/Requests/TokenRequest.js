@@ -35,7 +35,7 @@ const writeTokens = (requestTokens) =>
       }
     });
   });
-const tokenRequestCache = async () => {
+async function tokenRequestCache() {
   try {
     const requestTokens = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
       Authorization: `Basic ${encodedClientIdSecretString}`,
@@ -49,5 +49,5 @@ const tokenRequestCache = async () => {
   } catch (err) {
     console.log(err);
   }
-};
+}
 module.exports = tokenRequestCache;
