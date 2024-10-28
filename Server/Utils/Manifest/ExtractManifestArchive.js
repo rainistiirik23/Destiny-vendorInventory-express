@@ -1,7 +1,10 @@
 const decompress = require("decompress");
 
-function extractManifestArchive(params) {
-  decompress("sqliteFile", "dist").then((files) => {
+function extractManifestArchive() {
+  decompress(
+    "Server/Storage/Manifest/SqlLite/manifestSqlLiteFile",
+    "Server/Storage/Manifest/SqlLite/WorldContent"
+  ).then((files) => {
     console.log("done!");
   });
 }
