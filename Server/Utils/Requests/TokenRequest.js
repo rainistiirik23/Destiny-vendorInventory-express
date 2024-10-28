@@ -3,7 +3,7 @@ const {
 } = require("../../../Config/config.json");
 
 const fs = require("fs");
-const X = Buffer.from(client_id + ":" + client_secret).toString("base64");
+const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
 const axios = require("axios");
 const axiosRequestInstance = axios.create({
   headers: {
@@ -38,7 +38,7 @@ const writeTokens = (requestTokens) =>
 const tokenRequestCache = async () => {
   try {
     const requestTokens = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
-      Authorization: `Basic ${X}`,
+      Authorization: `Basic ${encodedClientIdSecretString}`,
       client_id: client_id,
       code: code,
       grant_type: "authorization_code",
