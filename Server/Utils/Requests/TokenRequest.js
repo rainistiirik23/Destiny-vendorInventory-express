@@ -27,45 +27,6 @@ const axiosRequestInstance = axios.create({
 });
 // Request for a Token which Oauth requires to make a VendorRequest
 
-const tokenRequest = () => {
-  return new Promise((resolve, reject) => {
-    request.post(
-      {
-        url: "https://www.bungie.net/Platform/App/OAuth/Token/",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-API-Key": ApiKey,
-        },
-        form: {
-          grant_type: "authorization_code",
-          client_id: client_id,
-          code: code,
-        },
-      },
-      (err, res, body) => {
-        const bodyAsJson = JSON.parse(body);
-        if (bodyAsJson.error) {
-          const moreErrorInfo = body + " \nstatus code: " + res.statusCode;
-          reject(moreErrorInfo);
-        } else {
-          resolve(bodyAsJson);
-        }
-      }
-    );
-  });
-};
-const readTokenConfig = () => {
-  return new Promise((resolve, reject) => {
-    fs.readFile("Config/config.json", "utf8", (err, res) => {
-      const resultAsJson = JSON.parse(res);
-      if (err) {
-        reject(err);
-      } else {
-        resolve(resultAsJson);
-      }
-    });
-  });
-};
 const writeTokens = (configTokens, requestTokens) =>
   new Promise((resolve, reject) => {
     configTokens.Api.access_token = requestTokens["access_token"];
