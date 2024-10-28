@@ -1,7 +1,7 @@
 const fs = require("fs");
 const axios = require("axios");
 const fetch = require("node-fetch");
-const config = require("../../../Config/config.json");
+const config = require("../../Config/config.json");
 const {
   Discord: { clientId, clientSecret },
 } = config;

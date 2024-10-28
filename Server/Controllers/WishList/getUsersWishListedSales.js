@@ -1,6 +1,6 @@
 const {
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
-} = require("../../../Config/config.json");
+} = require("../../Config/config.json");
 const mysql = require("mysql");
 const sqlite3 = require("sqlite3");
 const createMysqlConnection = (host, databaseUser, password, databaseName) => {

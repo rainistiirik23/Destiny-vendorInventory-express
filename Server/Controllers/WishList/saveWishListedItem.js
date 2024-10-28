@@ -1,7 +1,7 @@
 const mysql = require("mysql");
 const {
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
-} = require("../../../Config/config.json");
+} = require("../../Config/config.json");
 const createMysqlConnection = (host, databaseUser, password, databaseName) => {
   return new Promise((resolve, reject) => {
     const mysqlConnection = mysql.createConnection({
