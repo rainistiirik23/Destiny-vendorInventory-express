@@ -1,7 +1,7 @@
 const {
   Api: { ApiKey, client_id, client_secret, code },
 } = require("../../../Config/config.json");
-const request = require("request");
+
 const fs = require("fs");
 const X = Buffer.from(client_id + ":" + client_secret).toString("base64");
 const axios = require("axios");
