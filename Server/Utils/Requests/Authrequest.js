@@ -2,7 +2,7 @@ const request = require("request");
 const {
   Api: { client_id, AuthCodeUrl },
   SteamAccount: { username, password },
-} = require("../../../Config/config.json");
+} = require("../../Config/config.json");
 const fetch = require("node-fetch");
 const { default: puppeteer, HTTPResponse, HTTPRequest } = require("puppeteer");
 const fs = require("fs");
@@ -62,7 +62,7 @@ const authCodeRequest = async () => {
 
 const getConfig = () => {
   return new Promise((resolve, reject) => {
-    fs.readFile("Config/config.json", "utf8", (err, res) => {
+    fs.readFile("Server/Config/config.json", "utf8", (err, res) => {
       const resultAsJson = JSON.parse(res);
       if (err) {
         reject(err);
@@ -75,7 +75,7 @@ const getConfig = () => {
 const replaceAuthCode = (config, authCode) =>
   new Promise((resolve, reject) => {
     config.Api.code = authCode;
-    fs.writeFile("Config/config.json", JSON.stringify(config), (err, result) => {
+    fs.writeFile("Server/Config/config.json", JSON.stringify(config), (err, result) => {
       if (err) {
         reject(err);
       } else {
