@@ -37,15 +37,15 @@ const writeTokens = (requestTokens) =>
   });
 async function tokenRequestCache() {
   try {
-    const requestTokens = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
+    const TokenRequestResponse = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
       Authorization: `Basic ${encodedClientIdSecretString}`,
       client_id: client_id,
       code: code,
       grant_type: "authorization_code",
       client_secret: client_secret,
-    }).data;
+    });
 
-    await writeTokens(requestTokens);
+    await writeTokens(TokenRequestResponse.data);
   } catch (err) {
     console.log(err);
   }
