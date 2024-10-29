@@ -23,7 +23,6 @@ const authCodeRequest = async () => {
     await page.click('button[type="submit"]');
     await page.waitForNavigation();
     await page.click('input[type="submit"]');
-    /*    await page.waitForNavigation(); */
 
     const getAuthCode = () => {
       return new Promise((resolve, reject) => {
