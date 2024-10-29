@@ -1,8 +1,9 @@
 const fs = require("fs");
 const request = require("request");
+const config = require("../../Config/config.json");
 const {
   Api: { ApiKey, client_id, client_secret, refresh_token },
-} = require("../../../Config/config.json");
+} = config;
 const X = btoa(client_id + ":" + client_secret);
 
 /* While it's possible to log in again and again to bungie.net with the account to get the access token and make a VendorRequest,
