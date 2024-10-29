@@ -20,7 +20,7 @@ const writeTokens = (requestTokens) =>
     const configTokens = Object.assign({}, config);
     configTokens.Api.access_token = requestTokens["access_token"];
     configTokens.Api.refresh_token = requestTokens["refresh_token"];
-    fs.writeFile("Config/config.json", JSON.stringify(configTokens), (err, result) => {
+    fs.writeFile("Server/Config/config.json", JSON.stringify(configTokens), (err, result) => {
       if (err) {
         reject(err);
       } else {
