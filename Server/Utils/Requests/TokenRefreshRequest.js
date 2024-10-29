@@ -29,7 +29,7 @@ const writeTokens = (requestTokens) =>
     });
   });
 
-const refreshToken = async () => {
+async function refreshToken() {
   try {
     const requestTokens = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
       "X-API-Key": ApiKey,
@@ -43,5 +43,5 @@ const refreshToken = async () => {
   } catch (err) {
     console.log(err);
   }
-};
+}
 module.exports = refreshToken;
