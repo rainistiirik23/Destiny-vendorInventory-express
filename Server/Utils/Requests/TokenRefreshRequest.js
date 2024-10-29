@@ -33,7 +33,7 @@ const refreshToken = async () => {
   try {
     const requestTokens = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
       "X-API-Key": ApiKey,
-      Authorization: "Basic " + encodedClientIdSecretString,
+      Authorization: `Basic ${encodedClientIdSecretString}`,
       grant_type: "refresh_token",
       refresh_token: refresh_token,
     });
