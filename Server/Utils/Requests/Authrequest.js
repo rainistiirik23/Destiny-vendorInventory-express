@@ -34,9 +34,7 @@ const authCodeRequest = async () => {
           if (!response.headers()["location"]) {
             return;
           }
-
           const status = response.status();
-          console.log(response.headers());
           const redirectUrlExists = response.headers()["location"].includes("https://localhost:8000/");
           /*
           Response has to have status code 302,
