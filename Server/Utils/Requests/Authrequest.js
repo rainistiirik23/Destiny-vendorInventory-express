@@ -55,7 +55,7 @@ const authCodeRequest = async () => {
     process.exit(1);
   }
 };
-authCodeRequest();
+
 const getConfig = () => {
   return new Promise((resolve, reject) => {
     fs.readFile("Config/config.json", "utf8", (err, res) => {
@@ -81,6 +81,7 @@ const replaceAuthCode = (config, authCode) =>
   });
 const getNewAuthCode = async () => {
   try {
+    await authCodeRequest();
     const Config = await getConfig();
     const authCodeFromRequest = await authCodeRequest();
     await replaceAuthCode(Config, authCodeFromRequest);
