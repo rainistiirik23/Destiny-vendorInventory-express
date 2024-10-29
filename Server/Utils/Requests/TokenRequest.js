@@ -1,6 +1,7 @@
+const config = require("../../Config/config.json");
 const {
   Api: { ApiKey, client_id, client_secret, code, access_token, refresh_token },
-} = require("../../Config/config.json");
+} = config;
 
 const fs = require("fs");
 const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
