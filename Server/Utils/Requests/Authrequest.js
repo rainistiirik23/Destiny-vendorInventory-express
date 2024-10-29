@@ -58,20 +58,9 @@ const authCodeRequest = async () => {
   }
 };
 
-const getConfig = () => {
-  return new Promise((resolve, reject) => {
-    fs.readFile("Server/Config/config.json", "utf8", (err, res) => {
-      const resultAsJson = JSON.parse(res);
-      if (err) {
-        reject(err);
-      } else {
-        resolve(resultAsJson);
-      }
-    });
-  });
-};
-const replaceAuthCode = (config, authCode) =>
+const replaceAuthCode = (authCode) =>
   new Promise((resolve, reject) => {
+    const config = Object.assign({}, config);
     config.Api.code = authCode;
     fs.writeFile("Server/Config/config.json", JSON.stringify(config), (err, result) => {
       if (err) {
@@ -81,11 +70,11 @@ const replaceAuthCode = (config, authCode) =>
       }
     });
   });
+
 const getNewAuthCode = async () => {
   try {
-    const Config = await getConfig();
     const authCodeFromRequest = await authCodeRequest();
-    await replaceAuthCode(Config, authCodeFromRequest);
+    await replaceAuthCode(authCodeFromRequest);
     process.exit();
   } catch (error) {
     console.log(error);
