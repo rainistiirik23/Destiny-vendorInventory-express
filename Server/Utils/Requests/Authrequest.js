@@ -85,7 +85,6 @@ const replaceAuthCode = (config, authCode) =>
   });
 const getNewAuthCode = async () => {
   try {
-    await authCodeRequest();
     const Config = await getConfig();
     const authCodeFromRequest = await authCodeRequest();
     await replaceAuthCode(Config, authCodeFromRequest);
