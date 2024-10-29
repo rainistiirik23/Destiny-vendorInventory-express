@@ -21,12 +21,9 @@ Access token is valid for an hour and refresh token is valid for 90 days.
 
 const writeTokens = (requestTokens) =>
   new Promise((resolve, reject) => {
-    const configTokens = Object.create({
-      access_token: null,
-      refreshToken: null,
-    });
-    configTokens.access_token = requestTokens["access_token"];
-    configTokens.refresh_token = requestTokens["refresh_token"];
+    const configTokens = Object.assign({}, config);
+    configTokens.Api.access_token = requestTokens["access_token"];
+    configTokens.Api.refresh_token = requestTokens["refresh_token"];
 
     fs.writeFile("Server/Config/config.json", JSON.stringify(configTokens), (err, result) => {
       if (err) {
