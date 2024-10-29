@@ -42,9 +42,6 @@ const authCodeRequest = async () => {
             console.log("Redirect from", response.url(), "to", response.headers()["location"]);
             const redirectUrl = response.headers()["location"];
             resolve(redirectUrl);
-          } else {
-            reject("redirecting to specified url failed");
-            return;
           }
         });
       });
@@ -63,9 +60,9 @@ const authCodeRequest = async () => {
 
 const replaceAuthCode = (authCode) =>
   new Promise((resolve, reject) => {
-    const config = Object.assign({}, config);
-    config.Api.code = authCode;
-    fs.writeFile("Server/Config/config.json", JSON.stringify(config), (err, result) => {
+    const configClone = Object.assign({}, config);
+    configClone.Api.code = authCode;
+    fs.writeFile("Server/Config/config.json", JSON.stringify(configClone), (err, result) => {
       if (err) {
         reject(err);
       } else {
