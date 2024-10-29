@@ -30,6 +30,7 @@ const authCodeRequest = async () => {
       return new Promise((resolve, reject) => {
         page.on("response", (response) => {
           if (!response.headers()["location"]) {
+            reject("Location header is missing");
             return;
           }
 
@@ -40,6 +41,9 @@ const authCodeRequest = async () => {
             console.log("Redirect from", response.url(), "to", response.headers()["location"]);
             const redirectUrl = response.headers()["location"];
             resolve(redirectUrl);
+          } else {
+            reject("redirecting to specified url failed");
+            return;
           }
         });
       });
