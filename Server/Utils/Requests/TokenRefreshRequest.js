@@ -37,8 +37,7 @@ const refreshToken = async () => {
       grant_type: "refresh_token",
       refresh_token: refresh_token,
     });
-    const configTokens = await readTokenConfig();
-    await writeTokens(configTokens, requestTokens);
+    await writeTokens(requestTokens.data);
   } catch (err) {
     console.log(err);
   }
