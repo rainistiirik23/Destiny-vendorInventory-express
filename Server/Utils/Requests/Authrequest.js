@@ -1,8 +1,8 @@
+const config = require("../../Config/config.json");
 const {
   Api: { client_id, AuthCodeUrl },
   SteamAccount: { username, password },
-} = require("../../Config/config.json");
-
+} = config;
 const { default: puppeteer } = require("puppeteer");
 const fs = require("fs");
 const authCodeUrl = `https://www.bungie.net/en/oauth/authorize?client_id=${client_id}&response_type=code&state=6i0mkLx79Hp91nzWVeHrzHG4`;
@@ -27,8 +27,11 @@ const authCodeRequest = async () => {
     const getAuthCode = () => {
       return new Promise((resolve, reject) => {
         page.on("response", (response) => {
+          /*
+            Page recieves multiple response events,
+            the one we want has the "location" header.
+            */
           if (!response.headers()["location"]) {
-            reject("Location header is missing");
             return;
           }
 
