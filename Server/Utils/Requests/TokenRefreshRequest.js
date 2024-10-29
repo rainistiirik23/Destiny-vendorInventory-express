@@ -44,5 +44,4 @@ const refreshToken = async () => {
     console.log(err);
   }
 };
-refreshToken();
 module.exports = refreshToken;
