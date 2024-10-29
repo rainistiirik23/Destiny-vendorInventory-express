@@ -1,4 +1,3 @@
-const request = require("request");
 const {
   Api: { client_id, AuthCodeUrl },
   SteamAccount: { username, password },
