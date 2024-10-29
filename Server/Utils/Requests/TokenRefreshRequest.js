@@ -15,20 +15,7 @@ rather let's use the refresh token to get the access token,without having to log
 NB!! refresh token has an expiration date of 90 days,after that you will  have to log in again.
 */
 
-const readTokenConfig = () => {
-  return new Promise((resolve, reject) => {
-    fs.readFile("Config/config.json", "utf8", (err, res) => {
-      const resultAsJson = JSON.parse(res);
-      if (err) {
-        reject(err);
-      } else {
-        resolve(resultAsJson);
-      }
-    });
-  });
-};
-
-const writeTokens = (configTokens, requestTokens) =>
+const writeTokens = (requestTokens) =>
   new Promise((resolve, reject) => {
     configTokens.Api.access_token = requestTokens["access_token"];
     configTokens.Api.refresh_token = requestTokens["refresh_token"];
