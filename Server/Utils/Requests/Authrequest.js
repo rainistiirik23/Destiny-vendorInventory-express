@@ -38,6 +38,13 @@ const authCodeRequest = async () => {
           const status = response.status();
           console.log(response.headers());
           const redirectUrlExists = response.headers()["location"].includes("https://localhost:8000/");
+          /*
+          Response has to have status code 302,
+          The HTTP 302 Found redirection response status code indicates that the requested resource has been temporarily moved to the URL in the Location header.
+          A browser receiving this status will automatically request the resource at the URL in the Location header,
+          redirecting the user to the new page.
+          Redirect url will have the authorization code
+          */
           if (status >= 300 && status <= 399 && redirectUrlExists) {
             console.log("Redirect from", response.url(), "to", response.headers()["location"]);
             const redirectUrl = response.headers()["location"];
