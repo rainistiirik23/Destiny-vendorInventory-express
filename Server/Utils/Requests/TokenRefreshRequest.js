@@ -1,44 +1,19 @@
 const fs = require("fs");
-const request = require("request");
+const axios = require("axios");
 const config = require("../../Config/config.json");
 const {
   Api: { ApiKey, client_id, client_secret, refresh_token },
 } = config;
-const X = btoa(client_id + ":" + client_secret);
-
+const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
+const axiosRequestInstance = axios.create({
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
 /* While it's possible to log in again and again to bungie.net with the account to get the access token and make a VendorRequest,
 rather let's use the refresh token to get the access token,without having to log in for each VendorRequest.
 NB!! refresh token has an expiration date of 90 days,after that you will  have to log in again.
 */
-
-const tokenRequest = () => {
-  return new Promise((resolve, reject) => {
-    request.post(
-      {
-        url: "https://www.bungie.net/Platform/App/OAuth/Token/",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-API-Key": ApiKey,
-          Authorization: "Basic " + X,
-        },
-
-        form: {
-          grant_type: "refresh_token",
-          refresh_token: refresh_token,
-        },
-      },
-      (err, res, body) => {
-        const moreErrorInfo = body + " \nstatus code: " + res.statusCode;
-        const bodyAsJSon = JSON.parse(body);
-        if (bodyAsJSon.error) {
-          reject(moreErrorInfo);
-        } else {
-          resolve(bodyAsJSon);
-        }
-      }
-    );
-  });
-};
 
 const readTokenConfig = () => {
   return new Promise((resolve, reject) => {
@@ -68,7 +43,12 @@ const writeTokens = (configTokens, requestTokens) =>
 
 const refreshToken = async () => {
   try {
-    const requestTokens = await tokenRequest();
+    const requestTokens = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
+      "X-API-Key": ApiKey,
+      Authorization: "Basic " + encodedClientIdSecretString,
+      grant_type: "refresh_token",
+      refresh_token: refresh_token,
+    });
     const configTokens = await readTokenConfig();
     await writeTokens(configTokens, requestTokens);
   } catch (err) {
