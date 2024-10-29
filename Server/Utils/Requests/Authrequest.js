@@ -3,7 +3,7 @@ const {
   Api: { client_id, AuthCodeUrl },
   SteamAccount: { username, password },
 } = require("../../Config/config.json");
-const fetch = require("node-fetch");
+
 const { default: puppeteer, HTTPResponse, HTTPRequest } = require("puppeteer");
 const fs = require("fs");
 const authCodeUrl = `https://www.bungie.net/en/oauth/authorize?client_id=${client_id}&response_type=code&state=6i0mkLx79Hp91nzWVeHrzHG4`;
