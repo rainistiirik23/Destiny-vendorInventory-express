@@ -15,7 +15,7 @@ const authCodeRequest = async () => {
     await page.click(
       'a[href="/en/User/SignIn/SteamId?bru=%252Fen%252Foauth%252Fauthorize%253Fclient_id%253D46155%2526response_type%253Dcode%2526state%253D6i0mkLx79Hp91nzWVeHrzHG4&flowStart=1"]'
     );
-    const loginUrl = await page.url();
+
     const userNameElement = await page.waitForSelector('input[type="text"]');
     const passwordElement = await page.waitForSelector('input[type="password"]');
     await userNameElement.type(username, { delay: 100 });
