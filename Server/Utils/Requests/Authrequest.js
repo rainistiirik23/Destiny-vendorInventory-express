@@ -4,7 +4,7 @@ const {
   SteamAccount: { username, password },
 } = require("../../Config/config.json");
 
-const { default: puppeteer, HTTPResponse, HTTPRequest } = require("puppeteer");
+const { default: puppeteer } = require("puppeteer");
 const fs = require("fs");
 const authCodeUrl = `https://www.bungie.net/en/oauth/authorize?client_id=${client_id}&response_type=code&state=6i0mkLx79Hp91nzWVeHrzHG4`;
 const authCodeRequest = async () => {
