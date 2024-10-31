@@ -87,4 +87,4 @@ async function getNewAuthCode() {
     process.exit();
   }
 }
-getNewAuthCode();
+module.exports = getNewAuthCode;
