@@ -1,6 +1,6 @@
 const config = require("../../Config/config.json");
 const {
-  Api: { client_id, AuthCodeUrl },
+  Api: { client_id },
   SteamAccount: { username, password },
 } = config;
 const { default: puppeteer } = require("puppeteer");
