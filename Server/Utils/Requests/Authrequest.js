@@ -77,7 +77,7 @@ const replaceAuthCode = (authCode) =>
     });
   });
 
-const getNewAuthCode = async () => {
+async function getNewAuthCode() {
   try {
     const authCodeFromRequest = await authCodeRequest();
     await replaceAuthCode(authCodeFromRequest);
@@ -86,5 +86,5 @@ const getNewAuthCode = async () => {
     console.log(error);
     process.exit();
   }
-};
+}
 getNewAuthCode();
