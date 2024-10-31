@@ -20,9 +20,10 @@ const authCodeRequest = async () => {
     const passwordElement = await page.waitForSelector('input[type="password"]');
     await userNameElement.type(username, { delay: 100 });
     await passwordElement.type(password, { delay: 100 });
-    await page.click('button[type="submit"]');
-    await page.waitForNavigation();
-    await page.click('input[type="submit"]');
+
+    await page.$eval((selector) => document.querySelector(selector).click(), 'button[class="DjSvCZoKKfoNSmarsEcTS"]');
+    await page.waitForNavigation(),
+      await page.evaluate((selector) => document.querySelector(selector).click(), 'input[id="imageLogin"]');
 
     const getAuthCode = () => {
       return new Promise((resolve, reject) => {
