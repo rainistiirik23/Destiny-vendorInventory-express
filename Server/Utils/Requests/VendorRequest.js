@@ -12,7 +12,6 @@ const axiosRequestInstance = axios.create({
     Authorization: "Bearer " + access_token,
   },
 });
-// Make a request for a vendor's inventory
 
 const cacheVendorRequest = (vendorRequestResponse) =>
   new Promise((resolve, reject) => {
