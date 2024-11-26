@@ -27,7 +27,7 @@ const readConfigFile = () => {
 };
 const saveCharacterIdToConifg = (Config) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile("Config/config.json", JSON.stringify(Config), (error, result) => {
+    fs.writeFile("Server/Config/config.json", JSON.stringify(Config), (error, result) => {
       if (error) {
         reject(error);
       }
