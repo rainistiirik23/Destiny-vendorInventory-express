@@ -1,0 +1,31 @@
+{
+  "SteamAccount": {
+    "username": "",
+    "password": "",
+    "memberShipId": "",
+    "memberShipType": "",
+    "characterId": "",
+    "steamId": ""
+  },
+  "Api": {
+    "ApiKey": "",
+    "client_id": "",
+    "client_secret": "",
+    "access_token": "",
+    "refresh_token": "",
+    "code": "",
+    "manifestUrl": "",
+    "vendorRefreshDate": ""
+  },
+  "Discord": { "clientId": "", "clientSecret": "" },
+  "Database": {
+    "host": "",
+    "user": "",
+    "password": "",
+    "dataBaseName": ""
+  },
+  "CorsOptions": {
+    "origin": "",
+    "optionsSuccessStatus": 200
+  }
+}
