@@ -1,11 +1,5 @@
-const config = require("../../../Config/config.json");
-
 const fs = require("fs");
 const fetch = require("node-fetch");
-const {
-  Api: { ApiKey, client_id, client_secret, code },
-  SteamAccount: { memberShipType, memberShipId },
-} = config;
 
 const X = btoa(client_id + ":" + client_secret);
 const profileRequest = () => {
