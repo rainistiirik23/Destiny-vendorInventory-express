@@ -267,17 +267,7 @@ const insertGuns = (mysqlConnection, vendorID, gunInfo) => {
 const getGunSales = async (name) => {
   try {
     const vendorData = await getVendorData();
-    const perkData = await getVendorPerkData();
-    /*  const vendorData = await fetch(
-        `https://www.bungie.net/Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/Character/${characterId}/Vendors/672118013/?components=402`,
-        {
-            "X-API-KEY": ApiKey,
-            Authorization: "Bearer " + access_token,
-        }
-        ); */
-    /* console.log(vendorData); */
-
-    const itemHashList = await getItemHashList(JSON.parse(vendorData));
+    const itemHashList = await getItemHashList(vendorData);
     console.log(itemHashList);
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     const allItems = await getAllItems(mysqlConnection);
