@@ -1,13 +1,17 @@
 const fetch = require("node-fetch");
-const credentials = require("../../../Config/config.json");
 const fs = require("fs");
-const {
-  Api: { ApiKey, client_id, client_secret, code },
-} = credentials;
 
-const X = btoa(client_id + ":" + client_secret);
-
-const memberShipIdrequest = () => {
+const readConfigFile = () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile("Server/Config/config.json", (error, result) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(result));
+    });
+  });
+};
+const memberShipIdrequest = (steamId, encodedClientIdSecretString, apiKey) => {
   const response = fetch(
     "https://www.bungie.net/Platform/User/GetMembershipFromHardLinkedCredential/SteamID/76561199622021169/",
     {
