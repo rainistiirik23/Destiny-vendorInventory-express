@@ -22,8 +22,28 @@ const writeTokens = (requestTokens, config) =>
       }
     });
   });
-async function tokenRequestCache() {
+const readConfig = () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile("Server/Config/config.json", (error, result) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(result));
+    });
+  });
+};
+async function tokenRequest() {
   try {
+    const config = await readConfig();
+    const {
+      Api: { client_id, client_secret, code },
+    } = config;
+    const axiosRequestInstance = axios.create({
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+    const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
     const TokenRequestResponse = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
       Authorization: `Basic ${encodedClientIdSecretString}`,
       client_id: client_id,
@@ -32,9 +52,9 @@ async function tokenRequestCache() {
       client_secret: client_secret,
     });
 
-    await writeTokens(TokenRequestResponse.data);
+    await writeTokens(TokenRequestResponse.data, config);
   } catch (err) {
     console.log(err);
   }
 }
-module.exports = tokenRequestCache;
+module.exports = tokenRequest;
