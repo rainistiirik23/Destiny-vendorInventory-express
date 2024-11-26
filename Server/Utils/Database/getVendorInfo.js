@@ -2,12 +2,25 @@ const fs = require("fs");
 const sqlite3 = require("sqlite3").verbose();
 const mysql = require("mysql");
 const {
-  Database: { host: host, user: databaseUser, password: password, database: dataBaseName },
-} = require("../../../Config/config.json");
-const getVendorManifest = () => {
+  Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
+} = require("../../Config/config.json");
+const getmanifestFileName = () => {
+  return new Promise((resolve, reject) => {
+    fs.readdir("Server/Storage/Manifest/WorldContent", (error, files) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+        return;
+      }
+      const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+      resolve(manifestFileName);
+    });
+  });
+};
+const getVendorManifest = (manifestFileName) => {
   return new Promise((resolve, reject) => {
     let db = new sqlite3.Database(
-      "dist/world_sql_content_50f67b17bc243f7570787a58395230db.content",
+      `Server/Storage/Manifest/WorldContent/${manifestFileName}`,
       sqlite3.OPEN_READWRITE,
       (err) => {
         if (err) {
@@ -136,7 +149,8 @@ const getVendor = async () => {
     }
   });
   try {
-    const manifest = await getVendorManifest();
+    const manifestFileName = await getmanifestFileName();
+    const manifest = await getVendorManifest(manifestFileName);
     const vendorInfo = await getVendorInfo(manifest, "Banshee-44", "Lord Shaxx");
     await doesTableExist(mysqlConnection);
     await insertVendorData(vendorInfo, mysqlConnection);
