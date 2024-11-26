@@ -79,5 +79,6 @@ async function vendorRequest() {
   } catch (err) {
     console.log(err);
   }
-};
-vendorRequestCache();
+}
+
+module.exports = vendorRequest;
