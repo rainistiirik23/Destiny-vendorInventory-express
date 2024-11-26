@@ -117,7 +117,8 @@ const insertPerkData = async (mysqlConnection, manifest) => {
 
 const manifestToDatabase = async () => {
   try {
-    const manifest = await getPerkManifest();
+    const manifestFileName = await getmanifestFileName();
+    const manifest = await getPerkManifest(manifestFileName);
     /* console.log(manifest) */
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, databaseName);
     await PerkTableCheck(mysqlConnection);
