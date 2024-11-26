@@ -1,8 +1,7 @@
 const fs = require("fs");
 const fetch = require("node-fetch");
 
-const X = btoa(client_id + ":" + client_secret);
-const profileRequest = () => {
+const profileRequest = (memberShipType, memberShipId, encodedClientIdSecretString, apiKey) => {
   const profileResponse = fetch(
     `https://www.bungie.net/Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/?components=200`,
     {
