@@ -66,9 +66,6 @@ const doesItemManifestTableExist = (manifestDescription, mysqlConnection) => {
               resolve();
             }
           });
-        } else if (error.errno !== 1146) {
-          console.log(error);
-          reject(error);
         }
       } else {
         console.log("Table found");
