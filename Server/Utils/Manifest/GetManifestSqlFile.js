@@ -5,7 +5,39 @@ This function needs the correct manifest url, which will sometimes need to be up
 because of that config require is in the promise code block due to it not reading the correct manifest version
 after node fs writefile function is called
 */
-function getManifestSqlFile() {
+const readConfig = () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile("Server/Config/config.json", (error, result) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(result));
+    });
+  });
+};
+const removeOldManifestSQlFile = () => {
+  return new Promise((resolve, reject) => {
+    fs.readdir("Server/Storage/Manifest/SqlLite", (error, files) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+        return;
+      } else if (files.length !== 0) {
+        fs.rm("Server/Storage/Manifest/SqlLite/manifestSqlLiteFile", (error) => {
+          if (error) {
+            console.error(error);
+            reject(error);
+            return;
+          }
+          resolve();
+        });
+      } else {
+        resolve();
+      }
+    });
+  });
+};
+const manifestSqlFileRequest = (manifestUrl) => {
   return new Promise((resolve, reject) => {
     const {
       Api: { manifestUrl },
