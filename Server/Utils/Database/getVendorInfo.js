@@ -79,29 +79,34 @@ const doesTableExist = (mysqlConnection) => {
   return new Promise((resolve, reject) => {
     const doesTableExist = `DESCRIBE vendors;`;
     mysqlConnection.query(doesTableExist, (error, result) => {
-      if (error && error.errno === 1146) {
-        console.log(error);
-        const createVendorTable = `CREATE TABLE Item_manifest (
-                        id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-                        name VARCHAR(255) NOT NULL,
-                        description TEXT,
-                        );`;
+      if (error) {
+        if (error.errno === 1146) {
+          console.log(error);
+          const createVendorTable = `CREATE TABLE vendors (
+                            id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+                            name VARCHAR(255) NOT NULL,
+                            description TEXT
+                            );`;
 
-        mysqlConnection.query(createVendorTable, (error, result) => {
-          if (error) {
-            reject(error);
-          }
-        });
+          mysqlConnection.query(createVendorTable, (error, result) => {
+            if (error) {
+              reject(error);
+            }
+            resolve();
+          });
+        }
       } else {
-        console.log("found table");
+        console.log("table found");
+        resolve();
       }
     });
-    resolve();
   });
 };
 
 const insertVendorData = (vendorInfo, mysqlConnection) => {
   return new Promise((resolve, reject) => {
+    console.log(vendorInfo);
+
     const insertVendorDatasql = `INSERT INTO vendors(name, description) VALUES (?, ?);`;
     const vendorLength = vendorInfo["Vendors"].length;
     for (let i = 0; i < vendorLength; i++) {
@@ -115,15 +120,13 @@ const insertVendorData = (vendorInfo, mysqlConnection) => {
 
       const checkForDuplicates = `SELECT name FROM vendors WHERE EXISTS(SELECT name FROM vendors WHERE vendors.name = ?)`;
 
-      const duplicateExists = mysqlConnection.query(checkForDuplicates, [vendorName], (error, result) => {
+      const duplicateVendorCheck = mysqlConnection.query(checkForDuplicates, [vendorName], (error, result) => {
         if (error) {
           reject(error);
         }
-        console.log(result);
       });
-
-      if (duplicateExists) {
-        console.log("Cannot insert duplicate value");
+      if (duplicateVendorCheck["_results"].length != 0) {
+        console.log(duplicateVendorCheck["_results"]);
         continue;
       }
 
