@@ -177,8 +177,8 @@ const getGunInfo = (items, vendorData, allItems) => {
       }
 
       gunInfo.push(matchedItem);
+      resolve(gunInfo);
     }
-    resolve(gunInfo);
   });
 };
 const insertGuns = (mysqlConnection, vendorID, gunInfo) => {
