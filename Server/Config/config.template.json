@@ -4,7 +4,8 @@
     "password": "",
     "memberShipId": "",
     "memberShipType": "",
-    "characterId": ""
+    "characterId": "",
+    "steamId": ""
   },
   "Api": {
     "ApiKey": "",
@@ -13,7 +14,8 @@
     "access_token": "",
     "refresh_token": "",
     "code": "",
-    "manifestUrl": ""
+    "manifestUrl": "",
+    "vendorRefreshDate": ""
   },
   "Discord": { "clientId": "", "clientSecret": "" },
   "Database": {
