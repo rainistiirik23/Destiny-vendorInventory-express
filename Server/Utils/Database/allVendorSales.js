@@ -394,4 +394,3 @@ async function allVendorSales() {
 }
 
 module.exports = allVendorSales;
-// Itemdisplayname,DestinyItemSourceBlockDefinition,itemCategoryHashes,itemType,DestinyVendorDefinition
