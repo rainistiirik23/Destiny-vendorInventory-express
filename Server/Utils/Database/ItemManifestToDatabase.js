@@ -152,4 +152,4 @@ const manifestToDatabase = async () => {
     console.log(error);
   }
 };
-manifestToDatabase();
+module.exports = manifestToDatabase;
