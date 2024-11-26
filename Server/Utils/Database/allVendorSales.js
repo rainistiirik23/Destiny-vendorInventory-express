@@ -156,7 +156,7 @@ const getAllPossibleVendorSales = (
     allVendorGunsales.forEach((saleItem, saleItemIndex) => {
       for (let i = 0; i < itemDefintionsManifestLength; i++) {
         const itemDefinitionAsJson = JSON.parse(itemDefintionsManifest[i].json);
-        /* console.log(itemDefinitionAsJson); */
+
         if (saleItem.itemHash === itemDefinitionAsJson.hash) {
           saleItem.itemName = itemDefinitionAsJson.displayProperties.name;
           saleItem.itemFlavorText = itemDefinitionAsJson.flavorText;
@@ -173,7 +173,7 @@ const getAllPossibleVendorSales = (
           saleItem.masterWorks = [];
           const socketEntries = itemDefinitionAsJson.sockets.socketEntries;
           const statKeys = Object.keys(itemDefinitionAsJson.stats.stats);
-          /* console.log(Object.keys(itemDefinitionAsJson.stats.stats)); */
+
           statKeys.forEach((statKey) => {
             const statHash = itemDefinitionAsJson.stats.stats[statKey].statHash;
             statDefinitions.forEach((statDefinition) => {
@@ -191,13 +191,12 @@ const getAllPossibleVendorSales = (
           for (let j = 0; j < socketEntries.length; j++) {
             for (let k = 0; k < socketTypeDefinitions.length; k++) {
               const socketTypeDefinitionsAsJson = JSON.parse(socketTypeDefinitions[k].json);
-              /*     console.log(saleItem.itemName); */
+
               if (
                 socketEntries[j].socketTypeHash === socketTypeDefinitionsAsJson.hash &&
                 socketEntries[j].randomizedPlugSetHash &&
                 socketTypeDefinitionsAsJson.socketCategoryHash === 4241085061
               ) {
-                /*  console.log("condition met: perks", saleItemIndex); */
                 saleItem.perks[`perkColumn${j}`] = [];
 
                 plugSetDefinitions.forEach((plugSetDefinition, index) => {
@@ -226,7 +225,6 @@ const getAllPossibleVendorSales = (
                 socketEntries[j].socketTypeHash === socketTypeDefinitionsAsJson.hash &&
                 socketEntries[j].socketTypeHash === 2218962841
               ) {
-                /* console.log("condition met: masterwork", saleItemIndex); */
                 plugSetDefinitions.forEach((plugSetDefinition, index) => {
                   const plugSetDefinitionAsJson = JSON.parse(plugSetDefinition.json);
                   if (plugSetDefinitionAsJson.hash === socketEntries[j].reusablePlugSetHash) {
@@ -256,7 +254,6 @@ const getAllPossibleVendorSales = (
           break;
         }
       }
-      /*   console.log(saleItem.masterWorks); */
     });
 
     resolve(allVendorGunsales);
@@ -332,7 +329,7 @@ const insertAllVendorSalesData = (mysqlConnection, vendorSales, vendorId) => {
         masterWorks,
       } = saleItem;
       const instertDataQuery = `INSERT INTO allVendorSales (item_name,item_icon,item_hash,item_type_display_name,item_flavorText,item_type_and_tier_display_name,stats,perks,masterworks,vendor_id) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?,?);`;
-      /* console.log(statGroupHash); */
+
       mysqlConnection.query(
         instertDataQuery,
         [
@@ -387,7 +384,7 @@ async function allVendorSales() {
       plugSetDefinitions,
       statDefinitions
     );
-    /* console.log(vendorSales); */
+
     await createAllVendorSalesTable(mysqlConnection);
     await insertAllVendorSalesData(mysqlConnection, vendorSales, vendorId);
     await endMysqlConnection(mysqlConnection);
@@ -395,6 +392,6 @@ async function allVendorSales() {
     console.log(error);
   }
 }
-/* allVendorSales(); */
+
 module.exports = allVendorSales;
 // Itemdisplayname,DestinyItemSourceBlockDefinition,itemCategoryHashes,itemType,DestinyVendorDefinition
