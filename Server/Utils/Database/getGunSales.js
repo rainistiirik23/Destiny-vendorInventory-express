@@ -129,64 +129,52 @@ const getGunInfo = (items, vendorData, allItems) => {
       matchedItem.perks = {};
       matchedItem.itemSaleKey = saleKey;
       matchedItem.masterWork = {};
-      /*     console.log(Object.values(perkDataAsJson)); */
-      /*  console.log(Object.values(perkDataAsJson[saleKey])); */
-      /* console.log(saleKey); */
-      /* if (!Object.values(perkDataAsJson[saleKey])) {
-        continue;
-        } */
-      if (!socketDataAsJson[saleKey]?.sockets) {
-        console.log(saleKey);
-      }
-      const socketArray = socketDataAsJson[saleKey].sockets;
-      let perkColumnIndex = 1;
-      socketArray.forEach((socketItem) => {
-        if (!socketItem.plugHash) {
-          return;
-        }
-        const socketItemInfo = allItems.find((item) => {
-          return item.itemHash === socketItem.plugHash;
-        });
-        if (!socketItemInfo?.itemName) {
-          console.log(socketItem);
-        }
-        if (
-          socketItemInfo.itemName.includes("Frame") ||
-          socketItemInfo.plug_category_identifier.includes("intrinsics")
-        ) {
-          return;
-        }
-        if (
-          socketItemInfo.itemName.includes("Tier") &&
-          socketItemInfo.plug_category_identifier.includes("masterworks")
-        ) {
-          matchedItem.masterWork.masterWorkName = socketItemInfo.itemName;
-          matchedItem.masterWork.masterWorkDescription = socketItemInfo.itemDescription;
-          matchedItem.masterWork.masterWorkIcon = socketItemInfo.itemIcon;
-          matchedItem.masterWork.masterWorkItemHash = socketItemInfo.itemHash;
-          return;
-        }
-        switch (socketItemInfo.itemName) {
-          case "Default Shader":
-          case "Empty Mod Socket":
-          case "Kill Tracker":
+      const plugsArrayKeys = Object.keys(itemsPlugDataAsJson[saleKey].plugs);
+      for (let j = 0; j < plugsArrayKeys.length; j++) {
+        const plugArrayPropertyValue = plugsArrayKeys[j];
+        const plugsArray = itemsPlugDataAsJson[saleKey].plugs[plugArrayPropertyValue];
+        plugsArray.forEach((plug) => {
+          const plugInfo = allItems.find((item) => {
+            return item.itemHash === plug.plugItemHash;
+          });
+          if (!plugInfo) {
+            console.log(plugsArray);
+          }
+          /*   console.log(plugInfo); */
+          /* console.log(plugInfo); */
+
+          switch (plugInfo?.itemTypeAndTierDisplayName) {
+            case "Legendary Weapon Mod":
+            case "Common Restore Defaults":
+              return;
+          }
+          if (plugInfo?.itemName.includes("Tracker") || plugInfo?.plug_category_identifier.includes("trackers")) {
             return;
-        }
-        if (!matchedItem.perks[`perkColumn${perkColumnIndex}`]) {
-          matchedItem.perks[`perkColumn${perkColumnIndex}`] = [];
-        }
-        const perkObject = {
-          id: socketItemInfo.id,
-          perkName: socketItemInfo.itemName,
-          perkDescription: socketItemInfo.itemDescription,
-          perkIcon: socketItemInfo.itemIcon,
-          perkHash: socketItemInfo.itemHash,
-          perkTypeDisplayName: socketItemInfo.itemTypeDisplayName,
-          perkTypeAndTierDisplayName: socketItemInfo.itemTypeAndTierDisplayName,
-        };
-        matchedItem.perks[`perkColumn${perkColumnIndex}`].push(perkObject);
-        perkColumnIndex++;
-      });
+          }
+
+          if (plugInfo?.itemName.includes("Tier") && plugInfo?.plug_category_identifier.includes("masterworks")) {
+            matchedItem.masterWork.masterWorkName = plugInfo.itemName;
+            matchedItem.masterWork.masterWorkDescription = plugInfo.itemDescription;
+            matchedItem.masterWork.masterWorkIcon = plugInfo.itemIcon;
+            matchedItem.masterWork.masterWorkItemHash = plugInfo.itemHash;
+            return;
+          }
+          if (!matchedItem.perks[`perkColumn${plugArrayPropertyValue}`]) {
+            matchedItem.perks[`perkColumn${plugArrayPropertyValue}`] = [];
+          }
+
+          const perkObject = {
+            id: plugInfo.id,
+            perkName: plugInfo.itemName,
+            perkDescription: plugInfo.itemDescription,
+            perkIcon: plugInfo.itemIcon,
+            perkHash: plugInfo.itemHash,
+            perkTypeDisplayName: plugInfo.itemTypeDisplayName,
+            perkTypeAndTierDisplayName: plugInfo.itemTypeAndTierDisplayName,
+          };
+          matchedItem.perks[`perkColumn${plugArrayPropertyValue}`].push(perkObject);
+        });
+      }
 
       gunInfo.push(matchedItem);
     }
