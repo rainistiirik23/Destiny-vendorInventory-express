@@ -33,7 +33,7 @@ const getVendorData = () => {
       if (err) {
         reject(err);
       }
-      resolve(data);
+      resolve(JSON.parse(data));
     });
   });
 };
