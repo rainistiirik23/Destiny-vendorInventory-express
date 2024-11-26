@@ -372,12 +372,13 @@ const endMysqlConnection = (mysqlConnection) => {
 };
 const allVendorSales = async () => {
   try {
+    const manifestFileName = await getmanifestFileName();
+    const ItemDefinitions = await getInventoryItemDefinitions(manifestFileName);
+    const socketDefinitions = await getSocketDefinitions(manifestFileName);
+    const plugSetDefinitions = await getPlugSetDefinitions(manifestFileName);
+    const statDefinitions = await getStatDefinitions(manifestFileName);
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
-    const ItemDefinitions = await getInventoryItemDefinitions();
-    const socketDefinitions = await getSocketDefinitions();
-    const plugSetDefinitions = await getPlugSetDefinitions();
-    const statDefinitions = await getStatDefinitions();
-    const vendorInfo = await getVendorInfo(mysqlConnection);
+    const vendorInfo = await getVendorInfo(manifestFileName);
     const vendorId = await getVendorID(mysqlConnection, "Banshee-44");
     const vendorSales = await getAllPossibleVendorSales(
       vendorInfo,
