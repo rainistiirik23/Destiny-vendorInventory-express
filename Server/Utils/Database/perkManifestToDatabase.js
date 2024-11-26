@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const sqlite3 = require("sqlite3");
 const {
   Database: { host: host, user: databaseUser, password: password, database: databaseName },
-} = require("../../../Config/config.json");
+} = require("../../Config/config.json");
 
 const getPerkManifest = async () => {
   return new Promise((resolve, reject) => {
