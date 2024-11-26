@@ -74,6 +74,8 @@ async function vendorRequest() {
       }
     );
     await cacheVendorRequest(vendorRequestResponse.data);
+    const vendorRefreshDate = await getVendorRefreshDate(vendorRequestResponse.data);
+    await saveVendorRefreshDate(credentials, vendorRefreshDate);
   } catch (err) {
     console.log(err);
   }
