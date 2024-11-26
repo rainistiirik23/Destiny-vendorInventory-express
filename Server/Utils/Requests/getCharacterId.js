@@ -7,9 +7,9 @@ const profileRequest = (memberShipType, memberShipId, encodedClientIdSecretStrin
     {
       method: "get",
       headers: {
-        Authorization: "Basic " + X,
-        "X-API-KEY": ApiKey,
-        Authorization: "Basic " + X,
+        Authorization: "Basic " + encodedClientIdSecretString,
+        "X-API-KEY": apiKey,
+        Authorization: "Basic " + encodedClientIdSecretString,
       },
     }
   );
