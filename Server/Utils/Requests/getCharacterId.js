@@ -17,7 +17,7 @@ const profileRequest = (memberShipType, memberShipId, encodedClientIdSecretStrin
 };
 const readConfigFile = () => {
   return new Promise((resolve, reject) => {
-    fs.readFile("Config/config.json", (error, data) => {
+    fs.readFile("Server/Config/config.json", (error, result) => {
       if (error) {
         reject(error);
       }
