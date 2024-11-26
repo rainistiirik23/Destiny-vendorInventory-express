@@ -53,4 +53,4 @@ async function getBungieAccountMembershipId() {
     console.error(error);
   }
 }
-getBungieAccountMembershipId();
+module.exports = getBungieAccountMembershipId;
