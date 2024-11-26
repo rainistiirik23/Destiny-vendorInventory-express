@@ -68,8 +68,15 @@ const doesItemManifestTableExist = (manifestDescription, mysqlConnection) => {
           });
         }
       } else {
-        console.log("Table found");
-        resolve();
+        console.log("Table found, truncating table and adding new data.");
+        mysqlConnection.query("Truncate table Item_manifest", (error, result) => {
+          console.error(error);
+          if (error) {
+            reject(error);
+          } else {
+            resolve();
+          }
+        });
       }
     });
   });
