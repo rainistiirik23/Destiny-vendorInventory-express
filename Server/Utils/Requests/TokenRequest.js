@@ -1,10 +1,4 @@
-const config = require("../../Config/config.json");
-const {
-  Api: { client_id, client_secret, code },
-} = config;
-
 const fs = require("fs");
-const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
 const axios = require("axios");
 const axiosRequestInstance = axios.create({
   headers: {
