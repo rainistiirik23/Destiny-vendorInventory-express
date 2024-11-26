@@ -272,8 +272,7 @@ const getGunSales = async (name) => {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     const allItems = await getAllItems(mysqlConnection);
     const vendorID = await getVendorID(mysqlConnection, name);
-    const gunInfo = await getGunInfo(mysqlConnection, itemHashList, perkData, allItems);
-    console.log(gunInfo[4].perks);
+    const gunInfo = await getGunInfo(itemHashList, vendorData, allItems);
     await insertGuns(mysqlConnection, vendorID, gunInfo);
     await mysqlConnection.end((error, result) => {
       if (error) {
