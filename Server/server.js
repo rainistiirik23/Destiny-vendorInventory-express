@@ -10,8 +10,8 @@ app.use(jsonParser);
 app.use(bodyParser.urlencoded({ extended: true }));
 const schedule = require("node-schedule");
 const options = {
-  cert: fs.readFileSync("Server/ssl/cert.pem"),
-  key: fs.readFileSync("Server/ssl/key.pem"),
+  cert: fs.readFileSync("Server/Ssl/cert.pem"),
+  key: fs.readFileSync("Server/Ssl/key.pem"),
 };
 
 const server = https.createServer(options, app);
