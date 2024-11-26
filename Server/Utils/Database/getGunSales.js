@@ -101,7 +101,7 @@ const getVendorID = (mysqlConnection, name) => {
     });
   });
 };
-const getGunInfo = (mysqlConnection, items, perkData, allItems) => {
+const getGunInfo = (items, vendorData, allItems) => {
   return new Promise(async (resolve, reject) => {
     /*  console.log(allItems); */
     const itemHashQuery = `SELECT * FROM Item_manifest WHERE itemHash=?;`;
