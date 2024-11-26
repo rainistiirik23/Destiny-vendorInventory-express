@@ -54,10 +54,10 @@ const getInventoryItemDefinitions = (manifestFileName) => {
     });
   });
 };
-const getPlugSetDefinitions = () => {
+const getPlugSetDefinitions = (manifestFileName) => {
   return new Promise((resolve, reject) => {
     const manifest = new sqlite3.Database(
-      "dist/world_sql_content_14e4321b227a904753480705bc9a3651.content",
+      `Server/Storage/Manifest/WorldContent/${manifestFileName}`,
       sqlite3.OPEN_READONLY,
       (error) => {
         if (error) {
@@ -73,10 +73,10 @@ const getPlugSetDefinitions = () => {
     });
   });
 };
-const getSocketDefinitions = () => {
+const getSocketDefinitions = (manifestFileName) => {
   return new Promise((resolve, reject) => {
     const manifest = new sqlite3.Database(
-      "dist/world_sql_content_14e4321b227a904753480705bc9a3651.content",
+      `Server/Storage/Manifest/WorldContent/${manifestFileName}`,
       sqlite3.OPEN_READONLY,
       (error) => {
         if (error) {
@@ -92,10 +92,10 @@ const getSocketDefinitions = () => {
     });
   });
 };
-const getStatDefinitions = () => {
+const getStatDefinitions = (manifestFileName) => {
   return new Promise((resolve, reject) => {
     const manifest = new sqlite3.Database(
-      "dist/world_sql_content_14e4321b227a904753480705bc9a3651.content",
+      `Server/Storage/Manifest/WorldContent/${manifestFileName}`,
       sqlite3.OPEN_READONLY,
       (error) => {
         if (error) {
@@ -111,10 +111,10 @@ const getStatDefinitions = () => {
     });
   });
 };
-const getVendorInfo = () => {
+const getVendorInfo = (manifestFileName) => {
   return new Promise((resolve, reject) => {
     const manifest = new sqlite3.Database(
-      "dist/world_sql_content_14e4321b227a904753480705bc9a3651.content",
+      `Server/Storage/Manifest/WorldContent/${manifestFileName}`,
       sqlite3.OPEN_READONLY,
       (error) => {
         if (error) {
