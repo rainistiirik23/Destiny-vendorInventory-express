@@ -1,7 +1,3 @@
-const config = require("../../Config/config.json");
-const {
-  Api: { ApiKey, client_id, client_secret, code, manifestUrl: configManifestUrl },
-} = config;
 const axios = require("axios");
 const fs = require("fs");
 
