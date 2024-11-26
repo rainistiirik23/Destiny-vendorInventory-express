@@ -46,7 +46,7 @@ async function getCharacterId() {
   const profileInfo = await response.json();
   const configClone = Object.assign({}, config);
   /* const characterID = Object.keys(profileInfo.Response.characters.data)[0]; */
-  config.SteamAccount.characterId = Object.keys(profileInfo.Response.characters.data)[0];
+  configClone.SteamAccount.characterId = Object.keys(profileInfo.Response.characters.data)[0];
   await saveCharacterIdToConifg(config);
   /* console.log(characterID); */
 }
