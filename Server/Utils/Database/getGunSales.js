@@ -209,6 +209,14 @@ const insertGuns = (mysqlConnection, vendorID, gunInfo) => {
             reject(error);
           }
         });
+      } else {
+        console.log("Table found, truncating table gun_sales");
+        mysqlConnection.query("Truncate table gun_sales", (error, result) => {
+          if (error) {
+            console.error(error);
+            reject(error);
+          }
+        });
       }
 
       for (let i = 0; i < gunInfo.length; i++) {
