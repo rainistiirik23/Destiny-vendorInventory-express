@@ -135,8 +135,8 @@ const endMysqlConnection = (mysqlConnection) => {
 };
 const manifestToDatabase = async () => {
   try {
-    const manifest = await getItemManifest();
-
+    const manifestFileName = await getmanifestFileName();
+    const manifest = await getItemManifest(manifestFileName);
     const mysqlConnection = mysql.createConnection({
       host: host,
       user: databaseUser,
