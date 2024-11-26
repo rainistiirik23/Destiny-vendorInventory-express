@@ -26,20 +26,13 @@ const memberShipIdrequest = (steamId, encodedClientIdSecretString, apiKey) => {
   return response;
 };
 const writeMemberShipIdToConfig = (Config) => {
-  fs.writeFile("Config/config.json", JSON.stringify(Config), (error, result) => {
-    if (error) {
-      console.log(error);
-    }
-  });
-};
-const readConfig = () => {
   return new Promise((resolve, reject) => {
-    fs.readFile("Config/config.json", "utf8", (error, data) => {
+    fs.writeFile("Server/Config/config.json", JSON.stringify(Config), (error, result) => {
       if (error) {
         console.log(error);
         reject(error);
       }
-      resolve(JSON.parse(data));
+      resolve();
     });
   });
 };
