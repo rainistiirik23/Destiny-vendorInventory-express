@@ -107,9 +107,11 @@ const getGunInfo = (items, vendorData, allItems) => {
     const itemHashQuery = `SELECT * FROM Item_manifest WHERE itemHash=?;`;
     const perkQuery = `SELECT * FROM Perk_manifest WHERE perkHash=?;`;
     let gunInfo = [];
-    const perkDataAsJson = JSON.parse(perkData).Response.itemComponents.reusablePlugs.data;
-    const socketDataAsJson = JSON.parse(perkData).Response.itemComponents.sockets.data;
-    console.log(socketDataAsJson);
+    console.log(vendorData.Response.itemComponents);
+
+    const itemsPlugDataAsJson = vendorData.Response.itemComponents.reusablePlugs.data;
+    const socketDataAsJson = vendorData.Response.itemComponents.sockets.data;
+    /*   console.log(socketDataAsJson); */
     for (let i = 0; i < items.length; i++) {
       const gunHash = items[i].itemHash;
       const saleKey = items[i].saleKey;
