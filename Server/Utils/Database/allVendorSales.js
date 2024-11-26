@@ -21,10 +21,24 @@ const createMysqlConnection = (host, databaseUser, password, databaseName) => {
     resolve(mysqlConnection);
   });
 };
-const getInventoryItemDefinitions = () => {
+const getmanifestFileName = () => {
+  return new Promise((resolve, reject) => {
+    fs.readdir("Server/Storage/Manifest/WorldContent", (error, files) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+        return;
+      }
+      const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+
+      resolve(manifestFileName);
+    });
+  });
+};
+const getInventoryItemDefinitions = (manifestFileName) => {
   return new Promise((resolve, reject) => {
     const manifest = new sqlite3.Database(
-      "dist/world_sql_content_14e4321b227a904753480705bc9a3651.content",
+      `Server/Storage/Manifest/WorldContent/${manifestFileName}`,
       sqlite3.OPEN_READONLY,
       (error) => {
         if (error) {
