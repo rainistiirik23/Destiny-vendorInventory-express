@@ -39,9 +39,6 @@ const removeOldManifestSQlFile = () => {
 };
 const manifestSqlFileRequest = (manifestUrl) => {
   return new Promise((resolve, reject) => {
-    const {
-      Api: { manifestUrl },
-    } = require("../../Config/config.json");
     const manifestRequest = https.get(manifestUrl);
     manifestRequest.on("response", (response) => {
       if (response.statusCode !== 200) {
