@@ -1,18 +1,16 @@
 const fs = require("fs");
 const axios = require("axios");
 
-const credentials = require("../../Config/config.json");
-const {
-  Api: { ApiKey, access_token },
-  SteamAccount: { memberShipType, memberShipId, characterId },
-} = credentials;
-const axiosRequestInstance = axios.create({
-  headers: {
-    "X-API-KEY": ApiKey,
-    Authorization: "Bearer " + access_token,
-  },
-});
-
+const readConfig = () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile("Server/Config/config.json", (error, result) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(result));
+    });
+  });
+};
 const cacheVendorRequest = (vendorRequestResponse) =>
   new Promise((resolve, reject) => {
     fs.writeFile(
