@@ -10,28 +10,6 @@ const {
 } = require("../../Config/config.json");
 const mysql = require("mysql");
 
-const Vendordata = fs.readFileSync("Cache/VendorRequest.json", "utf8", function (err, data) {
-  if (err) {
-    console.log(err);
-  }
-});
-const perkData = fs.readFileSync("Cache/PerkRequest.json", "utf8", function (err, data) {
-  if (err) {
-    console.log(err);
-  }
-});
-
-let itemHashList = [];
-const gunSales = JSON.parse(Vendordata)["Response"]["sales"]["data"];
-const salesKeys = Object.keys(gunSales);
-let gunKeys = [];
-for (let i = 0; i < salesKeys.length; i++) {
-  if (Object.hasOwn(gunSales[salesKeys[i]], "costs") && gunSales[salesKeys[i]]["costs"].length == 2) {
-    gunKeys.push(salesKeys[i]);
-    itemHashList.push(gunSales[salesKeys[i]]["itemHash"]);
-  }
-}
-
 const createMysqlConnection = (host, databaseUser, password, dataBaseName) => {
   return new Promise((resolve, reject) => {
     const mysqlConnection = mysql.createConnection({
