@@ -36,7 +36,13 @@ const saveCharacterIdToConifg = (Config) => {
   });
 };
 async function getCharacterId() {
-  const response = await profileRequest();
+  const config = await readConfigFile();
+  const {
+    Api: { ApiKey, client_id, client_secret, code },
+    SteamAccount: { memberShipType, memberShipId },
+  } = config;
+  const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
+  const response = await profileRequest(memberShipType, memberShipId, encodedClientIdSecretString, ApiKey);
   const profileInfo = await response.json();
   const config = await readConfig();
   /* const characterID = Object.keys(profileInfo.Response.characters.data)[0]; */
