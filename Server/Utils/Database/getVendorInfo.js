@@ -162,4 +162,4 @@ const getVendor = async () => {
     throw error;
   }
 };
-getVendor();
+module.exports = getVendor;
