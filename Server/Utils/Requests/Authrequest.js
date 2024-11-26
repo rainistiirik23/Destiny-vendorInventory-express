@@ -1,13 +1,19 @@
-const config = require("../../Config/config.json");
-const {
-  Api: { client_id },
-  SteamAccount: { username, password },
-} = config;
 const { default: puppeteer } = require("puppeteer");
 const fs = require("fs");
-const authCodeUrl = `https://www.bungie.net/en/oauth/authorize?client_id=${client_id}&response_type=code&state=6i0mkLx79Hp91nzWVeHrzHG4`;
-const authCodeRequest = async () => {
+
+const readConfig = () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile("Server/Config/config.json", (error, result) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(result));
+    });
+  });
+};
+const authCodeRequest = async (client_id, username, password) => {
   try {
+    const authCodeUrl = `https://www.bungie.net/en/oauth/authorize?client_id=${client_id}&response_type=code&state=6i0mkLx79Hp91nzWVeHrzHG4`;
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(authCodeUrl);
