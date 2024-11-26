@@ -46,9 +46,9 @@ async function getBungieAccountMembershipId() {
     const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
     const response = await memberShipIdrequest(steamId, encodedClientIdSecretString, ApiKey);
     const responseData = await response.json();
-    const config = await readConfig();
-    config.SteamAccount.memberShipId = responseData.Response.membershipId;
-    await writeMemberShipIdToConfig(config);
+    const configClone = Object.assign({}, credentials);
+    configClone.SteamAccount.memberShipId = responseData.Response.membershipId;
+    await writeMemberShipIdToConfig(configClone);
   } catch (error) {
     console.error(error);
   }
