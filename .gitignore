@@ -7,3 +7,9 @@ Requests/DownloadImage.js
 Server/Assets/Icons/Guns/*.png
 Server/Assets/Icons/Perks/*.png
 Server/Ssl/
+Server/Storage/Manifest/SqlLite/*
+Server/Storage/Manifest/WorldContent/*
+Server/Storage/Request/*
+!Server/Storage/Manifest/SqlLite/deleteThis.md
+!Server/Storage/Manifest/WorldContent/deleteThis.md
+!Server/Storage/Request/deleteThis.md
