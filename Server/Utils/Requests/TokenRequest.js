@@ -8,7 +8,7 @@ Access token is valid for an hour and refresh token is valid for 90 days.
 
 */
 
-const writeTokens = (requestTokens) =>
+const writeTokens = (requestTokens, config) =>
   new Promise((resolve, reject) => {
     const configTokens = Object.assign({}, config);
     configTokens.Api.access_token = requestTokens["access_token"];
