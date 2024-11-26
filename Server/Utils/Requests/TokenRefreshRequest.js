@@ -1,10 +1,5 @@
 const fs = require("fs");
 const axios = require("axios");
-const config = require("../../Config/config.json");
-const {
-  Api: { ApiKey, client_id, client_secret, refresh_token },
-} = config;
-const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
 const axiosRequestInstance = axios.create({
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
