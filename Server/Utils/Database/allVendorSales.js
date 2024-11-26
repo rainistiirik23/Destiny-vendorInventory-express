@@ -140,7 +140,9 @@ const getAllPossibleVendorSales = (
 ) => {
   return new Promise((resolve, reject) => {
     const allVendorGunsales = [];
-    for (let i = 0; i < vendorManifest.length; i++) {
+    const itemDefintionsManifestLength = itemDefintionsManifest.length;
+    const vendorManifestLength = vendorManifest.length;
+    for (let i = 0; i < vendorManifestLength; i++) {
       if (JSON.parse(vendorManifest[i].json).hash === 672118013) {
         const vendorItemList = JSON.parse(vendorManifest[i].json).itemList;
         for (let j = 0; j < vendorItemList.length; j++) {
@@ -152,7 +154,7 @@ const getAllPossibleVendorSales = (
       }
     }
     allVendorGunsales.forEach((saleItem, saleItemIndex) => {
-      for (let i = 0; i < itemDefintionsManifest.length; i++) {
+      for (let i = 0; i < itemDefintionsManifestLength; i++) {
         const itemDefinitionAsJson = JSON.parse(itemDefintionsManifest[i].json);
         /* console.log(itemDefinitionAsJson); */
         if (saleItem.itemHash === itemDefinitionAsJson.hash) {
@@ -202,7 +204,7 @@ const getAllPossibleVendorSales = (
                   const plugSetDefinitionAsJson = JSON.parse(plugSetDefinition.json);
                   if (plugSetDefinitionAsJson.hash === socketEntries[j].randomizedPlugSetHash) {
                     plugSetDefinitionAsJson.reusablePlugItems.forEach((reusablePlugItem) => {
-                      for (let l = 0; l < itemDefintionsManifest.length; l++) {
+                      for (let l = 0; l < itemDefintionsManifestLength; l++) {
                         const itemDefinition = JSON.parse(itemDefintionsManifest[l].json);
                         if (itemDefinition.hash === reusablePlugItem.plugItemHash) {
                           const perkObject = {};
@@ -229,7 +231,7 @@ const getAllPossibleVendorSales = (
                   const plugSetDefinitionAsJson = JSON.parse(plugSetDefinition.json);
                   if (plugSetDefinitionAsJson.hash === socketEntries[j].reusablePlugSetHash) {
                     plugSetDefinitionAsJson.reusablePlugItems.forEach((reusablePlugItem) => {
-                      for (let l = 0; l < itemDefintionsManifest.length; l++) {
+                      for (let l = 0; l < itemDefintionsManifestLength; l++) {
                         const itemDefinition = JSON.parse(itemDefintionsManifest[l].json);
                         if (itemDefinition.hash === reusablePlugItem.plugItemHash) {
                           const masterWorkObject = {};
