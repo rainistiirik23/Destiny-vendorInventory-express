@@ -1,13 +1,13 @@
 const fs = require("fs");
 const {
   /*  ApiKey, access_token  */
-} = require("../../../Config/config.json");
+} = require("../../Config/config.json");
 const fetch = require("node-fetch");
 const {
   Api: { ApiKey, access_token },
   SteamAccount: { memberShipType, memberShipId, characterId },
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
-} = require("../../../Config/config.json");
+} = require("../../Config/config.json");
 const mysql = require("mysql");
 
 const Vendordata = fs.readFileSync("Cache/VendorRequest.json", "utf8", function (err, data) {
