@@ -281,9 +281,10 @@ const createAllVendorSalesTable = (mysqlConnection) => {
   return new Promise((resolve, reject) => {
     const describeTableQuery = "DESCRIBE allVendorSales";
     mysqlConnection.query(describeTableQuery, (error, result) => {
-      if (error && error.errno === 1146) {
-        console.log(error);
-        const createTableQuery = `CREATE TABLE allVendorSales(
+      if (error) {
+        if (error.errno === 1146) {
+          console.log(error);
+          const createTableQuery = `CREATE TABLE allVendorSales(
             id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
             item_name VARCHAR(255) NOT NULL,
             item_icon  TEXT,
@@ -295,14 +296,24 @@ const createAllVendorSalesTable = (mysqlConnection) => {
             perks TEXT NOT NULL,
             masterworks TEXT NOT NULL,
             vendor_id INT NOT NULL)`;
-        mysqlConnection.query(createTableQuery, (error, result) => {
+          mysqlConnection.query(createTableQuery, (error, result) => {
+            if (error) {
+              reject(error);
+            }
+            resolve();
+          });
+        }
+      } else {
+        console.log("Table found, truncating table and adding new data.");
+        mysqlConnection.query("Truncate table allVendorSales", (error, result) => {
+          console.error(error);
           if (error) {
             reject(error);
+          } else {
+            resolve();
           }
-          resolve();
         });
       }
-      resolve();
     });
   });
 };
