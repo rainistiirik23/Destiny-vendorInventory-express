@@ -29,7 +29,7 @@ const createMysqlConnection = (host, databaseUser, password, dataBaseName) => {
 };
 const getVendorData = () => {
   return new Promise((resolve, reject) => {
-    fs.readFile("Cache/VendorRequest.json", "utf8", function (err, data) {
+    fs.readFile("Server/Storage/Request/vendorRequest.json", "utf8", function (err, data) {
       if (err) {
         reject(err);
       }
