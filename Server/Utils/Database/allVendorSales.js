@@ -370,7 +370,7 @@ const endMysqlConnection = (mysqlConnection) => {
     });
   });
 };
-const allVendorSales = async () => {
+async function allVendorSales() {
   try {
     const manifestFileName = await getmanifestFileName();
     const ItemDefinitions = await getInventoryItemDefinitions(manifestFileName);
