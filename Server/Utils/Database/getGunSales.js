@@ -39,7 +39,7 @@ const getVendorData = () => {
 };
 const getVendorPerkData = () => {
   return new Promise((resolve, reject) => {
-    fs.readFile("Cache/PerkRequest.json", "utf8", function (err, data) {
+    fs.readFile("Server/Storage/PerkRequest.json", "utf8", function (err, data) {
       if (err) {
         reject(err);
       }
