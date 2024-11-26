@@ -23,9 +23,23 @@ const writeTokens = (requestTokens, config) =>
       }
     });
   });
-
+const readConfig = () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile("Server/Config/config.json", (error, result) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(JSON.parse(result));
+    });
+  });
+};
 async function refreshToken() {
   try {
+    const config = await readConfig();
+    const {
+      Api: { ApiKey, client_id, client_secret, refresh_token },
+    } = config;
+    const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
     const requestTokens = await axiosRequestInstance.post("https://www.bungie.net/Platform/App/OAuth/Token/", {
       "X-API-Key": ApiKey,
       Authorization: `Basic ${encodedClientIdSecretString}`,
