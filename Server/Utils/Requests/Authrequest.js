@@ -73,7 +73,7 @@ const authCodeRequest = async (client_id, username, password) => {
   }
 };
 
-const replaceAuthCode = (authCode) =>
+const replaceAuthCode = (authCode, config) =>
   new Promise((resolve, reject) => {
     const configClone = Object.assign({}, config);
     configClone.Api.code = authCode;
@@ -85,15 +85,19 @@ const replaceAuthCode = (authCode) =>
       }
     });
   });
-
-async function getNewAuthCode() {
+async function AuthRequest() {
   try {
-    const authCodeFromRequest = await authCodeRequest();
-    await replaceAuthCode(authCodeFromRequest);
-    process.exit();
+    const config = await readConfig();
+
+    const {
+      Api: { client_id },
+      SteamAccount: { username, password },
+    } = config;
+    const authCodeFromRequest = await authCodeRequest(client_id, username, password);
+    await replaceAuthCode(authCodeFromRequest, config);
   } catch (error) {
     console.log(error);
-    process.exit();
   }
 }
-module.exports = getNewAuthCode;
+
+module.exports = AuthRequest;
