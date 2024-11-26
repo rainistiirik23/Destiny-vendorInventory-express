@@ -396,6 +396,6 @@ const allVendorSales = async () => {
     process.exit(1);
   }
 };
-manifestToDatabase();
-
+/* allVendorSales(); */
+module.exports = allVendorSales;
 // Itemdisplayname,DestinyItemSourceBlockDefinition,itemCategoryHashes,itemType,DestinyVendorDefinition
