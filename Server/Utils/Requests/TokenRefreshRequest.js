@@ -10,7 +10,7 @@ rather let's use the refresh token to get the access token,without having to log
 NB!! refresh token has an expiration date of 90 days,after that you will  have to log in again.
 */
 
-const writeTokens = (requestTokens) =>
+const writeTokens = (requestTokens, config) =>
   new Promise((resolve, reject) => {
     const configTokens = Object.assign({}, config);
     configTokens.Api.access_token = requestTokens["access_token"];
@@ -34,7 +34,7 @@ async function refreshToken() {
       client_id: client_id,
       client_secret,
     });
-    await writeTokens(requestTokens.data);
+    await writeTokens(requestTokens.data, config);
   } catch (err) {
     console.log(err);
   }
