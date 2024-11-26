@@ -283,4 +283,5 @@ const getGunSales = async (name) => {
     throw error;
   }
 };
-getGunSales("Banshee-44", Vendordata, perkData);
+/* getGunSales("Banshee-44"); */
+module.exports = getGunSales;
