@@ -393,9 +393,8 @@ async function allVendorSales() {
     await endMysqlConnection(mysqlConnection);
   } catch (error) {
     console.log(error);
-    process.exit(1);
   }
-};
+}
 /* allVendorSales(); */
 module.exports = allVendorSales;
 // Itemdisplayname,DestinyItemSourceBlockDefinition,itemCategoryHashes,itemType,DestinyVendorDefinition
