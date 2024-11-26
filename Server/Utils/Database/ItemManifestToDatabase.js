@@ -3,9 +3,21 @@ const sqlite3 = require("sqlite3");
 const fs = require("fs");
 const {
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
-} = require("../../../Config/config.json");
-
-const getItemManifest = async () => {
+} = require("../../Config/config.json");
+const getmanifestFileName = () => {
+  return new Promise((resolve, reject) => {
+    fs.readdir("Server/Storage/Manifest/WorldContent", (error, files) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+        return;
+      }
+      const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+      resolve(manifestFileName);
+    });
+  });
+};
+const getItemManifest = async (manifestFileName) => {
   let db = new sqlite3.Database(
     "dist/world_sql_content_14e4321b227a904753480705bc9a3651.content",
     sqlite3.OPEN_READONLY,
