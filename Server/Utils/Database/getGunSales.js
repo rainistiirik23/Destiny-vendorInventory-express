@@ -279,7 +279,6 @@ const getGunSales = async (name) => {
         throw error;
       }
     });
-    process.exit(0);
   } catch (error) {
     throw error;
   }
