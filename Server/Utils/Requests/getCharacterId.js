@@ -21,7 +21,7 @@ const readConfigFile = () => {
       if (error) {
         reject(error);
       }
-      resolve(JSON.parse(data));
+      resolve(JSON.parse(result));
     });
   });
 };
