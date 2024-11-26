@@ -1,10 +1,5 @@
 const fs = require("fs");
 const axios = require("axios");
-const axiosRequestInstance = axios.create({
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
 /*
 
 Request for a Token which Oauth requires to make a VendorRequest.
