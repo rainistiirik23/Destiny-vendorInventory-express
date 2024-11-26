@@ -50,4 +50,4 @@ async function getCharacterId() {
   await saveCharacterIdToConifg(config);
   /* console.log(characterID); */
 }
-getCharacterId();
+module.exports = getCharacterId;
