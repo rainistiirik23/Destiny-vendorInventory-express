@@ -14,7 +14,7 @@ const readConfig = () => {
 const cacheVendorRequest = (vendorRequestResponse) =>
   new Promise((resolve, reject) => {
     fs.writeFile(
-      "./Cache/VendorRequest.json",
+      "Server/Storage/Request/vendorRequest.json",
       JSON.stringify(vendorRequestResponse),
       { flag: "w" },
       function (err, result) {
