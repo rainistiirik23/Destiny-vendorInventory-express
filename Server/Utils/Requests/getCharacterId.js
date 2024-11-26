@@ -44,7 +44,7 @@ async function getCharacterId() {
   const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
   const response = await profileRequest(memberShipType, memberShipId, encodedClientIdSecretString, ApiKey);
   const profileInfo = await response.json();
-  const config = await readConfig();
+  const configClone = Object.assign({}, config);
   /* const characterID = Object.keys(profileInfo.Response.characters.data)[0]; */
   config.SteamAccount.characterId = Object.keys(profileInfo.Response.characters.data)[0];
   await saveCharacterIdToConifg(config);
