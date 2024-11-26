@@ -13,7 +13,7 @@ const readConfigFile = () => {
 };
 const memberShipIdrequest = (steamId, encodedClientIdSecretString, apiKey) => {
   const response = fetch(
-    "https://www.bungie.net/Platform/User/GetMembershipFromHardLinkedCredential/SteamID/76561199622021169/",
+    `https://www.bungie.net/Platform/User/GetMembershipFromHardLinkedCredential/SteamID/${steamId}/`,
     {
       method: "get",
       headers: {
