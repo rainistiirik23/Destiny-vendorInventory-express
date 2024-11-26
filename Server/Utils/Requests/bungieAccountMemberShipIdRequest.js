@@ -38,7 +38,13 @@ const writeMemberShipIdToConfig = (Config) => {
 };
 async function getBungieAccountMembershipId() {
   try {
-    const response = await memberShipIdrequest();
+    const credentials = await readConfigFile();
+    const {
+      SteamAccount: { steamId },
+      Api: { ApiKey, client_id, client_secret },
+    } = credentials;
+    const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
+    const response = await memberShipIdrequest(steamId, encodedClientIdSecretString, ApiKey);
     const responseData = await response.json();
     const config = await readConfig();
     config.SteamAccount.memberShipId = responseData.Response.membershipId;
