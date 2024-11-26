@@ -5,10 +5,23 @@ const {
   Database: { host: host, user: databaseUser, password: password, database: databaseName },
 } = require("../../Config/config.json");
 
-const getPerkManifest = async () => {
+const getmanifestFileName = () => {
+  return new Promise((resolve, reject) => {
+    fs.readdir("Server/Storage/Manifest/WorldContent", (error, files) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+        return;
+      }
+      const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+      resolve(manifestFileName);
+    });
+  });
+};
+const getPerkManifest = async (manifestFileName) => {
   return new Promise((resolve, reject) => {
     let db = new sqlite3.Database(
-      "dist/world_sql_content_50f67b17bc243f7570787a58395230db.content",
+      `Server/Storage/Manifest/WorldContent/${manifestFileName}`,
       sqlite3.OPEN_READONLY,
       (error) => {
         if (error) {
