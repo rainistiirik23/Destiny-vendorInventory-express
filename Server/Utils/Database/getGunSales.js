@@ -53,7 +53,7 @@ const getItemHashList = (vendorData) => {
       reject("Did not find vendorData");
     }
     let itemsList = [];
-    const gunSales = JSON.parse(Vendordata)["Response"]["sales"]["data"];
+    const gunSales = vendorData["Response"]["sales"]["data"];
     const salesKeys = Object.keys(gunSales);
     let gunKeys = [];
     for (let i = 0; i < salesKeys.length; i++) {
