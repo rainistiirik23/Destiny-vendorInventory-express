@@ -370,7 +370,7 @@ const endMysqlConnection = (mysqlConnection) => {
     });
   });
 };
-const manifestToDatabase = async () => {
+const allVendorSales = async () => {
   try {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     const ItemDefinitions = await getInventoryItemDefinitions();
