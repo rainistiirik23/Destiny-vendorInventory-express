@@ -19,7 +19,7 @@ const getmanifestFileName = () => {
 };
 const getItemManifest = async (manifestFileName) => {
   let db = new sqlite3.Database(
-    "dist/world_sql_content_14e4321b227a904753480705bc9a3651.content",
+    `Server/Storage/Manifest/WorldContent/${manifestFileName}`,
     sqlite3.OPEN_READONLY,
     (error) => {
       if (error) {
