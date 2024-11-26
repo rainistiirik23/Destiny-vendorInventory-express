@@ -25,6 +25,21 @@ const saveManifestUrl = (config) => {
 
 async function checkManifestURl() {
   try {
+    const config = await readConfig();
+    const {
+      Api: { ApiKey, client_id, client_secret, code, manifestUrl: configManifestUrl },
+    } = config;
+    const encodedClientIdSecretString = Buffer.from(client_id + ":" + client_secret).toString("base64");
+    const axiosRequestInstance = axios.create({
+      baseURL: "https://www.bungie.net/Platform/Destiny2/Manifest/",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-API-Key": ApiKey,
+        Authorization: "Basic " + encodedClientIdSecretString,
+        client_id: client_id,
+        code: code,
+      },
+    });
     const manifestUrlRequest = await axiosRequestInstance.get();
     const manifestUrl = `https://www.bungie.net${manifestUrlRequest.data.Response.mobileWorldContentPaths.en}`;
     let isManifestOutdated = false;
