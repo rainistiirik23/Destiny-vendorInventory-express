@@ -45,7 +45,10 @@ async function refreshVendorData() {
     */
   } catch (error) {
     console.error(error);
-
+    if (error?.code === "ECONNREFUSED") {
+      console.error("Mysql is offline\nPlease start mysql service and then start express again");
+      return;
+    }
     if (error.response.status === 401) {
       console.warn("Refresh token has been expired, Retrieving new authorization code and token");
       await authRequest();
