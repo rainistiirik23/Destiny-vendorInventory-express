@@ -24,12 +24,12 @@ async function refreshVendorData() {
       console.log("Manifest isn't outdated at the moment");
     }
     /*   await tokenRefreshRequest(); */
-    const newDate = new Date();
+    const currentDate = new Date();
     const config = await readConfig();
     const {
       Api: { vendorRefreshDate },
     } = config;
-    if (newDate >= vendorRefreshDate) {
+    if (currentDate >= new Date(vendorRefreshDate)) {
       console.log("Vendor's inventory refresh date is expired");
       await tokenRefreshRequest();
       await vendorRequest();
