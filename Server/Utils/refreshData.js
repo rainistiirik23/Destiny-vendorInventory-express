@@ -29,7 +29,7 @@ async function refreshVendorData() {
     const {
       Api: { vendorRefreshDate },
     } = config;
-    if (newDate >= vendorRefreshDate) {
+    if (newDate >= new Date(vendorRefreshDate)) {
       console.log("Vendor's inventory refresh date is expired");
       await tokenRefreshRequest();
       await vendorRequest();
