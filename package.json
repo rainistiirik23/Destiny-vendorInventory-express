@@ -22,8 +22,6 @@
     "node-fetch": "^2.6.9",
     "node-schedule": "^2.1.1",
     "puppeteer": "^19.4.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "request": "^2.88.2",
     "sqlite3": "^5.1.1"
   },
