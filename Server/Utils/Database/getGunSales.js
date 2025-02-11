@@ -134,6 +134,12 @@ const getGunInfo = (items, vendorData, allItems) => {
         const plugArrayPropertyValue = plugsArrayKeys[j];
         const plugsArray = itemsPlugDataAsJson[saleKey].plugs[plugArrayPropertyValue];
         plugsArray.forEach((plug) => {
+          switch (plug.plugItemHash) {
+            case 213377779:
+            case 4275472612:
+            case 2728416798:
+              return;
+          }
           const plugInfo = allItems.find((item) => {
             return item.itemHash === plug.plugItemHash;
           });
