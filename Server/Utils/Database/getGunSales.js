@@ -261,7 +261,7 @@ const insertGuns = (mysqlConnection, vendorID, gunInfo) => {
               reject(error);
             }
             console.log(perks);
-            if (i + 1 > gunInfo.length) {
+            if (!i + 1 < gunInfo.length) {
               resolve();
             }
           }
@@ -280,7 +280,7 @@ const getGunSales = async (name) => {
     const vendorID = await getVendorID(mysqlConnection, name);
     const gunInfo = await getGunInfo(itemHashList, vendorData, allItems);
     await insertGuns(mysqlConnection, vendorID, gunInfo);
-    await mysqlConnection.end((error, result) => {
+    mysqlConnection.end((error, result) => {
       if (error) {
         throw error;
       }
@@ -289,5 +289,5 @@ const getGunSales = async (name) => {
     throw error;
   }
 };
-/* getGunSales("Banshee-44"); */
+getGunSales("Banshee-44");
 module.exports = getGunSales;
