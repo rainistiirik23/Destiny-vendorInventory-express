@@ -1,4 +1,5 @@
 const decompress = require("decompress");
+const fs = require("fs");
 const removeOldManifestFile = () => {
   return new Promise((resolve, reject) => {
     fs.readdir("Server/Storage/Manifest/WorldContent", (error, files) => {
