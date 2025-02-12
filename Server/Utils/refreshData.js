@@ -2,7 +2,7 @@ const checkManifestUrl = require("./Manifest/CheckManifestUrl");
 const getManifestSqlFile = require("./Manifest/GetManifestSqlFile");
 const extractManifestArchive = require("./Manifest/ExtractManifestArchive");
 const itemManifestToDatabase = require("./Database/ItemManifestToDatabase");
-const perkManifestToDatabase = require("./Database/perkManifestToDatabase");
+const allVendorSales = require("./Database/allVendorSales");
 const tokenRefreshRequest = require("./Requests/TokenRefreshRequest");
 const tokenRequest = require("./Requests/TokenRequest");
 const vendorRequest = require("./Requests/VendorRequest");
@@ -18,7 +18,6 @@ async function refreshVendorData() {
       await getManifestSqlFile();
       await extractManifestArchive();
       await itemManifestToDatabase();
-      await perkManifestToDatabase();
       await allVendorSales();
     } else {
       console.log("Manifest isn't outdated at the moment");
