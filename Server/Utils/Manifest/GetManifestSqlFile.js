@@ -46,7 +46,7 @@ const manifestSqlFileRequest = (manifestUrl) => {
     manifestRequest.on("response", (response) => {
       if (response.statusCode !== 200) {
         reject(
-          `Retrieving manifest sql file failed with statuscode ${response.statusCode} and status message ${response.statusMessage}`
+          `Retrieving manifest sql file failed with statuscode ${response.statusCode} and status message ${response.statusMessage}`,
         );
         return;
       }
