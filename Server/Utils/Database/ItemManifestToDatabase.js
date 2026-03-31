@@ -13,6 +13,11 @@ const getmanifestFileName = () => {
         return;
       }
       const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+      if (!manifestFileName) {
+        reject(new Error("Manifest file world content missing"));
+      }
+      console.log(manifestFileName);
+
       resolve(manifestFileName);
     });
   });
@@ -25,7 +30,7 @@ const getItemManifest = async (manifestFileName) => {
       if (error) {
         /*  console.log(error); */
       }
-    }
+    },
   );
   const itemManifest = await new Promise((resolve, reject) => {
     db.all("Select json from DestinyInventoryItemDefinition", (error, result) => {
@@ -116,7 +121,7 @@ const insertData = async (mysqlConnection, manifest) => {
           if (error) {
             reject(error);
           }
-        }
+        },
       );
     }
     resolve();

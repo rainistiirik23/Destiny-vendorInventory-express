@@ -7,8 +7,9 @@ const removeOldManifestFile = () => {
         console.error(error);
         reject(error);
         return;
-      } else if (files.length !== 0) {
-        const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+      }
+      const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+      if (manifestFileName) {
         fs.rm(`Server/Storage/Manifest/WorldContent/${manifestFileName}`, (error) => {
           if (error) {
             console.error(error);
@@ -29,7 +30,7 @@ const decompressManifestArchive = () => {
       (files) => {
         console.log("done!");
         resolve();
-      }
+      },
     );
   });
 };

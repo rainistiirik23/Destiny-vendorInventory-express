@@ -18,11 +18,14 @@ const readConfig = () => {
 const removeOldManifestSQlFile = () => {
   return new Promise((resolve, reject) => {
     fs.readdir("Server/Storage/Manifest/SqlLite", (error, files) => {
+      const manifestSqlLiteFileExists = files.find((file) => {
+        file.includes("manifestSqlLiteFile");
+      });
       if (error) {
         console.error(error);
         reject(error);
         return;
-      } else if (files.length !== 0) {
+      } else if (files.length !== 0 && manifestSqlLiteFileExists) {
         fs.rm("Server/Storage/Manifest/SqlLite/manifestSqlLiteFile", (error) => {
           if (error) {
             console.error(error);
@@ -43,7 +46,7 @@ const manifestSqlFileRequest = (manifestUrl) => {
     manifestRequest.on("response", (response) => {
       if (response.statusCode !== 200) {
         reject(
-          `Retrieving manifest sql file failed with statuscode ${response.statusCode} and status message ${response.statusMessage}`
+          `Retrieving manifest sql file failed with statuscode ${response.statusCode} and status message ${response.statusMessage}`,
         );
         return;
       }
@@ -60,9 +63,8 @@ const manifestSqlFileRequest = (manifestUrl) => {
 };
 async function getManifestSqlFile() {
   const config = await readConfig();
-  const {
-    Api: { manifestUrl },
-  } = config;
+  const manifestUrl = config.Api.manifestUrl;
+  await removeOldManifestSQlFile();
   await manifestSqlFileRequest(manifestUrl);
 }
 module.exports = getManifestSqlFile;

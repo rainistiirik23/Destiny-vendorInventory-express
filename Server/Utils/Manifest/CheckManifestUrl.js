@@ -43,13 +43,21 @@ async function checkManifestURl() {
     const manifestUrlRequest = await axiosRequestInstance.get();
     const manifestUrl = `https://www.bungie.net${manifestUrlRequest.data.Response.mobileWorldContentPaths.en}`;
     let isManifestOutdated = false;
-    if (configManifestUrl === manifestUrl) {
+    if (configManifestUrl !== manifestUrl) {
+      console.log("Manifest is outdated");
+      isManifestOutdated = true;
+      //---------------------------------------------------------------------------------------------------------------------
+
+      //Make a new copy of the object
+      let configCopy = { ...config };
+
+      //---------------------------------------------------------------------------------------------------------------------
+      configCopy.Api.manifestUrl = manifestUrl;
+      await saveManifestUrl(configCopy);
       return isManifestOutdated;
     }
-    let configCopy = { ...config };
-    configCopy.Api.manifestUrl = manifestUrl;
-    await saveManifestUrl(configCopy);
-    isManifestOutdated = true;
+    console.log("Manifest is up to date");
+
     return isManifestOutdated;
   } catch (error) {
     console.error(error);
