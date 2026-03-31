@@ -13,6 +13,9 @@ const getmanifestFileName = () => {
         return;
       }
       const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+      if (!manifestFileName) {
+        reject(new Error("Manifest file not found while trying to get vendor details"));
+      }
       resolve(manifestFileName);
     });
   });
