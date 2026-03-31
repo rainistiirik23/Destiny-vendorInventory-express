@@ -63,9 +63,8 @@ const manifestSqlFileRequest = (manifestUrl) => {
 };
 async function getManifestSqlFile() {
   const config = await readConfig();
-  const {
-    Api: { manifestUrl },
-  } = config;
+  const manifestUrl = config.Api.manifestUrl;
+  await removeOldManifestSQlFile();
   await manifestSqlFileRequest(manifestUrl);
 }
 module.exports = getManifestSqlFile;
