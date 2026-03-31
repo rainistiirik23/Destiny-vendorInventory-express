@@ -18,11 +18,14 @@ const readConfig = () => {
 const removeOldManifestSQlFile = () => {
   return new Promise((resolve, reject) => {
     fs.readdir("Server/Storage/Manifest/SqlLite", (error, files) => {
+      const manifestSqlLiteFileExists = files.find((file) => {
+        file.includes("manifestSqlLiteFile");
+      });
       if (error) {
         console.error(error);
         reject(error);
         return;
-      } else if (files.length !== 0) {
+      } else if (files.length !== 0 && manifestSqlLiteFileExists) {
         fs.rm("Server/Storage/Manifest/SqlLite/manifestSqlLiteFile", (error) => {
           if (error) {
             console.error(error);
