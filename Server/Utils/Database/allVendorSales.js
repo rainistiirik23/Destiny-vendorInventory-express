@@ -208,6 +208,13 @@ const getAllPossibleVendorSales = (
                         if (itemDefinition.hash === reusablePlugItem.plugItemHash) {
                           const perkObject = {};
                           perkObject.perkName = itemDefinition.displayProperties.name;
+                          const doesDuplicatePerkExist = saleItem.perks[`perkColumn${j}`].some(
+                            (perkObjectValue) => perkObjectValue.perkName === perkObject.perkName,
+                          );
+                          if (doesDuplicatePerkExist) {
+                            continue;
+                          }
+
                           perkObject.perkDescription = itemDefinition.displayProperties.description;
                           perkObject.perkIcon = itemDefinition.displayProperties.icon;
                           perkObject.perkHash = itemDefinition.hash;
