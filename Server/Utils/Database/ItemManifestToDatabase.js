@@ -13,6 +13,11 @@ const getmanifestFileName = () => {
         return;
       }
       const manifestFileName = files.find((file) => file.includes("world_sql_content"));
+      if (!manifestFileName) {
+        reject(new Error("Manifest file world content missing"));
+      }
+      console.log(manifestFileName);
+
       resolve(manifestFileName);
     });
   });
