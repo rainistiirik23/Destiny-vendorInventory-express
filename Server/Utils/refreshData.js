@@ -9,7 +9,7 @@ const vendorRequest = require("./Requests/VendorRequest");
 const getGunSales = require("./Database/getGunSales");
 const readConfig = require("./File/ReadConfig");
 const authRequest = require("./Requests/Authrequest");
-
+const getVendorInfo = require("./Database/getVendorInfo");
 async function refreshVendorData() {
   try {
     const isManifestOutdated = await checkManifestUrl();
@@ -18,6 +18,7 @@ async function refreshVendorData() {
       await getManifestSqlFile();
       await extractManifestArchive();
       await itemManifestToDatabase();
+      await getVendorInfo();
       await allVendorSales();
     } else {
       console.log("Manifest isn't outdated at the moment");
