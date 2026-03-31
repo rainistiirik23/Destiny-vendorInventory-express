@@ -7,7 +7,7 @@ const tokenRefreshRequest = require("./Requests/TokenRefreshRequest");
 const tokenRequest = require("./Requests/TokenRequest");
 const vendorRequest = require("./Requests/VendorRequest");
 const getGunSales = require("./Database/getGunSales");
-const readConfig = require("./Config/readConfig");
+const readConfig = require("./File/ReadConfig");
 const authRequest = require("./Requests/Authrequest");
 
 async function refreshVendorData() {
