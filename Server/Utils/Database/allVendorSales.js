@@ -44,7 +44,7 @@ const getInventoryItemDefinitions = (manifestFileName) => {
         if (error) {
           reject(error);
         }
-      }
+      },
     );
     manifest.all("Select json from DestinyInventoryItemDefinition", (error, result) => {
       if (error) {
@@ -63,7 +63,7 @@ const getPlugSetDefinitions = (manifestFileName) => {
         if (error) {
           reject(error);
         }
-      }
+      },
     );
     manifest.all("Select json from DestinyPlugSetDefinition", (error, result) => {
       if (error) {
@@ -82,7 +82,7 @@ const getSocketDefinitions = (manifestFileName) => {
         if (error) {
           reject(error);
         }
-      }
+      },
     );
     manifest.all("Select json from DestinySocketTypeDefinition", (error, result) => {
       if (error) {
@@ -101,7 +101,7 @@ const getStatDefinitions = (manifestFileName) => {
         if (error) {
           reject(error);
         }
-      }
+      },
     );
     manifest.all("Select json from DestinyStatDefinition", (error, result) => {
       if (error) {
@@ -120,7 +120,7 @@ const getVendorInfo = (manifestFileName) => {
         if (error) {
           reject(error);
         }
-      }
+      },
     );
     manifest.all("Select json from DestinyVendorDefinition", (error, result) => {
       if (error) {
@@ -136,7 +136,7 @@ const getAllPossibleVendorSales = (
   itemDefintionsManifest,
   socketTypeDefinitions,
   plugSetDefinitions,
-  statDefinitions
+  statDefinitions,
 ) => {
   return new Promise((resolve, reject) => {
     const allVendorGunsales = [];
@@ -274,7 +274,6 @@ const getVendorID = (mysqlConnection, name) => {
       if (error) {
         reject(error);
       }
-      console.log(result[0].id);
 
       resolve(result[0].id);
     });
@@ -357,7 +356,7 @@ const insertAllVendorSalesData = (mysqlConnection, vendorSales, vendorId) => {
             reject(error);
           }
           console.log(result);
-        }
+        },
       );
     });
     resolve();
@@ -389,7 +388,7 @@ async function allVendorSales() {
       ItemDefinitions,
       socketDefinitions,
       plugSetDefinitions,
-      statDefinitions
+      statDefinitions,
     );
 
     await createAllVendorSalesTable(mysqlConnection);
