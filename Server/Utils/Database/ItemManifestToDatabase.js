@@ -30,7 +30,7 @@ const getItemManifest = async (manifestFileName) => {
       if (error) {
         /*  console.log(error); */
       }
-    }
+    },
   );
   const itemManifest = await new Promise((resolve, reject) => {
     db.all("Select json from DestinyInventoryItemDefinition", (error, result) => {
@@ -121,7 +121,7 @@ const insertData = async (mysqlConnection, manifest) => {
           if (error) {
             reject(error);
           }
-        }
+        },
       );
     }
     resolve();
