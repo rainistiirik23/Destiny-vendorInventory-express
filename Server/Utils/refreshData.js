@@ -23,7 +23,7 @@ async function refreshVendorData() {
     } else {
       console.log("Manifest isn't outdated at the moment");
     }
-    /*   await tokenRefreshRequest(); */
+
     const currentDate = new Date();
     const config = await readConfig();
     const {
