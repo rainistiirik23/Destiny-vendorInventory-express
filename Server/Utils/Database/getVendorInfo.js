@@ -83,8 +83,8 @@ const doesTableExist = (mysqlConnection) => {
     const doesTableExist = `DESCRIBE vendors;`;
     mysqlConnection.query(doesTableExist, (error, result) => {
       if (error) {
-        if (error.errno === 1146) {
-          console.log(error);
+        if (error.errno === 1146 && error["code"].includes("ER_NO_SUCH_TABLE")) {
+          console.log("Missing vendors table, adding the vendors table");
           const createVendorTable = `CREATE TABLE vendors (
                             id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
                             name VARCHAR(255) NOT NULL,
