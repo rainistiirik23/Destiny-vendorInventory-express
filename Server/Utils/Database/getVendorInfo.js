@@ -29,7 +29,7 @@ const getVendorManifest = (manifestFileName) => {
         if (err) {
           reject(err.message);
         }
-      }
+      },
     );
 
     db.all(`SELECT json FROM DestinyVendorDefinition`, (error, result) => {
