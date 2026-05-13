@@ -1,9 +1,5 @@
 const fs = require("fs");
 const {
-  /*  ApiKey, access_token  */
-} = require("../../Config/config.json");
-const fetch = require("node-fetch");
-const {
   Api: { ApiKey, access_token },
   SteamAccount: { memberShipType, memberShipId, characterId },
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
@@ -62,9 +58,7 @@ const getItemHashList = (vendorData) => {
           saleKey: salesKeys[i],
           itemHash: gunSales[salesKeys[i]]["itemHash"],
         };
-        /* gunKeys.push(salesKeys[i]); */
         itemsList.push(saleObject);
-        /*     console.log(salesKeys[i]); */
       }
     }
     resolve(itemsList);
@@ -89,7 +83,6 @@ const getVendorID = (mysqlConnection, name) => {
       if (error) {
         reject(error);
       }
-      /*    console.log(result); */
       const id = result[0]["id"];
       const name = result[0]["name"];
       const vendor = {
@@ -103,15 +96,11 @@ const getVendorID = (mysqlConnection, name) => {
 };
 const getGunInfo = (items, vendorData, allItems) => {
   return new Promise(async (resolve, reject) => {
-    /*  console.log(allItems); */
     const itemHashQuery = `SELECT * FROM Item_manifest WHERE itemHash=?;`;
     const perkQuery = `SELECT * FROM Perk_manifest WHERE perkHash=?;`;
     let gunInfo = [];
-    console.log(vendorData.Response.itemComponents);
-
     const itemsPlugDataAsJson = vendorData.Response.itemComponents.reusablePlugs.data;
-    const socketDataAsJson = vendorData.Response.itemComponents.sockets.data;
-    /*   console.log(socketDataAsJson); */
+
     for (let i = 0; i < items.length; i++) {
       const gunHash = items[i].itemHash;
       const saleKey = items[i].saleKey;
@@ -124,8 +113,6 @@ const getGunInfo = (items, vendorData, allItems) => {
       if (!matchedItem) {
         continue;
       }
-      console.log(matchedItem, saleKey);
-
       matchedItem.perks = {};
       matchedItem.itemSaleKey = saleKey;
       matchedItem.masterWork = {};
@@ -144,11 +131,7 @@ const getGunInfo = (items, vendorData, allItems) => {
             return item.itemHash === plug.plugItemHash;
           });
           if (!plugInfo) {
-            console.log(plugsArray);
           }
-          /*   console.log(plugInfo); */
-          /* console.log(plugInfo); */
-
           switch (plugInfo?.itemTypeAndTierDisplayName) {
             case "Legendary Weapon Mod":
             case "Common Restore Defaults":
@@ -238,7 +221,6 @@ const insertGuns = (mysqlConnection, vendorID, gunInfo) => {
           perks,
           masterWork,
         } = gunInfo[i];
-        console.log(perks);
         const insertGunInfo = `INSERT INTO gun_sales (vendorId, itemManifestID, itemName, itemIcon, itemHash, itemTypeDisplayName, itemFlavorText, itemTypeAndTierDisplayName,itemSaleKey,perks,masterWork) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`;
 
         mysqlConnection.query(
@@ -260,11 +242,10 @@ const insertGuns = (mysqlConnection, vendorID, gunInfo) => {
             if (error) {
               reject(error);
             }
-            console.log(perks);
             if (!i + 1 < gunInfo.length) {
               resolve();
             }
-          }
+          },
         );
       }
     });
@@ -274,7 +255,6 @@ const getGunSales = async (name) => {
   try {
     const vendorData = await getVendorData();
     const itemHashList = await getItemHashList(vendorData);
-    console.log(itemHashList);
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     const allItems = await getAllItems(mysqlConnection);
     const vendorID = await getVendorID(mysqlConnection, name);

@@ -54,17 +54,13 @@ const sendUserData = (response, userIdJson) => {
 async function getUserId(request, response, next) {
   try {
     const authCode = await request.body.data.code;
-    console.log(authCode);
     if (authCode) {
       const discordAccessToken = await getDiscordAccessToken(clientId, clientSecret, authCode);
       const discordAccessTokenData = await discordAccessToken.json();
       const discordId = await getUserDiscordId(discordAccessTokenData.token_type, discordAccessTokenData.access_token);
       const discordIdJson = await discordId.json();
-      console.log(discordAccessToken);
       await sendUserData(response, discordIdJson);
     }
-
-    /*   response.status(200).json("success"); */
   } catch (error) {
     response.status(500).json("Server error");
     console.log(error);

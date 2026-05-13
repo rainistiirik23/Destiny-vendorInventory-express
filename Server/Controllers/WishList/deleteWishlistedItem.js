@@ -2,7 +2,6 @@ const {
   Database: { host: host, user: databaseUser, password: password, dataBaseName: dataBaseName },
 } = require("../../Config/config.json");
 const mysql = require("mysql");
-const sqlite3 = require("sqlite3");
 const createMysqlConnection = (host, databaseUser, password, databaseName) => {
   return new Promise((resolve, reject) => {
     const mysqlConnection = mysql.createConnection({
@@ -37,7 +36,6 @@ const deleteWishlistedItemFromDatabase = (mysqlConnection, sale) => {
 async function deleteWishlistedItem(request, response, next) {
   try {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
-    console.log(request.body);
     await deleteWishlistedItemFromDatabase(mysqlConnection, request.body);
     await mysqlConnection.end();
     response.status(200).json("success");

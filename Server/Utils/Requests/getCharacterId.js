@@ -11,7 +11,7 @@ const profileRequest = (memberShipType, memberShipId, encodedClientIdSecretStrin
         "X-API-KEY": apiKey,
         Authorization: "Basic " + encodedClientIdSecretString,
       },
-    }
+    },
   );
   return profileResponse;
 };
@@ -45,9 +45,7 @@ async function getCharacterId() {
   const response = await profileRequest(memberShipType, memberShipId, encodedClientIdSecretString, ApiKey);
   const profileInfo = await response.json();
   const configClone = Object.assign({}, config);
-  /* const characterID = Object.keys(profileInfo.Response.characters.data)[0]; */
   configClone.SteamAccount.characterId = Object.keys(profileInfo.Response.characters.data)[0];
   await saveCharacterIdToConifg(config);
-  /* console.log(characterID); */
 }
 module.exports = getCharacterId;

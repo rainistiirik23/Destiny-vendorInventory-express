@@ -16,8 +16,6 @@ const getmanifestFileName = () => {
       if (!manifestFileName) {
         reject(new Error("Manifest file world content missing"));
       }
-      console.log(manifestFileName);
-
       resolve(manifestFileName);
     });
   });
@@ -28,7 +26,6 @@ const getItemManifest = async (manifestFileName) => {
     sqlite3.OPEN_READONLY,
     (error) => {
       if (error) {
-        /*  console.log(error); */
       }
     },
   );
@@ -39,7 +36,6 @@ const getItemManifest = async (manifestFileName) => {
       }
       resolve(result);
     });
-    /*  console.log(manifest); */
   });
 
   return itemManifest;
@@ -67,7 +63,6 @@ const doesItemManifestTableExist = (manifestDescription, mysqlConnection) => {
               console.log(error);
               reject(error);
             } else {
-              console.log(result);
               resolve();
             }
           });
@@ -90,9 +85,6 @@ const insertData = async (mysqlConnection, manifest) => {
   return new Promise((resolve, reject) => {
     for (let i = 0; i < manifest.length; i++) {
       const manifestAsJson = JSON.parse(manifest[i]["json"]);
-      /*  if (manifestAsJson.hash === 3511092054) {
-        console.log(manifestAsJson);
-      } */
       const {
         displayProperties: { name: itemName, description, icon: itemIcon },
         hash: itemHash,
@@ -115,9 +107,6 @@ const insertData = async (mysqlConnection, manifest) => {
           plugCategoryIdentifier,
         ],
         (error, result) => {
-          /*  if (manifestAsJson.hash === 3511092054) {
-            console.log(error);
-          } */
           if (error) {
             reject(error);
           }

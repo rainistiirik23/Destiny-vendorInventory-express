@@ -27,7 +27,7 @@ const getPerkManifest = async (manifestFileName) => {
         if (error) {
           reject(error);
         }
-      }
+      },
     );
 
     db.all("Select json from DestinySandboxPerkDefinition", (error, result) => {
@@ -75,7 +75,6 @@ const PerkTableCheck = (mysqlConnection) => {
           if (error) {
             reject(error);
           }
-          console.log(result);
           resolve();
         });
       } else {
@@ -119,7 +118,6 @@ const manifestToDatabase = async () => {
   try {
     const manifestFileName = await getmanifestFileName();
     const manifest = await getPerkManifest(manifestFileName);
-    /* console.log(manifest) */
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, databaseName);
     await PerkTableCheck(mysqlConnection);
     await insertPerkData(mysqlConnection, manifest);

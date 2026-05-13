@@ -34,9 +34,8 @@ const saveUsersWishListedItem = (mysqlConnection, requestData) => {
         if (error) {
           reject(error);
         }
-        console.log(result);
         resolve();
-      }
+      },
     );
   });
 };
@@ -44,7 +43,6 @@ async function saveWishLIstedItem(request, response, next) {
   try {
     const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
     await saveUsersWishListedItem(mysqlConnection, request.body.data);
-    console.log(request.body.data);
     response.status(200).json("route is working");
     await mysqlConnection.end();
   } catch (error) {

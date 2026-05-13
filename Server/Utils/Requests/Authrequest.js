@@ -19,7 +19,7 @@ const authCodeRequest = async (client_id, username, password) => {
     await page.goto(authCodeUrl);
 
     await page.click(
-      'a[href="/en/User/SignIn/SteamId?bru=%252Fen%252Foauth%252Fauthorize%253Fclient_id%253D46155%2526response_type%253Dcode%2526state%253D6i0mkLx79Hp91nzWVeHrzHG4&flowStart=1"]'
+      'a[href="/en/User/SignIn/SteamId?bru=%252Fen%252Foauth%252Fauthorize%253Fclient_id%253D46155%2526response_type%253Dcode%2526state%253D6i0mkLx79Hp91nzWVeHrzHG4&flowStart=1"]',
     );
 
     const userNameElement = await page.waitForSelector('input[type="text"]');
@@ -29,10 +29,10 @@ const authCodeRequest = async (client_id, username, password) => {
 
     await page.evaluate(
       (selector) => document.querySelector(selector).click(),
-      'button[class="DjSvCZoKKfoNSmarsEcTS"]'
+      'button[class="DjSvCZoKKfoNSmarsEcTS"]',
     );
-    await page.waitForNavigation(),
-      await page.evaluate((selector) => document.querySelector(selector).click(), 'input[id="imageLogin"]');
+    (await page.waitForNavigation(),
+      await page.evaluate((selector) => document.querySelector(selector).click(), 'input[id="imageLogin"]'));
 
     const getAuthCode = () => {
       return new Promise((resolve, reject) => {
@@ -64,7 +64,6 @@ const authCodeRequest = async (client_id, username, password) => {
     let authCode = await getAuthCode();
 
     authCode = authCode.slice(29, 61);
-    console.log(authCode);
     browser.close();
     return authCode;
   } catch (error) {
