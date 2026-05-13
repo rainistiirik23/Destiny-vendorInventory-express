@@ -22,7 +22,7 @@ const createMysqlConnection = (host, databaseUser, password, databaseName) => {
 const getUsersWhisListedItems = (mysqlConnection, userObjectsList) => {
   return new Promise(async (resolve, reject) => {
     const wishListedItems = [];
-    /*  const wishListedItemSearchQuery = `Select from Wishlisted_items Where user_id =${userObjectsList}`; */
+
     userObjectsList.forEach(async (user, index) => {
       const result = await new Promise((resolve, reject) => {
         mysqlConnection.query(`Select * from Wishlisted_items Where user_id = ${user.userId}`, (error, result) => {
@@ -37,7 +37,6 @@ const getUsersWhisListedItems = (mysqlConnection, userObjectsList) => {
         resolve(wishListedItems);
       }
     });
-    /*    resolve(wishListedItems); */
   });
 };
 const getCurrentVendorSales = (mysqlConnection) => {
@@ -54,7 +53,7 @@ const getCurrentVendorSales = (mysqlConnection) => {
 const getUsersWhisListedItemsFromSales = (userObjectsList, vendorSales, usersWhisListedItems) => {
   return new Promise((resolve, reject) => {
     const matchingSalesObject = {};
-    /*  console.log(usersWhisListedItems); */
+
     userObjectsList.forEach((user) => {
       matchingSalesObject[user.userId] = [];
       const findWhislistedItemsByUserId = usersWhisListedItems[0].filter((item) => item.user_id === user.userId);
@@ -72,7 +71,6 @@ const getUsersWhisListedItemsFromSales = (userObjectsList, vendorSales, usersWhi
         const vendorSaleItemPerks = JSON.parse(itemWithWhishListedItemHash.perks);
         perkObjectColumnKeys.forEach((columnKey) => {
           const wishListedItemPerks = JSON.parse(wishListedItem.perks)[columnKey];
-          /*  console.log(wishListedItem); */
           if (wishListedItemPerks.length === 0) {
             return;
           }
@@ -81,7 +79,6 @@ const getUsersWhisListedItemsFromSales = (userObjectsList, vendorSales, usersWhi
               return wishListPerk.item_name === saleItemPerk.itemName;
             });
             if (!findWishListedPerk) {
-              console.log(itemWithWhishListedItemHash);
               doesItemMatch = false;
             }
           });
@@ -89,19 +86,18 @@ const getUsersWhisListedItemsFromSales = (userObjectsList, vendorSales, usersWhi
         if (!doesItemMatch) {
           continue;
         }
-        /* console.log(wishListedItem); */
+
         const wishListedItemMasterworks = JSON.parse(wishListedItem.masterworks);
         const itemWithWhishListedItemHashMasterworks = JSON.parse(itemWithWhishListedItemHash.masterWork);
 
         const findMasterworkFromWishlistedItem = wishListedItemMasterworks.filter(
           (wishListedItemMasterwork) =>
             itemWithWhishListedItemHashMasterworks.masterWorkName.includes(wishListedItemMasterwork.masterWorkName) ===
-            true
+            true,
         );
         if (!findMasterworkFromWishlistedItem) {
           doesItemMatch = false;
         }
-        console.log(wishListedItemMasterworks);
         if (doesItemMatch) {
           matchingSalesObject[user.userId].push(itemWithWhishListedItemHash);
         }
@@ -111,13 +107,11 @@ const getUsersWhisListedItemsFromSales = (userObjectsList, vendorSales, usersWhi
   });
 };
 async function checkForWishListedItem(request, response, next) {
-  /*  console.log(request.body.data.usersList); */
   const usersList = request.body.data.usersList;
   const mysqlConnection = await createMysqlConnection(host, databaseUser, password, dataBaseName);
   const usersWhisListedItems = await getUsersWhisListedItems(mysqlConnection, usersList);
   const vendorInventory = await getCurrentVendorSales(mysqlConnection);
   const usersWishListedSales = await getUsersWhisListedItemsFromSales(usersList, vendorInventory, usersWhisListedItems);
-  /* console.log(usersWishListedSales); */
   await mysqlConnection.end();
   response.json(usersWishListedSales);
 }

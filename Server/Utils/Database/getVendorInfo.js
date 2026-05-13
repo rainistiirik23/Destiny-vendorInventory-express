@@ -108,8 +108,6 @@ const doesTableExist = (mysqlConnection) => {
 
 const insertVendorData = (vendorInfo, mysqlConnection) => {
   return new Promise((resolve, reject) => {
-    console.log(vendorInfo);
-
     const insertVendorDatasql = `INSERT INTO vendors(name, description) VALUES (?, ?);`;
     const vendorLength = vendorInfo["Vendors"].length;
     for (let i = 0; i < vendorLength; i++) {
@@ -129,7 +127,6 @@ const insertVendorData = (vendorInfo, mysqlConnection) => {
         }
       });
       if (duplicateVendorCheck["_results"].length != 0) {
-        console.log(duplicateVendorCheck["_results"]);
         continue;
       }
 

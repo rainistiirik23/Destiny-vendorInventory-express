@@ -256,8 +256,6 @@ const getAllPossibleVendorSales = (
               }
             }
           }
-
-          console.log(JSON.stringify(saleItem.stats));
           break;
         }
       }
@@ -286,7 +284,6 @@ const createAllVendorSalesTable = (mysqlConnection) => {
     mysqlConnection.query(describeTableQuery, (error, result) => {
       if (error) {
         if (error.errno === 1146) {
-          console.log(error);
           const createTableQuery = `CREATE TABLE allVendorSales(
             id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
             item_name VARCHAR(255) NOT NULL,
@@ -355,7 +352,6 @@ const insertAllVendorSalesData = (mysqlConnection, vendorSales, vendorId) => {
             console.log(error);
             reject(error);
           }
-          console.log(result);
         },
       );
     });
