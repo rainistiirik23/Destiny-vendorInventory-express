@@ -51,7 +51,7 @@ async function refreshToken() {
     await writeTokens(requestTokens.data, config);
   } catch (error) {
     console.log(error);
-    throw error;
+    return;
   }
 }
 module.exports = refreshToken;
