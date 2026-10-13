@@ -15,9 +15,9 @@ const writeTokens = (requestTokens, config) =>
     const configTokens = Object.assign({}, config);
     configTokens.Api.access_token = requestTokens["access_token"];
     configTokens.Api.refresh_token = requestTokens["refresh_token"];
-    fs.writeFile("Server/Config/config.json", JSON.stringify(configTokens), (err, result) => {
-      if (err) {
-        reject(err);
+    fs.writeFile("Server/Config/config.json", JSON.stringify(configTokens), (error, result) => {
+      if (error) {
+        reject(error);
       } else {
         resolve(console.log("Tokens are written"));
       }
@@ -49,9 +49,9 @@ async function refreshToken() {
       client_secret,
     });
     await writeTokens(requestTokens.data, config);
-  } catch (err) {
-    console.log(err);
-    throw err;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
 module.exports = refreshToken;
