@@ -52,8 +52,12 @@ async function refreshToken() {
     });
     await writeTokens(requestTokens.data, config);
   } catch (error) {
-    console.log(error);
-    return;
+    console.log({
+      statusCode: error.response.status,
+      statusText: error.response.statusText,
+      data: error.response.status,
+    });
+    throw new Error(`Token refresh failed: ${error.response?.status ?? error.message}`);
   }
 }
 module.exports = refreshToken;
