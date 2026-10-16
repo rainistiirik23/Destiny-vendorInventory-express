@@ -60,11 +60,15 @@ async function vendorRequest() {
       },
     );
     await cacheVendorRequest(vendorRequestResponse.data);
-    const vendorRefreshDate = await getVendorRefreshDate(vendorRequestResponse.data);
-    await saveVendorRefreshDate(credentials, vendorRefreshDate);
-  } catch (err) {
-    console.log(err);
+    await saveVendorRefreshDate(credentials, vendorRequestResponse);
+  } catch (error) {
+    console.log({
+      statusCode: error.response?.status ?? 500,
+      statusText: error.response?.statusText ?? error.message,
+      errorData: error.response?.data ?? null,
+    });
+
+    throw new Error(`Bungie API error: ${error.response?.status ?? error.message}`);
   }
 }
-
 module.exports = vendorRequest;
