@@ -27,10 +27,7 @@ const authCodeRequest = async (client_id, username, password) => {
     await userNameElement.type(username, { delay: 100 });
     await passwordElement.type(password, { delay: 100 });
 
-    await page.evaluate(
-      (selector) => document.querySelector(selector).click(),
-      'button[class="DjSvCZoKKfoNSmarsEcTS"]',
-    );
+    await page.evaluate((selector) => document.querySelector(selector).click(), 'button[type="submit"]');
     (await page.waitForNavigation(),
       await page.evaluate((selector) => document.querySelector(selector).click(), 'input[id="imageLogin"]'));
 
@@ -98,5 +95,4 @@ async function AuthRequest() {
     console.log(error);
   }
 }
-
 module.exports = AuthRequest;
