@@ -23,7 +23,7 @@ const cacheVendorRequest = (vendorRequestResponse) =>
         } else {
           resolve(console.log("Vendor request is cached"));
         }
-      }
+      },
     );
   });
 
@@ -57,7 +57,7 @@ async function vendorRequest() {
           "X-API-KEY": ApiKey,
           Authorization: "Bearer " + access_token,
         },
-      }
+      },
     );
     await cacheVendorRequest(vendorRequestResponse.data);
     const vendorRefreshDate = await getVendorRefreshDate(vendorRequestResponse.data);
