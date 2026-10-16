@@ -23,31 +23,17 @@ const cacheVendorRequest = (vendorRequestResponse) =>
         } else {
           resolve(console.log("Vendor request is cached"));
         }
-      }
+      },
     );
   });
-const getVendorRefreshDate = (vendorRequestResponse) => {
-  return new Promise((resolve, reject) => {
-    let vendorRefreshDate = null;
-    const vendorSales = vendorRequestResponse.Response.sales.data;
-    const vendorSalesKeyValues = Object.keys(vendorSales);
-    vendorSalesKeyValues.forEach((vendorSaleKey) => {
-      if (Object.hasOwn(vendorSales[vendorSaleKey], "overrideNextRefreshDate")) {
-        vendorRefreshDate = vendorSales[vendorSaleKey].overrideNextRefreshDate;
-        return;
-      }
-    });
-    if (!vendorRefreshDate) {
-      reject();
-    }
-    resolve(vendorRefreshDate);
-  });
-};
 
-const saveVendorRefreshDate = (config, vendorRefreshDate) =>
-  new Promise((resolve, reject) => {
-    const configWithVendorRefreshDate = Object.assign({}, config);
-    configWithVendorRefreshDate.Api.vendorRefreshDate = vendorRefreshDate;
+const saveVendorRefreshDate = (config, vendorRequestResponse) => {
+  return new Promise((resolve, reject) => {
+    const configWithVendorRefreshDate = { ...config };
+    console.log(vendorRequestResponse.data.response);
+
+    configWithVendorRefreshDate.Api.nextVendorRefreshDate = vendorRequestResponse.data.vendor.nextRefreshDate;
+
     fs.writeFile("Server/Config/config.json", JSON.stringify(configWithVendorRefreshDate), (err, result) => {
       if (err) {
         reject(err);
@@ -56,7 +42,7 @@ const saveVendorRefreshDate = (config, vendorRefreshDate) =>
       }
     });
   });
-
+};
 async function vendorRequest() {
   const credentials = await readConfig();
   const {
@@ -65,20 +51,24 @@ async function vendorRequest() {
   } = credentials;
   try {
     const vendorRequestResponse = await axios.get(
-      `https://www.bungie.net/Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/Character/${characterId}/Vendors/672118013/?components=402,310,305`,
+      `https://www.bungie.net/Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/Character/${characterId}/Vendors/672118013/?components=402,310,305,400`,
       {
         headers: {
           "X-API-KEY": ApiKey,
           Authorization: "Bearer " + access_token,
         },
-      }
+      },
     );
     await cacheVendorRequest(vendorRequestResponse.data);
-    const vendorRefreshDate = await getVendorRefreshDate(vendorRequestResponse.data);
-    await saveVendorRefreshDate(credentials, vendorRefreshDate);
-  } catch (err) {
-    console.log(err);
+    await saveVendorRefreshDate(credentials, vendorRequestResponse);
+  } catch (error) {
+    console.log({
+      statusCode: error.response?.status ?? 500,
+      statusText: error.response?.statusText ?? error.message,
+      errorData: error.response?.data ?? null,
+    });
+
+    throw new Error(`Bungie API error: ${error.response?.status ?? error.message}`);
   }
 }
-
 module.exports = vendorRequest;

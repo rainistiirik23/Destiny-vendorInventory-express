@@ -15,7 +15,7 @@
     "refresh_token": "",
     "code": "",
     "manifestUrl": "",
-    "vendorRefreshDate": ""
+    "nextVendorRefreshDate": ""
   },
   "Discord": { "clientId": "", "clientSecret": "" },
   "Database": {
