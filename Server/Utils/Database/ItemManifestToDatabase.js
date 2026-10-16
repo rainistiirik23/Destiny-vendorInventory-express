@@ -26,6 +26,7 @@ const getItemManifest = async (manifestFileName) => {
     sqlite3.OPEN_READONLY,
     (error) => {
       if (error) {
+        console.log(error);
       }
     },
   );
