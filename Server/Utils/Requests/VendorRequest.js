@@ -65,7 +65,7 @@ async function vendorRequest() {
   } = credentials;
   try {
     const vendorRequestResponse = await axios.get(
-      `https://www.bungie.net/Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/Character/${characterId}/Vendors/672118013/?components=402,310,305`,
+      `https://www.bungie.net/Platform/Destiny2/${memberShipType}/Profile/${memberShipId}/Character/${characterId}/Vendors/672118013/?components=402,310,305,400`,
       {
         headers: {
           "X-API-KEY": ApiKey,
