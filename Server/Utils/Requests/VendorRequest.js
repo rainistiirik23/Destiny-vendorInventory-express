@@ -26,28 +26,14 @@ const cacheVendorRequest = (vendorRequestResponse) =>
       }
     );
   });
-const getVendorRefreshDate = (vendorRequestResponse) => {
-  return new Promise((resolve, reject) => {
-    let vendorRefreshDate = null;
-    const vendorSales = vendorRequestResponse.Response.sales.data;
-    const vendorSalesKeyValues = Object.keys(vendorSales);
-    vendorSalesKeyValues.forEach((vendorSaleKey) => {
-      if (Object.hasOwn(vendorSales[vendorSaleKey], "overrideNextRefreshDate")) {
-        vendorRefreshDate = vendorSales[vendorSaleKey].overrideNextRefreshDate;
-        return;
-      }
-    });
-    if (!vendorRefreshDate) {
-      reject();
-    }
-    resolve(vendorRefreshDate);
-  });
-};
 
-const saveVendorRefreshDate = (config, vendorRefreshDate) =>
-  new Promise((resolve, reject) => {
-    const configWithVendorRefreshDate = Object.assign({}, config);
-    configWithVendorRefreshDate.Api.vendorRefreshDate = vendorRefreshDate;
+const saveVendorRefreshDate = (config, vendorRequestResponse) => {
+  return new Promise((resolve, reject) => {
+    const configWithVendorRefreshDate = { ...config };
+    console.log(vendorRequestResponse.data.response);
+
+    configWithVendorRefreshDate.Api.nextVendorRefreshDate = vendorRequestResponse.data.vendor.nextRefreshDate;
+
     fs.writeFile("Server/Config/config.json", JSON.stringify(configWithVendorRefreshDate), (err, result) => {
       if (err) {
         reject(err);
