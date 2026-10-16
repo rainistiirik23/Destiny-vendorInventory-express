@@ -39,12 +39,51 @@ async function refreshVendorData() {
       console.error("Mysql is offline\nPlease start mysql service and then start express again");
       return;
     }
-    if (error?.response?.status === 401) {
-      console.warn("Refresh token has been expired, Retrieving new authorization code and token");
-      await authRequest();
-      await tokenRequest();
-      await refreshVendorData();
+
+    //---------------------------------------------------------------------------------------------------------------------
+
+    /* "ApplicationTokenKeyIdDoesNotExist" indicates that the refresh token is expired, altough before just using the 401
+    status code as part of the condition would work.    
+    */
+    //---------------------------------------------------------------------------------------------------------------------
+
+    if (
+      error?.response.status === 400 &&
+      error?.response.data.error_description === "ApplicationTokenKeyIdDoesNotExist"
+    ) {
+      console.warn("It's possible that refresh_token has expired, getting a new refresh token");
+      try {
+        await authRequest();
+        await tokenRequest();
+        await getGunSales("Banshee-44");
+        console.log("Refresh token aqquired, credentials refresh successful");
+
+        return;
+      } catch (error) {
+        if (Object.hasOwn(error, "response")) {
+          console.log(
+            "Failed to retrieve refresh token, either the refresh token is not actually expired or something else is wrong",
+          );
+          throw {
+            statusCode: error.response.status,
+            statusText: error.response.statusText,
+            errorData: error.response.data,
+          };
+        }
+        console.log("Something else went wrong during refresh token retrieval");
+        throw error;
+      }
     }
+    if (Object.hasOwn(error, "response")) {
+      throw {
+        statusCode: error.response.status,
+        statusText: error.response.statusText,
+        errorData: error.response.data,
+      };
+    }
+    throw error;
   }
+  return;
 }
+
 module.exports = refreshVendorData;
