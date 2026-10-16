@@ -42,7 +42,7 @@ const saveVendorRefreshDate = (config, vendorRequestResponse) => {
       }
     });
   });
-
+};
 async function vendorRequest() {
   const credentials = await readConfig();
   const {
