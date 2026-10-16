@@ -53,12 +53,35 @@ const getItemHashList = (vendorData) => {
     const salesKeys = Object.keys(gunSales);
     let gunKeys = [];
     for (let i = 0; i < salesKeys.length; i++) {
-      if (Object.hasOwn(gunSales[salesKeys[i]], "costs") && gunSales[salesKeys[i]]["costs"].length == 2) {
-        const saleObject = {
-          saleKey: salesKeys[i],
-          itemHash: gunSales[salesKeys[i]]["itemHash"],
-        };
-        itemsList.push(saleObject);
+      switch (gunSales[salesKeys[i]]["itemHash"]) {
+        //Non weapon sales to ignore(Weapons item,enhancment prism,enhancment cores etc).
+        case 4001448176:
+          break;
+        case 2733640344:
+          break;
+        case 2133694745:
+          break;
+        case 690263484:
+          break;
+        case 353704689:
+          break;
+        case 4257549984:
+          break;
+        case 3853748946:
+          break;
+        case 2502860484:
+          break;
+        case 820958888:
+          break;
+        case 3685790083:
+          break;
+        default:
+          const saleObject = {
+            saleKey: salesKeys[i],
+            itemHash: gunSales[salesKeys[i]]["itemHash"],
+          };
+          itemsList.push(saleObject);
+          break;
       }
     }
     resolve(itemsList);
@@ -269,5 +292,4 @@ const getGunSales = async (name) => {
     throw error;
   }
 };
-getGunSales("Banshee-44");
 module.exports = getGunSales;
