@@ -53,8 +53,13 @@ async function tokenRequest() {
     });
 
     await writeTokens(TokenRequestResponse.data, config);
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error({
+      statusCode: error.response.status,
+      statusText: error.response.statusText,
+      data: error.response.status,
+    });
+    return;
   }
 }
 module.exports = tokenRequest;
