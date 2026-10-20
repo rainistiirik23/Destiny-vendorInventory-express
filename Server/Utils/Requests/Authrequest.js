@@ -92,7 +92,8 @@ async function AuthRequest() {
     const authCodeFromRequest = await authCodeRequest(client_id, username, password);
     await replaceAuthCode(authCodeFromRequest, config);
   } catch (error) {
-    console.log(error);
+    console.error(`Something went wrong during authcode request:\n${error}`);
+    return;
   }
 }
 module.exports = AuthRequest;

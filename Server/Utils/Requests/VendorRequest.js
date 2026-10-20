@@ -60,7 +60,7 @@ async function vendorRequest() {
     await cacheVendorRequest(vendorRequestResponse.data);
     await saveVendorRefreshDate(credentials, vendorRequestResponse);
   } catch (error) {
-    console.log({
+    console.error({
       statusCode: error.response?.status ?? 500,
       statusText: error.response?.statusText ?? error.message,
       errorData: error.response?.data ?? null,
