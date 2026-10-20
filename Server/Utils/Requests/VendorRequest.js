@@ -30,10 +30,8 @@ const cacheVendorRequest = (vendorRequestResponse) =>
 const saveVendorRefreshDate = (config, vendorRequestResponse) => {
   return new Promise((resolve, reject) => {
     const configWithVendorRefreshDate = { ...config };
-    console.log(vendorRequestResponse.data.response);
-
-    configWithVendorRefreshDate.Api.nextVendorRefreshDate = vendorRequestResponse.data.vendor.nextRefreshDate;
-
+    configWithVendorRefreshDate.Api.nextVendorRefreshDate =
+      vendorRequestResponse.data.Response.vendor.data.nextRefreshDate;
     fs.writeFile("Server/Config/config.json", JSON.stringify(configWithVendorRefreshDate), (err, result) => {
       if (err) {
         reject(err);
@@ -67,8 +65,7 @@ async function vendorRequest() {
       statusText: error.response?.statusText ?? error.message,
       errorData: error.response?.data ?? null,
     });
-
-    throw new Error(`Bungie API error: ${error.response?.status ?? error.message}`);
+    return;
   }
 }
 module.exports = vendorRequest;
